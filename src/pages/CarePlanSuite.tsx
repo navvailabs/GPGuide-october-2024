@@ -6,6 +6,7 @@ import DexaScanTool from '@/pages/DexaScanTool';
 import CentrelinkFormAssist from '@/pages/CentrelinkFormAssist';
 import WorkersCompAssist from '@/pages/WorkersCompAssist';
 import MEDDAssistTool from '@/pages/MEDDAssistTool';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 interface MEDDResult {
     totalMEDD: number;
@@ -111,9 +112,11 @@ const CarePlanSuite = () => {
     };
 
     return (
-        <CarePlanLayout activeView={activeView} setActiveView={setActiveView}>
-            {renderContent()}
-        </CarePlanLayout>
+        <ThemeProvider>
+            <CarePlanLayout activeView={activeView} setActiveView={setActiveView}>
+                {renderContent()}
+            </CarePlanLayout>
+        </ThemeProvider>
     );
 };
 

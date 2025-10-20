@@ -40,6 +40,14 @@ function HomePage() {
     };
   }, []);
 
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (!root.classList.contains('dark')) {
+      root.classList.add('dark');
+    }
+    root.classList.remove('light');
+  }, []);
+
   return (
     <div className="overflow-x-hidden">
       <FlowingGradientBackground />

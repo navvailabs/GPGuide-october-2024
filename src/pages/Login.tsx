@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import { Component as SignInCard } from '@/components/ui/sign-in-card-2.tsx';
 import Header from '@/components/Header.tsx';
 
 export default function LoginPage() {
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (!root.classList.contains('dark')) {
+      root.classList.add('dark');
+    }
+    root.classList.remove('light');
+  }, []);
+
   return (
     <div>
       {/* Header is positioned absolutely to float over the SignInCard */}
