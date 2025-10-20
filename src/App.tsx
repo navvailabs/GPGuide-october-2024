@@ -8,18 +8,16 @@ import { ThemeProvider } from './contexts/ThemeContext';
 function App() {
   return (
     <BrightnessProvider>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route 
-          path="/gp-care-plan-generator" 
-          element={
-            <ThemeProvider>
-              <CarePlanSuite />
-            </ThemeProvider>
-          } 
-        />
-      </Routes>
+      <ThemeProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route 
+            path="/gp-care-plan-generator" 
+            element={<CarePlanSuite />} 
+          />
+        </Routes>
+      </ThemeProvider>
     </BrightnessProvider>
   );
 }
