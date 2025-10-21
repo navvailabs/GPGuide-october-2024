@@ -1,50 +1,52 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const Pricing = () => {
     const plans = [
         {
-            name: 'Essential Plan',
-            price: '$24.99',
+            name: 'Basic Plan',
+            price: '$19.99',
             salePrice: '$7.99',
             billing: '/week',
             description: 'Perfect for Individual GPs',
             features: [
-                'Generate unlimited GP Management Plans, Reviews, and MHCPs',
-                'Pre-formatted and MBS-aligned structure',
-                'Built-in guideline references (RACGP, eTG, PBS links)',
-                'Secure local document generation (no PHI stored)',
-                'Instant Document export and Copy-paste integration',
-                'Priority support with 24-hour response',
+                'Generate unlimited Care Plans and Mental Health Treatment Plans',
+                'Templates reference current RACGP guidelines',
+                'Built-in guideline references (eTG, PBS links)',
+                'Secure local document generation (no patient data stored)',
+                'Export to Word and copy-paste to EMR',
+                'Email support with 48-hour response',
             ],
-            cta: 'Start Essential Plan',
+            cta: 'Start Basic Plan',
             isPopular: false,
-            roi: 'Pays for itself by saving 1 hour per week',
-            value: 'ROI: $300+ monthly value for ~$32 cost',
-            limitedNote: 'Limited accounts available!',
-            disclaimer: 'After one month, payment will resume at the regular weekly price of $24.99.'
+            roi: 'Pays for itself by saving 30 minutes per week.',
+            value: 'ROI: $200+ monthly value for ~$32 cost',
+            limitedNote: 'Limited time offer!',
+            disclaimer: 'Promotional price for first month. After one month, payment will resume at the regular weekly price of $19.99.'
         },
         {
             name: 'Professional Plan',
-            price: '$39',
+            price: '$29.99',
             salePrice: '$14.99',
             billing: '/week',
             description: 'Complete Practice Transformation',
             features: [
-                'Everything in Essential Plan',
-                'Access to advanced clinical tools:',
-                ' - DEXA Scan Interpreter (bone density summariser)',
-                ' - Opioid Calculator & Safety Checker (titration & conversion aid)',
-                ' - WorkCover Template Generator',
+                'Everything in Basic Plan',
+                'Access to specialized clinical tools:',
+                ' - DEXA Scan Interpreter (bone density analysis)',
+                ' - Centrelink SU415 Form Generator (DSP assessments)',
+                ' - Workers Compensation Report Templates',
                 ' - Allied Health Referral Wizard (physio, psych, dietitian templates)',
-                'Submit your own template ideas — we’ll review and build them into the platform.',
+                'Priority support with 24-hour response',
+                'Submit your own template ideas — we\'ll review and build them into the platform',
             ],
             cta: 'Choose Professional Plan',
             isPopular: true,
-            roi: 'Save 8+ hours weekly - $400+ monthly value',
-            value: 'ROI: $800+ monthly value for ~$60 cost',
+            roi: 'Save 5+ hours weekly - $400+ monthly value.',
+            value: 'ROI: $600+ monthly value for ~$60 cost',
             limitedNote: 'Limited time offer!',
-            disclaimer: 'After one month, payment will resume at the regular weekly price of $39.'
+            disclaimer: 'Promotional price for first month. After one month, payment will resume at the regular weekly price of $29.99.'
         },
     ];
 
@@ -109,26 +111,28 @@ const Pricing = () => {
 
                             <ul className="mt-8 space-y-4 flex-grow">
                                 {plan.features.map((feature) => {
-                                    if (feature.endsWith(':')) {
+                                    const isSubFeature = feature.startsWith(' - ');
+                                    const isAdvancedToolsTitle = feature === 'Access to specialized clinical tools:';
+                                    const featureText = isSubFeature ? feature.replace(' - ', '') : feature;
+
+                                    if (isSubFeature) {
                                         return (
-                                            <li key={feature} className="flex items-start pt-2">
-                                                <div className="w-5 mr-3 flex-shrink-0" />
-                                                <span className="text-gray-800 font-semibold">{feature}</span>
+                                            <li key={feature} className="flex items-start pl-8">
+                                                <span className="text-gray-500 mr-3 mt-0.5 font-bold text-lg leading-tight">&ndash;</span>
+                                                <span className="text-gray-700">{featureText}</span>
                                             </li>
                                         );
                                     }
-                                    if (feature.startsWith(' - ')) {
-                                        return (
-                                            <li key={feature} className="flex items-start">
-                                                <Check className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
-                                                <span className="text-gray-700 pl-5">{feature.replace(' - ', '')}</span>
-                                            </li>
-                                        );
-                                    }
+
                                     return (
                                         <li key={feature} className="flex items-start">
                                             <Check className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
-                                            <span className="text-gray-700">{feature}</span>
+                                            <span className={cn(
+                                                'text-gray-700',
+                                                { 'font-semibold text-gray-800': isAdvancedToolsTitle }
+                                            )}>
+                                                {featureText}
+                                            </span>
                                         </li>
                                     );
                                 })}
