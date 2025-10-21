@@ -35,16 +35,19 @@ const Footer = () => {
                 </div>
 
                 <div className="mt-12 border-t border-white/10 pt-8">
-                    <div className="p-4 bg-black/30 backdrop-blur-lg border border-white/10 rounded-2xl mb-8">
-                        <p className="text-xs text-gray-400 text-center">
-                            Disclaimer: GPGuide is a clinical decision support tool and should be used to supplement, not replace, professional medical judgment. All patient information is hypothetical and for illustrative purposes only.
+                    <div className="p-6 bg-black/20 backdrop-blur-lg border border-white/10 rounded-2xl mb-8 text-xs text-gray-400 text-center space-y-4">
+                        <p>
+                            <strong>Disclaimer:</strong> GPGuide is a clinical decision support tool and should be used to supplement, not replace, professional medical judgment. All patient information is hypothetical and for illustrative purposes only. Use requires professional judgment and clinical oversight. GPGuide is not affiliated with RACGP, AMA, eTG, or PBS.
+                        </p>
+                        <p>
+                            <strong>Tax Information:</strong> Statements regarding tax deductibility are general in nature and based on ATO public guidance. GP Guide does not provide tax advice. Consult a registered tax agent for advice specific to your circumstances.
+                        </p>
+                        <p className="pt-4 border-t border-white/10">
+                            © 2025 New Era Pty Ltd (trading as GPGuide). All rights reserved. Full details in our <a href="#" className="underline hover:text-white">Terms of Service</a> and <a href="#" className="underline hover:text-white">Privacy Policy</a>.
                         </p>
                     </div>
-                    <div className="bg-premium-gold/10 border border-premium-gold/20 p-4 rounded-lg text-premium-gold text-xs mb-8">
-                        © 2025 New Era Pty Ltd (trading as GPGuide). All rights reserved. GPGuide provides educational clinical documentation and decision-support tools for Australian healthcare professionals. Use requires professional judgment and clinical oversight. GPGuide is not affiliated with RACGP, AMA, eTG, or PBS. Full details in our <a href="#" className="underline hover:text-white">Terms of Service</a> and <a href="#" className="underline hover:text-white">Privacy Policy</a>.
-                    </div>
                     <div className="flex flex-col sm:flex-row justify-between items-center text-sm">
-                        <div className="flex flex-wrap gap-x-4 gap-y-2">
+                        <div className="flex flex-wrap gap-x-4 gap-y-2 justify-center">
                             <div className="flex items-center space-x-1.5">
                                 <Lock className="h-4 w-4" />
                                 <span>Australian Privacy Compliant</span>
