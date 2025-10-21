@@ -112,21 +112,22 @@ const Pricing = () => {
                                     if (feature.endsWith(':')) {
                                         return (
                                             <li key={feature} className="flex items-start pt-2">
+                                                <div className="w-5 mr-3 flex-shrink-0" />
                                                 <span className="text-gray-800 font-semibold">{feature}</span>
                                             </li>
                                         );
                                     }
                                     if (feature.startsWith(' - ')) {
                                         return (
-                                            <li key={feature} className="flex items-start pl-5">
-                                                <Check className="h-5 w-5 text-success-green mr-2 mt-0.5 flex-shrink-0" />
-                                                <span className="text-gray-700">{feature.replace(' - ', '')}</span>
+                                            <li key={feature} className="flex items-start">
+                                                <Check className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
+                                                <span className="text-gray-700 pl-5">{feature.replace(' - ', '')}</span>
                                             </li>
                                         );
                                     }
                                     return (
                                         <li key={feature} className="flex items-start">
-                                            <Check className="h-6 w-6 text-success-green mr-3 flex-shrink-0" />
+                                            <Check className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
                                             <span className="text-gray-700">{feature}</span>
                                         </li>
                                     );
