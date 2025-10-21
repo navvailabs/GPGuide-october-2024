@@ -18,6 +18,10 @@ const faqData = {
         {
             q: "How much time will I actually save?",
             a: "Our users average 5-8 hours saved weekly. Even saving just 3 hours weekly means GPGuide pays for itself based on standard GP hourly rates ($150+). Most GPs see ROI within the first week."
+        },
+        {
+            q: "Is GP Guide tax deductible?",
+            a: "Yes, GP Guide subscriptions are generally tax deductible as work-related expenses under ATO guidelines. Professional software and tools used to earn your income typically qualify as deductible expenses under Section 8-1 of the Income Tax Assessment Act 1997.\n\nYou'll receive tax invoices for all payments, which you can provide to your accountant. As with all tax matters, individual circumstances vary, so please consult your registered tax agent or accountant for advice specific to your situation."
         }
     ],
     "Clinical & Compliance": [

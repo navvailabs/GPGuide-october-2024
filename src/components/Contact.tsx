@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MessageSquare, BookOpen } from 'lucide-react';
+import { Mail, BookOpen, ClipboardList, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
     const contactMethods = [
-        { icon: Mail, title: "Email Support", detail: "support@gpguide.com.au", response: "48-hour response guarantee" },
-        { icon: Phone, title: "Professional Plan Phone Support", detail: "1800-GP-GUIDE", response: "Priority phone access" },
-        { icon: MessageSquare, title: "Live Chat", detail: "Available 9 AM - 6 PM AEST", response: "Instant help during business hours" },
-        { icon: BookOpen, title: "Training Resources", detail: "Comprehensive video library & guides", response: "24/7 self-help available" }
+        { icon: Mail, title: "Email Support", detail: "support@gpguide.com.au", response: "Response within 48 hours" },
+        { icon: BookOpen, title: "Getting Started Guide", detail: "Complete setup documentation", response: "Available immediately after signup" },
+        { icon: ClipboardList, title: "Template Library", detail: "Browse all available templates", response: "Regular updates with new tools" },
+        { icon: MessageSquare, title: "Feedback Welcome", detail: "Help us improve GP Guide", response: "Professional Plan members: Request custom templates" }
     ];
 
     return (
