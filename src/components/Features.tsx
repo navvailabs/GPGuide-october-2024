@@ -1,25 +1,43 @@
 import { motion } from 'framer-motion';
-import { BrainCircuit, BarChart3, Share2, CheckCircle } from 'lucide-react';
+import { ClipboardList, BrainCircuit, BriefcaseMedical, CheckCircle } from 'lucide-react';
 
 const Features = () => {
     const primaryFeatures = [
         {
+            icon: ClipboardList,
+            title: "Customised Care Plan Templates",
+            description: "Generate comprehensive chronic disease management documentation designed to support MBS items 965, 967 requirements.",
+            points: [
+                "Templates reference current RACGP guidelines",
+                "Evidence-based clinical recommendations",
+                "Fully customizable for individual patients",
+                "Export to Word or copy to your EMR",
+                "No patient identifiable data stored"
+            ]
+        },
+        {
             icon: BrainCircuit,
-            title: "Intelligent Template Generation",
-            description: "AI-powered care plan creation based on clinical presentation.",
-            points: ["Evidence-based recommendations", "Specialty-specific adaptations", "Continuous learning from medical literature", "No patient data storage required", "Voice-to-text input support"]
+            title: "Mental Health Treatment Plan Templates",
+            description: "Streamline GP mental health plan documentation with templates.",
+            points: [
+                "Based on contemporary mental health guidelines",
+                "Evidence-based treatment approach suggestions",
+                "Built-in clinical assessment prompts",
+                "Export to Word or copy to your EMR",
+                "Review and follow-up planning support"
+            ]
         },
         {
-            icon: BarChart3,
-            title: "Practice Efficiency Analytics",
-            description: "Track your productivity gains and optimize workflows.",
-            points: ["Time savings metrics & ROI calculations", "Documentation quality insights", "Practice efficiency recommendations", "Team performance tracking (Pro plan)", "Billing opportunity identification"]
-        },
-        {
-            icon: Share2,
-            title: "Universal EMR Integration",
-            description: "Works with all major Australian EMR systems.",
-            points: ["Copy-paste functionality", "Direct export capabilities", "Mobile app synchronization", "Offline template generation", "Multi-device access"]
+            icon: BriefcaseMedical,
+            title: ["Specialized Practice", "Tools"],
+            description: "Streamline complex clinical and administrative tasks with specialized templates built for Australian general practice.",
+            points: [
+                "DEXA Scan Interpreter with treatment suggestions",
+                "Centrelink & Workers Compensation form assistants",
+                "Opioid calculation and safety tools",
+                "Universal EMR integration and Word export",
+                "Regularly updated with new specialized tools"
+            ]
         }
     ];
 
@@ -40,35 +58,58 @@ const Features = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Everything You Need for Practice Excellence</h2>
+                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Stop Spending Hours on Paperwork</h2>
                     <p className="mt-4 text-lg text-neutral-300">
-                        Comprehensive tools designed specifically for Australian GPs.
+                        Custom templates to help Australian GPs complete complex documentation in minutes, not hours.
                     </p>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-3 gap-8 mb-20">
                     {primaryFeatures.map((feature, index) => (
                         <motion.div
-                            key={feature.title}
+                            key={feature.title.toString()}
                             className="glass-card p-8 flex flex-col h-full"
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            <div className="relative w-16 h-16 bg-medical-blue/50 border border-white/20 rounded-full flex items-center justify-center mb-6">
+                            <div className="relative w-16 h-16 bg-medical-blue/50 border border-white/20 rounded-full flex items-center justify-center mb-6 mx-auto">
                                 <div className="absolute -inset-2 bg-cyan-400/20 rounded-full blur-md animate-pulse"></div>
                                 <feature.icon className="relative w-8 h-8 text-cyan-300" />
                             </div>
-                            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">{feature.title}</h3>
-                            <p className="mt-2 text-gray-300 flex-grow">{feature.description}</p>
+                            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 min-h-[4rem] text-center">
+                                {Array.isArray(feature.title) ? (
+                                    <>
+                                        {feature.title[0]}
+                                        <br />
+                                        {feature.title[1]}
+                                    </>
+                                ) : (
+                                    feature.title
+                                )}
+                            </h3>
+                            <p className="mt-4 text-sm text-gray-400 min-h-[6rem] text-center">{feature.description}</p>
                             <ul className="mt-6 space-y-4">
-                                {feature.points.map(point => (
-                                    <li key={point} className="flex items-start">
-                                        <CheckCircle className="h-5 w-5 text-cyan-400 mr-3 mt-0.5 flex-shrink-0" />
-                                        <span className="text-gray-300">{point}</span>
-                                    </li>
-                                ))}
+                                {feature.points.map(point => {
+                                    const emojiRegex = /^(\p{Emoji_Presentation}|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|(?:\p{Emoji_Presentation}|\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?)\uFE0F\s*)/u;
+                                    const emojiMatch = point.match(emojiRegex);
+                                    const icon = emojiMatch ? emojiMatch[0].trim() : null;
+                                    const text = icon ? point.substring(icon.length).trim() : point;
+
+                                    return (
+                                        <li key={point} className="flex items-start">
+                                            <div className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 flex items-center justify-center">
+                                                {icon ? (
+                                                    <span className="text-lg">{icon}</span>
+                                                ) : (
+                                                    <CheckCircle className="h-full w-full text-cyan-400" />
+                                                )}
+                                            </div>
+                                            <span className="text-gray-300">{text}</span>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </motion.div>
                     ))}
