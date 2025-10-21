@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ClipboardList, BrainCircuit, BriefcaseMedical, CheckCircle } from 'lucide-react';
+import { ClipboardList, BrainCircuit, BriefcaseMedical, CheckCircle, Clock, ShieldCheck, Users } from 'lucide-react';
 
 const Features = () => {
     const primaryFeatures = [
@@ -42,10 +42,10 @@ const Features = () => {
     ];
 
     const achievements = [
-        { title: "Save Hours of Admin", description: "Spend less time on repetitive paperwork and more on patient care and family." },
-        { title: "Learn While You Work", description: "Build clinical and documentation skills with step-by-step guidance." },
-        { title: "Guideline-Aligned Plans", description: "Create compliant plans with peace of mind from structured best practices." },
-        { title: "Improve Team Collaboration", description: "Standardize documentation across your practice with clear, structured plans." }
+        { icon: Clock, title: "Save Hours of Admin", description: "Spend less time on repetitive paperwork and more on patient care and family." },
+        { icon: BrainCircuit, title: "Learn While You Work", description: "Build clinical and documentation skills with step-by-step guidance." },
+        { icon: ShieldCheck, title: "Guideline-Aligned Plans", description: "Create compliant plans with peace of mind from structured best practices." },
+        { icon: Users, title: "Improve Team Collaboration", description: "Standardize documentation across your practice with clear, structured plans." }
     ];
 
     return (
@@ -122,13 +122,24 @@ const Features = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                    <h3 className="text-3xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Transform Your Practice Starting Today</h3>
+                    <h3 className="text-3xl font-bold mb-12 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Transform Your Practice Starting Today</h3>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {achievements.map((item) => (
-                            <div key={item.title} className="glass-card p-6 text-center">
-                                <h4 className="font-bold text-white text-lg">{item.title}</h4>
-                                <p className="text-sm text-gray-400 mt-2">{item.description}</p>
-                            </div>
+                        {achievements.map((item, index) => (
+                            <motion.div
+                                key={item.title}
+                                className="bg-black/30 backdrop-blur-lg border border-white/10 rounded-2xl p-6 text-center transition-all duration-300 hover:border-cyan-400/50 hover:-translate-y-2"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                            >
+                                <div className="relative w-14 h-14 bg-medical-blue/50 border border-white/20 rounded-full flex items-center justify-center mb-5 mx-auto">
+                                    <div className="absolute -inset-1.5 bg-cyan-400/20 rounded-full blur-md animate-pulse"></div>
+                                    <item.icon className="relative w-7 h-7 text-cyan-300" />
+                                </div>
+                                <h4 className="font-bold text-white text-lg mb-2">{item.title}</h4>
+                                <p className="text-sm text-gray-400">{item.description}</p>
+                            </motion.div>
                         ))}
                     </div>
                 </motion.div>
