@@ -68,7 +68,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         className={`px-4 overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100 pb-4' : 'max-h-0 opacity-0'}`}
       >
         <p className={cn(
-          "text-sm leading-[22.4px] text-left select-none",
+          "text-sm leading-[22.4px] text-left select-none whitespace-pre-line",
           theme === 'light' ? 'text-gray-700' : 'text-gray-400'
         )}>
           {answer}
