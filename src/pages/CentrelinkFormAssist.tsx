@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
 import InspiredCard from '@/components/ui/InspiredCard';
+import axios from 'axios';
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -37,11 +38,53 @@ const quickTreatments = [
     "Supportive care, rest, fluids. Expected resolution 7-10 days"
 ];
 
+const FormattedWebhookOutput = ({ content }: { content: string }) => {
+    const lines = content.split('\n');
+
+    const elements = lines.map((line, index) => {
+        const trimmedLine = line.trim();
+
+        // Main heading: ### **...**
+        const mainHeadingMatch = trimmedLine.match(/^###\s*\*\*(.*?)\*\*$/);
+        if (mainHeadingMatch) {
+            return <h3 key={index} className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 first:mt-0 pb-2 border-b border-gray-200 dark:border-white/10">{mainHeadingMatch[1].replace(/🗒️|📄|📋/g, '').trim()}</h3>;
+        }
+
+        // Subheading: **...:**
+        const subHeadingMatch = trimmedLine.match(/^\*\*(.*?):\*\*$/);
+        if (subHeadingMatch) {
+            return <h4 key={index} className="text-base font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-1">{subHeadingMatch[1].trim()}:</h4>;
+        }
+
+        // Separator: ---
+        if (trimmedLine === '---') {
+            return <hr key={index} className="my-6 border-gray-200 dark:border-white/10" />;
+        }
+
+        // Empty line for spacing - we'll let the parent container handle spacing
+        if (trimmedLine === '') {
+            return null;
+        }
+
+        // Normal paragraph
+        return <p key={index} className="text-gray-600 dark:text-gray-400 leading-relaxed">{trimmedLine}</p>;
+    });
+
+    return (
+        <InspiredCard>
+            <div className="space-y-2">
+                {elements.filter(Boolean)}
+            </div>
+        </InspiredCard>
+    );
+};
+
+
 const CentrelinkFormAssist = () => {
     const [clinicalInformation, setClinicalInformation] = useState('');
     const [functionalImpact, setFunctionalImpact] = useState('');
     const [treatmentPlan, setTreatmentPlan] = useState('');
-    const [summary, setSummary] = useState<string | null>(null);
+    const [statement, setStatement] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
 
@@ -66,31 +109,72 @@ const CentrelinkFormAssist = () => {
         });
     };
 
-    const handleGenerateSummary = () => {
+    const handleGenerateStatement = async () => {
         setIsLoading(true);
-        setSummary(null);
+        setStatement(null);
 
-        setTimeout(() => {
-            let summaryText = `Clinical information: ${clinicalInformation || '[Clinical Information]'}. `;
-            summaryText += `Functionally, this impacts the patient by: ${functionalImpact || '[Functional Impact]'}. `;
-            summaryText += `The current treatment plan includes: ${treatmentPlan || '[Treatment Plan]'}. `;
-            summaryText += `This information is provided to assist with their Centrelink claim (SU415).`;
+        const payload = {
+            clinicalInformation,
+            functionalImpact,
+            treatmentPlan,
+        };
+
+        const webhookUrl = '/api/webhook-test/2974a87a-53fe-4402-9316-ad2c4d500d18';
+
+        try {
+            const response = await axios.post(webhookUrl, payload);
             
-            setSummary(summaryText);
+            let responseData = response.data;
+            let finalStatement = 'Could not extract statement from webhook response.';
+
+            if (typeof responseData === 'string') {
+                finalStatement = responseData;
+            } else if (typeof responseData === 'object' && responseData !== null) {
+                const keys = Object.keys(responseData);
+                if (keys.length > 0 && typeof responseData[keys[0]] === 'string') {
+                    finalStatement = responseData[keys[0]];
+                } else {
+                    finalStatement = JSON.stringify(responseData, null, 2);
+                }
+            }
+            
+            setStatement(finalStatement);
+
+        } catch (error) {
+            console.error('Error fetching statement from webhook:', error);
+            let errorMessage = 'An error occurred while generating the statement.';
+            if (axios.isAxiosError(error)) {
+                if (!error.response) {
+                    errorMessage = 'A network error occurred. This could be a CORS issue. Please check the browser console.';
+                } else {
+                    errorMessage = `The server responded with an error: ${error.response.status} ${error.response.statusText}.`;
+                }
+            }
+            setStatement(`Error: ${errorMessage}`);
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
 
     const handleReset = () => {
         setClinicalInformation('');
         setFunctionalImpact('');
         setTreatmentPlan('');
-        setSummary(null);
+        setStatement(null);
     };
 
     const handleCopy = () => {
-        if (!summary) return;
-        navigator.clipboard.writeText(summary).then(() => {
+        if (!statement) return;
+        
+        const cleanedText = statement
+            .replace(/###\s*\*\*\s*(.*?)\s*\*\*/g, '\n\n--- $1 ---\n')
+            .replace(/\*\*(.*?):\*\*/g, '\n$1:')
+            .replace(/---/g, '--------------------------------')
+            .replace(/🗒️|📄|📋/g, '')
+            .replace(/  +/g, ' ')
+            .trim();
+
+        navigator.clipboard.writeText(cleanedText).then(() => {
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 2000);
         });
@@ -195,12 +279,12 @@ const CentrelinkFormAssist = () => {
 
                 <motion.div variants={sectionVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
                     <button
-                        onClick={handleGenerateSummary}
+                        onClick={handleGenerateStatement}
                         disabled={isLoading || !clinicalInformation}
                         className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
                     >
                         {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Sparkles className="h-5 w-5" />}
-                        {isLoading ? 'Generating...' : 'Generate Summary'}
+                        {isLoading ? 'Generating...' : 'Generate Statement'}
                     </button>
                     <button
                         onClick={handleReset}
@@ -212,21 +296,19 @@ const CentrelinkFormAssist = () => {
                     </button>
                 </motion.div>
 
-                {summary && (
+                {statement && (
                     <motion.div variants={sectionVariants} className="border-t border-gray-200 dark:border-white/10 pt-8 mt-12">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Generated Summary</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Generated Summary Statement</h3>
                             <button
                                 onClick={handleCopy}
                                 className={cn('flex items-center justify-center gap-2 h-9 px-3 bg-gray-100 dark:bg-black/20 hover:bg-gray-200 dark:hover:bg-black/40 font-semibold rounded-lg transition-all text-gray-700 dark:text-gray-300 text-sm', isCopied && 'text-success-green')}
                             >
                                 {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                                <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+                                <span>{isCopied ? 'Copied!' : 'Copy All'}</span>
                             </button>
                         </div>
-                        <InspiredCard className="text-gray-600 dark:text-gray-300">
-                            <p>{summary}</p>
-                        </InspiredCard>
+                        <FormattedWebhookOutput content={statement} />
                     </motion.div>
                 )}
             </div>
