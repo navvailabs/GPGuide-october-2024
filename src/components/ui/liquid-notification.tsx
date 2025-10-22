@@ -169,7 +169,7 @@ export const LiquidGlassCard = ({
       >
         {/* Base background color */}
         <div 
-          className="absolute inset-0 bg-black/20"
+          className="absolute inset-0 bg-black/50"
           style={{ borderRadius }}
         />
 

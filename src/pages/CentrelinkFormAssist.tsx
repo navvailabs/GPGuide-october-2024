@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, RefreshCw, Loader2, Copy, Check } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Sparkles, RefreshCw, Loader2 } from 'lucide-react';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
 import InspiredCard from '@/components/ui/InspiredCard';
 import axios from 'axios';
+import CentrelinkPreviewSection from '@/components/care-plan/CentrelinkPreviewSection';
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -38,47 +38,6 @@ const quickTreatments = [
     "Supportive care, rest, fluids. Expected resolution 7-10 days"
 ];
 
-const FormattedWebhookOutput = ({ content }: { content: string }) => {
-    const lines = content.split('\n');
-
-    const elements = lines.map((line, index) => {
-        const trimmedLine = line.trim();
-
-        // Main heading: ### **...**
-        const mainHeadingMatch = trimmedLine.match(/^###\s*\*\*(.*?)\*\*$/);
-        if (mainHeadingMatch) {
-            return <h3 key={index} className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 first:mt-0 pb-2 border-b border-gray-200 dark:border-white/10">{mainHeadingMatch[1].replace(/🗒️|📄|📋/g, '').trim()}</h3>;
-        }
-
-        // Subheading: **...:**
-        const subHeadingMatch = trimmedLine.match(/^\*\*(.*?):\*\*$/);
-        if (subHeadingMatch) {
-            return <h4 key={index} className="text-base font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-1">{subHeadingMatch[1].trim()}:</h4>;
-        }
-
-        // Separator: ---
-        if (trimmedLine === '---') {
-            return <hr key={index} className="my-6 border-gray-200 dark:border-white/10" />;
-        }
-
-        // Empty line for spacing - we'll let the parent container handle spacing
-        if (trimmedLine === '') {
-            return null;
-        }
-
-        // Normal paragraph
-        return <p key={index} className="text-gray-600 dark:text-gray-400 leading-relaxed">{trimmedLine}</p>;
-    });
-
-    return (
-        <InspiredCard>
-            <div className="space-y-2">
-                {elements.filter(Boolean)}
-            </div>
-        </InspiredCard>
-    );
-};
-
 
 const CentrelinkFormAssist = () => {
     const [clinicalInformation, setClinicalInformation] = useState('');
@@ -86,7 +45,6 @@ const CentrelinkFormAssist = () => {
     const [treatmentPlan, setTreatmentPlan] = useState('');
     const [statement, setStatement] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isCopied, setIsCopied] = useState(false);
 
     const handleAddClinicalInfo = (infoToAdd: string) => {
         setClinicalInformation(prev => {
@@ -119,7 +77,7 @@ const CentrelinkFormAssist = () => {
             treatmentPlan,
         };
 
-        const webhookUrl = '/api/webhook-test/2974a87a-53fe-4402-9316-ad2c4d500d18';
+        const webhookUrl = 'https://n8n.srv1072529.hstgr.cloud/webhook/2974a87a-53fe-4402-9316-ad2c4d500d18';
 
         try {
             const response = await axios.post(webhookUrl, payload);
@@ -161,23 +119,6 @@ const CentrelinkFormAssist = () => {
         setFunctionalImpact('');
         setTreatmentPlan('');
         setStatement(null);
-    };
-
-    const handleCopy = () => {
-        if (!statement) return;
-        
-        const cleanedText = statement
-            .replace(/###\s*\*\*\s*(.*?)\s*\*\*/g, '\n\n--- $1 ---\n')
-            .replace(/\*\*(.*?):\*\*/g, '\n$1:')
-            .replace(/---/g, '--------------------------------')
-            .replace(/🗒️|📄|📋/g, '')
-            .replace(/  +/g, ' ')
-            .trim();
-
-        navigator.clipboard.writeText(cleanedText).then(() => {
-            setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 2000);
-        });
     };
 
     return (
@@ -296,21 +237,7 @@ const CentrelinkFormAssist = () => {
                     </button>
                 </motion.div>
 
-                {statement && (
-                    <motion.div variants={sectionVariants} className="border-t border-gray-200 dark:border-white/10 pt-8 mt-12">
-                        <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Generated Summary Statement</h3>
-                            <button
-                                onClick={handleCopy}
-                                className={cn('flex items-center justify-center gap-2 h-9 px-3 bg-gray-100 dark:bg-black/20 hover:bg-gray-200 dark:hover:bg-black/40 font-semibold rounded-lg transition-all text-gray-700 dark:text-gray-300 text-sm', isCopied && 'text-success-green')}
-                            >
-                                {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                                <span>{isCopied ? 'Copied!' : 'Copy All'}</span>
-                            </button>
-                        </div>
-                        <FormattedWebhookOutput content={statement} />
-                    </motion.div>
-                )}
+                {statement && <CentrelinkPreviewSection statement={statement} />}
             </div>
         </motion.div>
     );
