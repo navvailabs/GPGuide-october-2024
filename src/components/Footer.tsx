@@ -1,28 +1,40 @@
 import { BriefcaseMedical, Linkedin, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const productLinks = [
-        "Basic Plan - $7.99/week",
-        "Professional Plan - $14.99/week",
-        "Features Comparison",
-        "Template Examples",
-        "How It Works"
+        { name: "Basic Plan - $7.99/week", href: "/#pricing" },
+        { name: "Professional Plan - $14.99/week", href: "/#pricing" },
+        { name: "Features Comparison", href: "/#features" },
+        { name: "Template Examples", href: "/#testimonials" },
+        { name: "How It Works", href: "/#how-it-works" }
     ];
 
     const supportLinks = [
-        "Help Center",
-        "Contact Support",
-        "Privacy Policy",
-        "Terms of Service",
-        "Medical Disclaimer",
-        "Refund Policy"
+        { name: "Help Center", href: "/help-center" },
+        { name: "Contact Support", href: "/contact-support" },
+        { name: "Privacy Policy", href: "/privacy-policy" },
+        { name: "Terms of Service", href: "/terms-of-service" },
+        { name: "Medical Disclaimer", href: "/medical-disclaimer" },
+        { name: "Refund Policy", href: "/refund-policy" }
     ];
 
     const companyLinks = [
-        "About GPGuide",
-        "Our Mission",
-        "Security & Compliance"
+        { name: "About GPGuide", href: "#" },
+        { name: "Our Mission", href: "#" },
+        { name: "Security & Compliance", href: "#" }
     ];
+
+    const handleScrollLink = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        if (href.startsWith('/#')) {
+            e.preventDefault();
+            const targetId = href.substring(2);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    };
 
     return (
         <footer className="bg-black/30 backdrop-blur-xl border-t border-white/10 text-gray-400 shadow-lg">
@@ -48,8 +60,8 @@ const Footer = () => {
                         <h4 className="font-bold text-white mb-4">Product</h4>
                         <ul className="space-y-2">
                             {productLinks.map(link => (
-                                <li key={link}>
-                                    <a href="#" className="text-sm hover:text-white transition-colors">{link}</a>
+                                <li key={link.name}>
+                                    <Link to={link.href} onClick={(e) => handleScrollLink(e, link.href)} className="text-sm hover:text-white transition-colors">{link.name}</Link>
                                 </li>
                             ))}
                         </ul>
@@ -60,8 +72,8 @@ const Footer = () => {
                         <h4 className="font-bold text-white mb-4">Support</h4>
                         <ul className="space-y-2">
                             {supportLinks.map(link => (
-                                <li key={link}>
-                                    <a href="#" className="text-sm hover:text-white transition-colors">{link}</a>
+                                <li key={link.name}>
+                                    <Link to={link.href} className="text-sm hover:text-white transition-colors">{link.name}</Link>
                                 </li>
                             ))}
                         </ul>
@@ -72,8 +84,8 @@ const Footer = () => {
                         <h4 className="font-bold text-white mb-4">Company</h4>
                         <ul className="space-y-2">
                             {companyLinks.map(link => (
-                                <li key={link}>
-                                    <a href="#" className="text-sm hover:text-white transition-colors">{link}</a>
+                                <li key={link.name}>
+                                    <a href={link.href} className="text-sm hover:text-white transition-colors">{link.name}</a>
                                 </li>
                             ))}
                         </ul>
