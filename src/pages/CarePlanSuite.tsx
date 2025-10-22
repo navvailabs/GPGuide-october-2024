@@ -6,6 +6,7 @@ import DexaScanTool from '@/pages/DexaScanTool';
 import CentrelinkFormAssist from '@/pages/CentrelinkFormAssist';
 import WorkersCompAssist from '@/pages/WorkersCompAssist';
 import MEDDAssistTool from '@/pages/MEDDAssistTool';
+import NDISFormAssist from '@/pages/NDISFormAssist';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 
 interface MEDDResult {
@@ -19,7 +20,7 @@ interface MEDDResult {
     }[];
 }
 
-export type ActiveView = 'gp-care-plan' | 'mental-health-care-plan' | 'dexa-scan-tool' | 'centrelink-form-assist' | 'workers-comp-assist' | 'medd-assist-tool';
+export type ActiveView = 'gp-care-plan' | 'mental-health-care-plan' | 'dexa-scan-tool' | 'centrelink-form-assist' | 'workers-comp-assist' | 'medd-assist-tool' | 'ndis-form-assist';
 
 const CarePlanSuite = () => {
     const [activeView, setActiveView] = useState<ActiveView>('gp-care-plan');
@@ -50,6 +51,14 @@ const CarePlanSuite = () => {
     // State for MEDDAssistTool
     const [meddInput, setMeddInput] = useState<string>('');
     const [meddResult, setMeddResult] = useState<MEDDResult | null>(null);
+
+    // State for NDISFormAssist
+    const [ndisInputs, setNdisInputs] = useState({
+        diagnosis: '',
+        functionalImpact: '',
+        recommendedSupports: ''
+    });
+    const [ndisSummary, setNdisSummary] = useState<string | null>(null);
 
     const renderContent = () => {
         switch (activeView) {
@@ -96,6 +105,13 @@ const CarePlanSuite = () => {
                     setMedicationInput={setMeddInput}
                     result={meddResult}
                     setResult={setMeddResult}
+                />;
+            case 'ndis-form-assist':
+                return <NDISFormAssist 
+                    inputs={ndisInputs}
+                    setInputs={setNdisInputs}
+                    summary={ndisSummary}
+                    setSummary={setNdisSummary}
                 />;
             default:
                 return <GPCarePlan

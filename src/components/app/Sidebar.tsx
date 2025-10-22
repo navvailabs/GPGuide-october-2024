@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutGrid, HeartPulse, X, Bone, ClipboardList, HardHat, Calculator } from 'lucide-react';
+import { LayoutGrid, HeartPulse, X, Bone, ClipboardList, HardHat, Calculator, Accessibility } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ActiveView } from '@/pages/CarePlanSuite';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -18,6 +18,7 @@ const toolItems = [
 const formItems = [
     { name: 'Centrelink SU415', view: 'centrelink-form-assist' as const, icon: ClipboardList, color: 'text-green-400' },
     { name: 'Workers Comp', view: 'workers-comp-assist' as const, icon: HardHat, color: 'text-orange-400' },
+    { name: 'NDIS Form Assist', view: 'ndis-form-assist' as const, icon: Accessibility, color: 'text-purple-400' },
 ];
 
 interface SidebarItemProps extends React.ComponentProps<'button'> {
