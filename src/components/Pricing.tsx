@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Dot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Pricing = () => {
@@ -118,7 +118,7 @@ const Pricing = () => {
                                     if (isSubFeature) {
                                         return (
                                             <li key={feature} className="flex items-start pl-8">
-                                                <span className="text-gray-500 mr-3 mt-0.5 font-bold text-lg leading-tight">&ndash;</span>
+                                                <Dot className="h-5 w-5 text-gray-500 mr-3 mt-0.5 flex-shrink-0" />
                                                 <span className="text-gray-700">{featureText}</span>
                                             </li>
                                         );

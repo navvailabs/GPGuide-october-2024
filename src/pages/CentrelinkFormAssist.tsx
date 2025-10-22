@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
 import InspiredCard from '@/components/ui/InspiredCard';
+import axios from 'axios';
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -66,19 +67,60 @@ const CentrelinkFormAssist = () => {
         });
     };
 
-    const handleGenerateSummary = () => {
+    const handleGenerateSummary = async () => {
         setIsLoading(true);
         setSummary(null);
 
-        setTimeout(() => {
-            let summaryText = `Clinical information: ${clinicalInformation || '[Clinical Information]'}. `;
-            summaryText += `Functionally, this impacts the patient by: ${functionalImpact || '[Functional Impact]'}. `;
-            summaryText += `The current treatment plan includes: ${treatmentPlan || '[Treatment Plan]'}. `;
-            summaryText += `This information is provided to assist with their Centrelink claim (SU415).`;
+        const payload = {
+            clinicalInformation,
+            functionalImpact,
+            treatmentPlan,
+        };
+
+        const webhookUrl = 'https://n8n.srv1072529.hstgr.cloud/webhook-test/SU415%20form';
+
+        try {
+            const response = await axios.post(webhookUrl, payload);
             
-            setSummary(summaryText);
+            const findTextInResponse = (data: any): string | null => {
+                if (typeof data === 'string') {
+                    return data;
+                }
+                if (typeof data === 'object' && data !== null) {
+                    const keys = ['summary', 'output', 'text', 'message', 'content'];
+                    for (const key of keys) {
+                        if (typeof data[key] === 'string') {
+                            return data[key];
+                        }
+                    }
+                    return JSON.stringify(data, null, 2);
+                }
+                return null;
+            };
+            
+            const summaryText = findTextInResponse(response.data);
+
+            if (summaryText) {
+                setSummary(summaryText);
+            } else {
+                console.error("Webhook response did not contain valid text.", response.data);
+                setSummary("Failed to extract a valid summary from the webhook response. Please check the console for details.");
+            }
+
+        } catch (error) {
+            console.error('Error fetching summary from webhook:', error);
+            let errorMessage = 'An error occurred while generating the summary.';
+            if (axios.isAxiosError(error)) {
+                if (!error.response) {
+                    errorMessage = 'A network error occurred. This could be a CORS issue. Please check the browser console.';
+                } else {
+                    errorMessage = `The server responded with an error: ${error.response.status} ${error.response.statusText}.`;
+                }
+            }
+            setSummary(errorMessage);
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
 
     const handleReset = () => {
@@ -225,7 +267,7 @@ const CentrelinkFormAssist = () => {
                             </button>
                         </div>
                         <InspiredCard className="text-gray-600 dark:text-gray-300">
-                            <p>{summary}</p>
+                            <pre className="whitespace-pre-wrap font-sans text-sm">{summary}</pre>
                         </InspiredCard>
                     </motion.div>
                 )}
