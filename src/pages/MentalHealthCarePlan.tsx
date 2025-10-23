@@ -31,33 +31,33 @@ const sectionVariants = {
 };
 
 const clinicalDetailsSuggestions = {
-    "🧠 Mood Symptoms": [
+    "Mood Symptoms": [
         "Low mood",
         "Loss of interest (anhedonia)",
         "Feelings of hopelessness",
         "Crying episodes",
         "Irritability",
     ],
-    "⚡ Anxiety Symptoms": [
+    "Anxiety Symptoms": [
         "Excessive worry",
         "Panic attacks",
         "Restlessness",
         "Racing thoughts",
         "Tight chest / palpitations",
     ],
-    "😴 Sleep & Energy": [
+    "Sleep & Energy": [
         "Poor sleep / insomnia",
         "Early morning waking",
         "Low energy / fatigue",
         "Poor concentration",
     ],
-    "📉 Functional Impact": [
+    "Functional Impact": [
         "Reduced ability to work/study",
         "Social withdrawal",
         "Avoidance behaviour",
         "Difficulty coping with daily tasks",
     ],
-    "🚨 Risk Symptoms": [
+    "Risk Symptoms": [
         "Suicidal thoughts (no plan)",
         "Passive suicidal ideation",
         "Self-harm urges",
@@ -208,8 +208,8 @@ const MentalHealthCarePlan = ({
                             {Object.entries(clinicalDetailsSuggestions).map(([category, items]) => (
                                 <div key={category}>
                                     <p className={cn(
-                                        "text-xs font-semibold mb-2",
-                                        theme === 'light' ? 'text-gray-500' : 'text-gray-400'
+                                        "text-sm font-semibold mb-2",
+                                        theme === 'light' ? 'text-gray-600' : 'text-gray-400'
                                     )}>{category}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {items.map(item => (

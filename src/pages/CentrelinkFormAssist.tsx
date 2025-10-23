@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, RefreshCw, Loader2, Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
@@ -38,44 +38,136 @@ const quickTreatments = [
     "Supportive care, rest, fluids. Expected resolution 7-10 days"
 ];
 
-const FormattedWebhookOutput = ({ content }: { content: string }) => {
-    const lines = content.split('\n');
+const SectionCopyButton = ({ contentToCopy, className }: { contentToCopy: string, className?: string }) => {
+    const [isCopied, setIsCopied] = useState(false);
 
-    const elements = lines.map((line, index) => {
-        const trimmedLine = line.trim();
+    const handleCopy = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        
+        const plainText = contentToCopy
+            .replace(/###\s*\*\*(.*?)\*\*/g, '$1')
+            .replace(/\*\*(.*?):\*\*/g, '$1: ')
+            .replace(/---/g, '')
+            .replace(/🗒️|📄|📋/g, '')
+            .replace(/\n\s*\n/g, '\n')
+            .trim();
 
-        // Main heading: ### **...**
-        const mainHeadingMatch = trimmedLine.match(/^###\s*\*\*(.*?)\*\*$/);
-        if (mainHeadingMatch) {
-            return <h3 key={index} className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 first:mt-0 pb-2 border-b border-gray-200 dark:border-white/10">{mainHeadingMatch[1].replace(/🗒️|📄|📋/g, '').trim()}</h3>;
+        const textArea = document.createElement('textarea');
+        textArea.value = plainText;
+        textArea.style.position = 'fixed';
+        textArea.style.top = '-9999px';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            alert('Failed to copy text.');
         }
-
-        // Subheading: **...:**
-        const subHeadingMatch = trimmedLine.match(/^\*\*(.*?):\*\*$/);
-        if (subHeadingMatch) {
-            return <h4 key={index} className="text-base font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-1">{subHeadingMatch[1].trim()}:</h4>;
-        }
-
-        // Separator: ---
-        if (trimmedLine === '---') {
-            return <hr key={index} className="my-6 border-gray-200 dark:border-white/10" />;
-        }
-
-        // Empty line for spacing - we'll let the parent container handle spacing
-        if (trimmedLine === '') {
-            return null;
-        }
-
-        // Normal paragraph
-        return <p key={index} className="text-gray-600 dark:text-gray-400 leading-relaxed">{trimmedLine}</p>;
-    });
+        document.body.removeChild(textArea);
+    };
 
     return (
-        <InspiredCard>
-            <div className="space-y-2">
-                {elements.filter(Boolean)}
-            </div>
-        </InspiredCard>
+        <button
+            onClick={handleCopy}
+            className={cn(
+                "flex items-center justify-center h-8 w-8 bg-gray-100/50 dark:bg-black/30 hover:bg-gray-200/70 dark:hover:bg-black/50 backdrop-blur-sm rounded-full transition-all text-gray-600 dark:text-gray-300 p-0",
+                isCopied && "text-success-green bg-green-500/10 dark:bg-green-500/20",
+                className
+            )}
+            aria-label={isCopied ? "Copied" : "Copy section"}
+        >
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={isCopied ? "check" : "copy"}
+                    initial={{ scale: 0.5, opacity: 0, rotate: -45 }}
+                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                    exit={{ scale: 0.5, opacity: 0, rotate: 45 }}
+                    transition={{ duration: 0.2 }}
+                >
+                    {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                </motion.div>
+            </AnimatePresence>
+        </button>
+    );
+};
+
+const FormattedWebhookOutput = ({ content }: { content: string }) => {
+    const sections = useMemo(() => {
+        if (!content) return [];
+
+        const sectionGroups: { title: string; content: string; rawContent: string }[] = [];
+        const lines = content.split('\n');
+        let currentSection: { title: string; contentLines: string[] } | null = null;
+
+        lines.forEach(line => {
+            const mainHeadingMatch = line.trim().match(/^###\s*\*\*(.*?)\*\*$/);
+            if (mainHeadingMatch) {
+                if (currentSection) {
+                    sectionGroups.push({
+                        title: currentSection.title,
+                        content: currentSection.contentLines.join('\n'),
+                        rawContent: `### **${currentSection.title}**\n${currentSection.contentLines.join('\n')}`
+                    });
+                }
+                currentSection = {
+                    title: mainHeadingMatch[1].replace(/🗒️|📄|📋/g, '').trim(),
+                    contentLines: []
+                };
+            } else if (currentSection) {
+                currentSection.contentLines.push(line);
+            }
+        });
+
+        if (currentSection) {
+            sectionGroups.push({
+                title: currentSection.title,
+                content: currentSection.contentLines.join('\n'),
+                rawContent: `### **${currentSection.title}**\n${currentSection.contentLines.join('\n')}`
+            });
+        }
+        
+        if (sectionGroups.length === 0 && content) {
+            return [{ title: 'Generated Statement', content: content, rawContent: content }];
+        }
+
+        return sectionGroups;
+    }, [content]);
+
+    const renderContent = (sectionContent: string) => {
+        const lines = sectionContent.split('\n');
+        return lines.map((line, index) => {
+            const trimmedLine = line.trim();
+            const subHeadingMatch = trimmedLine.match(/^\*\*(.*?):\*\*$/);
+            if (subHeadingMatch) {
+                return <h4 key={index} className="text-base font-semibold text-gray-700 dark:text-gray-300 mt-4 mb-1">{subHeadingMatch[1].trim()}:</h4>;
+            }
+            if (trimmedLine === '---') {
+                return <hr key={index} className="my-6 border-gray-200 dark:border-white/10" />;
+            }
+            if (trimmedLine === '') {
+                return null;
+            }
+            return <p key={index} className="text-gray-600 dark:text-gray-400 leading-relaxed">{trimmedLine}</p>;
+        }).filter(Boolean);
+    };
+
+    return (
+        <div className="space-y-6">
+            {sections.map((section, index) => (
+                <InspiredCard key={index} className="relative p-6 md:p-8">
+                    <SectionCopyButton contentToCopy={section.rawContent} className="absolute top-4 right-4 z-10" />
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 pr-10">{section.title}</h3>
+                    <div className="space-y-2">
+                        {renderContent(section.content)}
+                    </div>
+                </InspiredCard>
+            ))}
+        </div>
     );
 };
 
@@ -90,26 +182,50 @@ const CentrelinkFormAssist = () => {
 
     const handleAddClinicalInfo = (infoToAdd: string) => {
         setClinicalInformation(prev => {
-            if (!prev.trim()) return infoToAdd;
-            return `${prev.trim()}\n${infoToAdd}`;
+            const items = prev.split('\n').map(item => item.trim()).filter(Boolean);
+            if (items.includes(infoToAdd)) {
+                return items.filter(item => item !== infoToAdd).join('\n');
+            } else {
+                return [...items, infoToAdd].join('\n');
+            }
         });
+    };
+
+    const isClinicalInfoSelected = (info: string) => {
+        return clinicalInformation.split('\n').map(item => item.trim()).includes(info);
     };
 
     const handleAddFunctionalImpact = (impactToAdd: string) => {
         setFunctionalImpact(prev => {
-            if (!prev.trim()) return impactToAdd;
-            return `${prev.trim()}\n${impactToAdd}`;
+            const items = prev.split('\n').map(item => item.trim()).filter(Boolean);
+            if (items.includes(impactToAdd)) {
+                return items.filter(item => item !== impactToAdd).join('\n');
+            } else {
+                return [...items, impactToAdd].join('\n');
+            }
         });
+    };
+
+    const isFunctionalImpactSelected = (impact: string) => {
+        return functionalImpact.split('\n').map(item => item.trim()).includes(impact);
     };
 
     const handleAddTreatment = (treatmentToAdd: string) => {
         setTreatmentPlan(prev => {
-            if (!prev.trim()) return treatmentToAdd;
-            return `${prev.trim()}\n${treatmentToAdd}`;
+            const items = prev.split('\n').map(item => item.trim()).filter(Boolean);
+            if (items.includes(treatmentToAdd)) {
+                return items.filter(item => item !== treatmentToAdd).join('\n');
+            } else {
+                return [...items, treatmentToAdd].join('\n');
+            }
         });
     };
 
-    const handleGenerateStatement = async () => {
+    const isTreatmentSelected = (treatment: string) => {
+        return treatmentPlan.split('\n').map(item => item.trim()).includes(treatment);
+    };
+
+    const handleGenerateSummary = async () => {
         setIsLoading(true);
         setStatement(null);
 
@@ -119,7 +235,7 @@ const CentrelinkFormAssist = () => {
             treatmentPlan,
         };
 
-        const webhookUrl = '/api/webhook-test/2974a87a-53fe-4402-9316-ad2c4d500d18';
+        const webhookUrl = 'https://n8n.srv1072529.hstgr.cloud/webhook/2974a87a-53fe-4402-9316-ad2c4d500d18';
 
         try {
             const response = await axios.post(webhookUrl, payload);
@@ -174,10 +290,23 @@ const CentrelinkFormAssist = () => {
             .replace(/  +/g, ' ')
             .trim();
 
-        navigator.clipboard.writeText(cleanedText).then(() => {
+        const textArea = document.createElement('textarea');
+        textArea.value = cleanedText;
+        textArea.style.position = 'fixed';
+        textArea.style.top = '-9999px';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 2000);
-        });
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            alert('Failed to copy text.');
+        }
+        document.body.removeChild(textArea);
     };
 
     return (
@@ -213,7 +342,10 @@ const CentrelinkFormAssist = () => {
                                     <QuickActionButton
                                         key={info}
                                         onClick={() => handleAddClinicalInfo(info)}
-                                        className="w-full justify-start text-left"
+                                        className={cn(
+                                            'w-full justify-start text-left',
+                                            isClinicalInfoSelected(info) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                        )}
                                     >
                                         {info}
                                     </QuickActionButton>
@@ -240,7 +372,10 @@ const CentrelinkFormAssist = () => {
                                     <QuickActionButton
                                         key={impact}
                                         onClick={() => handleAddFunctionalImpact(impact)}
-                                        className="w-full justify-start text-left"
+                                        className={cn(
+                                            'w-full justify-start text-left',
+                                            isFunctionalImpactSelected(impact) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                        )}
                                     >
                                         {impact}
                                     </QuickActionButton>
@@ -267,7 +402,10 @@ const CentrelinkFormAssist = () => {
                                     <QuickActionButton
                                         key={treatment}
                                         onClick={() => handleAddTreatment(treatment)}
-                                        className="w-full justify-start text-left"
+                                        className={cn(
+                                            'w-full justify-start text-left',
+                                            isTreatmentSelected(treatment) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                        )}
                                     >
                                         {treatment}
                                     </QuickActionButton>
@@ -279,12 +417,12 @@ const CentrelinkFormAssist = () => {
 
                 <motion.div variants={sectionVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
                     <button
-                        onClick={handleGenerateStatement}
+                        onClick={handleGenerateSummary}
                         disabled={isLoading || !clinicalInformation}
                         className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
                     >
                         {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Sparkles className="h-5 w-5" />}
-                        {isLoading ? 'Generating...' : 'Generate Statement'}
+                        {isLoading ? 'Generating...' : 'Generate Summary'}
                     </button>
                     <button
                         onClick={handleReset}

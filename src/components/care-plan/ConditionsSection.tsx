@@ -38,11 +38,17 @@ const ConditionsSection = ({ conditions, setConditions }: ConditionsSectionProps
 
     const handleAddShortcut = (conditionToAdd: string) => {
         setConditions(prev => {
-            if (!prev.trim()) return conditionToAdd;
             const conditionsArray = prev.split('\n').map(c => c.trim()).filter(Boolean);
-            if (conditionsArray.includes(conditionToAdd)) return prev;
-            return `${prev}\n${conditionToAdd}`;
+            if (conditionsArray.includes(conditionToAdd)) {
+                return conditionsArray.filter(c => c !== conditionToAdd).join('\n');
+            } else {
+                return [...conditionsArray, conditionToAdd].join('\n');
+            }
         });
+    };
+
+    const isSelected = (condition: string) => {
+        return conditions.split('\n').map(c => c.trim()).includes(condition);
     };
 
     return (
@@ -75,7 +81,10 @@ const ConditionsSection = ({ conditions, setConditions }: ConditionsSectionProps
                             <QuickActionButton
                                 key={c}
                                 onClick={() => handleAddShortcut(c)}
-                                className="justify-center"
+                                className={cn(
+                                    'justify-center',
+                                    isSelected(c) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                )}
                             >
                                 {c}
                             </QuickActionButton>

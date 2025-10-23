@@ -6,19 +6,19 @@ import type { ActiveView } from '@/pages/CarePlanSuite';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const carePlanItems = [
-    { name: 'GP Care Plan', view: 'gp-care-plan' as const, icon: LayoutGrid, color: 'text-sky-400' },
+    { name: 'GP Chronic Condition Management Plan', view: 'gp-care-plan' as const, icon: LayoutGrid, color: 'text-sky-400' },
     { name: 'Mental Health Care Plan', view: 'mental-health-care-plan' as const, icon: HeartPulse, color: 'text-rose-400' },
+];
+
+const formItems = [
+    { name: 'Centrelink Medical Certificate form (SU415)', view: 'centrelink-form-assist' as const, icon: ClipboardList, color: 'text-green-400' },
+    { name: 'Workers Compensation Claim Form', view: 'workers-comp-assist' as const, icon: HardHat, color: 'text-orange-400' },
+    { name: 'NDIS Form Assist', view: 'ndis-form-assist' as const, icon: Accessibility, color: 'text-purple-400' },
 ];
 
 const toolItems = [
     { name: 'DEXA Scan Interpreter', view: 'dexa-scan-tool' as const, icon: Bone, color: 'text-amber-400' },
     { name: 'Opioid MEDD Assist Tool', view: 'medd-assist-tool' as const, icon: Calculator, color: 'text-teal-400' },
-];
-
-const formItems = [
-    { name: 'Centrelink SU415', view: 'centrelink-form-assist' as const, icon: ClipboardList, color: 'text-green-400' },
-    { name: 'Workers Comp', view: 'workers-comp-assist' as const, icon: HardHat, color: 'text-orange-400' },
-    { name: 'NDIS Form Assist', view: 'ndis-form-assist' as const, icon: Accessibility, color: 'text-purple-400' },
 ];
 
 interface SidebarItemProps extends React.ComponentProps<'button'> {
@@ -32,7 +32,7 @@ const SidebarItem = ({ item, isActive, ...props }: SidebarItemProps) => {
         <motion.button
             layout
             className={cn(
-                "w-full flex items-center p-3 rounded-lg transition-all duration-200 text-sm",
+                "w-full flex items-start p-3 rounded-lg transition-all duration-200 text-sm",
                 isActive
                     ? theme === 'light'
                         ? 'bg-gray-100 text-gray-900 shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] border border-black/5'
@@ -43,9 +43,9 @@ const SidebarItem = ({ item, isActive, ...props }: SidebarItemProps) => {
             )}
             {...props}
         >
-            <item.icon className={cn("h-5 w-5 flex-shrink-0", item.color)} />
+            <item.icon className={cn("h-5 w-5 flex-shrink-0 mt-0.5", item.color)} />
             <span className={cn(
-                "whitespace-nowrap ml-3",
+                "ml-3 text-left whitespace-normal",
                 isActive ? "font-bold" : "font-medium"
             )}>
                 {item.name}
@@ -77,7 +77,7 @@ const SidebarContent = ({ activeView, setActiveView, onLinkClick }: SidebarConte
     ));
 
     return (
-        <nav className="flex-1 flex flex-col space-y-6 overflow-y-auto pr-1">
+        <nav className={cn("flex-1 flex flex-col space-y-6 overflow-y-auto pr-1", "sidebar-scroll")}>
             <div>
                 <h3 className={cn(
                     "px-2 mb-2 text-xs font-semibold uppercase tracking-wider",
@@ -96,20 +96,6 @@ const SidebarContent = ({ activeView, setActiveView, onLinkClick }: SidebarConte
                 <h3 className={cn(
                     "px-2 mb-2 text-xs font-semibold uppercase tracking-wider",
                     theme === 'light' ? 'text-gray-500' : 'text-gray-400'
-                )}>Tools</h3>
-                <div className={cn(
-                    "rounded-2xl p-2 space-y-1",
-                    theme === 'light' 
-                        ? 'bg-white border border-gray-200/80 shadow-sm' 
-                        : 'bg-black/10 dark:bg-black/20'
-                )}>
-                    {renderItems(toolItems)}
-                </div>
-            </div>
-            <div>
-                <h3 className={cn(
-                    "px-2 mb-2 text-xs font-semibold uppercase tracking-wider",
-                    theme === 'light' ? 'text-gray-500' : 'text-gray-400'
                 )}>Forms</h3>
                 <div className={cn(
                     "rounded-2xl p-2 space-y-1",
@@ -118,6 +104,20 @@ const SidebarContent = ({ activeView, setActiveView, onLinkClick }: SidebarConte
                         : 'bg-black/10 dark:bg-black/20'
                 )}>
                     {renderItems(formItems)}
+                </div>
+            </div>
+            <div>
+                <h3 className={cn(
+                    "px-2 mb-2 text-xs font-semibold uppercase tracking-wider",
+                    theme === 'light' ? 'text-gray-500' : 'text-gray-400'
+                )}>Tools</h3>
+                <div className={cn(
+                    "rounded-2xl p-2 space-y-1",
+                    theme === 'light' 
+                        ? 'bg-white border border-gray-200/80 shadow-sm' 
+                        : 'bg-black/10 dark:bg-black/20'
+                )}>
+                    {renderItems(toolItems)}
                 </div>
             </div>
         </nav>
@@ -137,7 +137,7 @@ const Sidebar = ({ isMobileOpen, setIsMobileOpen, activeView, setActiveView }: S
         <>
             {/* Desktop Sidebar */}
             <div
-                className="hidden md:flex flex-col fixed top-[9.5rem] left-0 h-[calc(100vh-9.5rem)] z-30 w-80 p-4"
+                className="hidden md:flex flex-col fixed top-20 left-0 h-[calc(100vh-5rem)] z-30 w-80 p-4"
             >
                 <SidebarContent 
                     activeView={activeView} 

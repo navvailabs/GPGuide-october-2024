@@ -28,7 +28,18 @@ const GoalsSection = ({ goals, setGoals }: GoalsSectionProps) => {
     const { theme } = useTheme();
 
     const handleAddShortcut = (goalToAdd: string) => {
-        setGoals(prev => prev ? `${prev}\n${goalToAdd}` : goalToAdd);
+        setGoals(prev => {
+            const goalsArray = prev.split('\n').map(g => g.trim()).filter(Boolean);
+            if (goalsArray.includes(goalToAdd)) {
+                return goalsArray.filter(g => g !== goalToAdd).join('\n');
+            } else {
+                return [...goalsArray, goalToAdd].join('\n');
+            }
+        });
+    };
+
+    const isSelected = (goal: string) => {
+        return goals.split('\n').map(g => g.trim()).includes(goal);
     };
 
     return (
@@ -59,7 +70,10 @@ const GoalsSection = ({ goals, setGoals }: GoalsSectionProps) => {
                             <QuickActionButton
                                 key={goal}
                                 onClick={() => handleAddShortcut(goal)}
-                                className="w-full justify-start text-left"
+                                className={cn(
+                                    'w-full justify-start text-left',
+                                    isSelected(goal) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                )}
                             >
                                 {goal}
                             </QuickActionButton>

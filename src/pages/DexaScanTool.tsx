@@ -151,9 +151,7 @@ const DexaScanTool = ({ inputs, setInputs, summary, setSummary }: DexaScanToolPr
                                     onClick={() => handleIndicationToggle(indication)}
                                     className={cn(
                                         'w-full justify-start text-left',
-                                        inputs.indications.includes(indication)
-                                            ? '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
-                                            : ''
+                                        inputs.indications.includes(indication) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
                                     )}
                                 >
                                     {indication}
