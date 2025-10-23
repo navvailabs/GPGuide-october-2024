@@ -54,16 +54,19 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
     const [isLoading, setIsLoading] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
 
-    const handleInputChange = (field: keyof NDISInputs, value: string) => {
-        setInputs(prev => ({ ...prev, [field]: value }));
-    };
-    
     const handleAddQuickAction = (field: keyof NDISInputs, value: string) => {
         setInputs(prev => {
-            const currentVal = prev[field];
-            if (!currentVal.trim()) return { ...prev, [field]: value };
-            return { ...prev, [field]: `${currentVal.trim()}\n${value}` };
+            const items = prev[field].split('\n').map(item => item.trim()).filter(Boolean);
+            if (items.includes(value)) {
+                return { ...prev, [field]: items.filter(item => item !== value).join('\n') };
+            } else {
+                return { ...prev, [field]: [...items, value].join('\n') };
+            }
         });
+    };
+    
+    const isSelected = (field: keyof NDISInputs, value: string) => {
+        return inputs[field].split('\n').map(item => item.trim()).includes(value);
     };
 
     const handleGenerateSummary = () => {
@@ -116,7 +119,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                         <StyledTextarea
                             id="diagnosis-textarea"
                             value={inputs.diagnosis}
-                            onChange={(e) => handleInputChange('diagnosis', e.target.value)}
+                            onChange={(e) => setInputs(prev => ({ ...prev, diagnosis: e.target.value }))}
                             placeholder="e.g., Autism Spectrum Disorder, Level 2..."
                             rows={2}
                         />
@@ -124,7 +127,11 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                             <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Suggestions:</p>
                             <div className="flex flex-wrap gap-2">
                                 {quickDiagnoses.map(item => (
-                                    <QuickActionButton key={item} onClick={() => handleAddQuickAction('diagnosis', item)}>
+                                    <QuickActionButton 
+                                        key={item} 
+                                        onClick={() => handleAddQuickAction('diagnosis', item)}
+                                        className={cn(isSelected('diagnosis', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                    >
                                         {item}
                                     </QuickActionButton>
                                 ))}
@@ -139,7 +146,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                         <StyledTextarea
                             id="functional-impact-textarea"
                             value={inputs.functionalImpact}
-                            onChange={(e) => handleInputChange('functionalImpact', e.target.value)}
+                            onChange={(e) => setInputs(prev => ({ ...prev, functionalImpact: e.target.value }))}
                             placeholder="Describe limitations in mobility, communication, self-care, social interaction, learning, etc."
                             rows={4}
                         />
@@ -147,7 +154,11 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                             <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Suggestions:</p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 {quickFunctionalImpacts.map(item => (
-                                    <QuickActionButton key={item} onClick={() => handleAddQuickAction('functionalImpact', item)} className="w-full justify-start text-left">
+                                    <QuickActionButton 
+                                        key={item} 
+                                        onClick={() => handleAddQuickAction('functionalImpact', item)} 
+                                        className={cn('w-full justify-start text-left', isSelected('functionalImpact', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                    >
                                         {item}
                                     </QuickActionButton>
                                 ))}
@@ -162,7 +173,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                         <StyledTextarea
                             id="supports-textarea"
                             value={inputs.recommendedSupports}
-                            onChange={(e) => handleInputChange('recommendedSupports', e.target.value)}
+                            onChange={(e) => setInputs(prev => ({ ...prev, recommendedSupports: e.target.value }))}
                             placeholder="e.g., Occupational Therapy weekly, Speech Pathology fortnightly..."
                             rows={3}
                         />
@@ -170,7 +181,11 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                             <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Suggestions:</p>
                             <div className="flex flex-wrap gap-2">
                                 {quickSupports.map(item => (
-                                    <QuickActionButton key={item} onClick={() => handleAddQuickAction('recommendedSupports', item)}>
+                                    <QuickActionButton 
+                                        key={item} 
+                                        onClick={() => handleAddQuickAction('recommendedSupports', item)}
+                                        className={cn(isSelected('recommendedSupports', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                    >
                                         {item}
                                     </QuickActionButton>
                                 ))}

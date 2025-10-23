@@ -30,9 +30,17 @@ const WorkersCompAssist = () => {
 
     const handleAddDiagnosis = (diagnosisToAdd: string) => {
         setInjuryDetails(prev => {
-            if (!prev.trim()) return diagnosisToAdd;
-            return `${prev.trim()}\n${diagnosisToAdd}`;
+            const items = prev.split('\n').map(item => item.trim()).filter(Boolean);
+            if (items.includes(diagnosisToAdd)) {
+                return items.filter(item => item !== diagnosisToAdd).join('\n');
+            } else {
+                return [...items, diagnosisToAdd].join('\n');
+            }
         });
+    };
+
+    const isDiagnosisSelected = (diagnosis: string) => {
+        return injuryDetails.split('\n').map(item => item.trim()).includes(diagnosis);
     };
 
     const handleGenerateSummary = () => {
@@ -98,7 +106,10 @@ const WorkersCompAssist = () => {
                                     <QuickActionButton
                                         key={diagnosis}
                                         onClick={() => handleAddDiagnosis(diagnosis)}
-                                        className="w-full justify-start text-left"
+                                        className={cn(
+                                            'w-full justify-start text-left',
+                                            isDiagnosisSelected(diagnosis) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                        )}
                                     >
                                         {diagnosis}
                                     </QuickActionButton>

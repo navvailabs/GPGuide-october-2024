@@ -28,11 +28,17 @@ const AlliedHealthSection = ({ alliedHealth, setAlliedHealth }: AlliedHealthSect
 
     const handleAddQuickAction = (action: string) => {
         setAlliedHealth(prev => {
-            if (!prev.trim()) return action;
             const items = prev.split('\n').map(item => item.trim()).filter(Boolean);
-            if (items.includes(action)) return prev;
-            return `${prev}\n${action}`;
+            if (items.includes(action)) {
+                return items.filter(item => item !== action).join('\n');
+            } else {
+                return [...items, action].join('\n');
+            }
         });
+    };
+
+    const isSelected = (action: string) => {
+        return alliedHealth.split('\n').map(item => item.trim()).includes(action);
     };
 
     return (
@@ -65,7 +71,10 @@ const AlliedHealthSection = ({ alliedHealth, setAlliedHealth }: AlliedHealthSect
                             <QuickActionButton
                                 key={action}
                                 onClick={() => handleAddQuickAction(action)}
-                                className="justify-center"
+                                className={cn(
+                                    'justify-center',
+                                    isSelected(action) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                )}
                             >
                                 {action}
                             </QuickActionButton>
