@@ -43,7 +43,9 @@ const Hero = () => {
 
                         <p className="text-lg text-neutral-300 mb-4">For GPs, GP Registrars, Aspiring GPs</p>
                         <p className="text-lg text-neutral-300 mb-8 max-w-xl">
-                            Generate RACGP-compliant drafts for Care Plans, Mental Health Care Plans, and clinical forms — in minutes, not hours.
+                            Generate professional-quality drafts for Care Plans, Mental Health 
+                            Care Plans, and clinical forms — designed as learning templates 
+                            to support best-practice documentation.
                             <br/><br/>
                             Designed by Australian GPs. Trusted by over 500 clinicians nationwide.
                         </p>

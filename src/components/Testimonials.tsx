@@ -62,7 +62,7 @@ const Testimonials = () => {
     ];
 
     return (
-        <section className="relative overflow-hidden py-20 sm:py-24">
+        <section id="testimonials" className="relative overflow-hidden py-20 sm:py-24">
             <SectionGradientBackground />
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div

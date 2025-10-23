@@ -7,37 +7,37 @@ import { GlassCheckIcon } from './ui/GlassCheckIcon';
 const painPointsData = [
   {
     icon: Clock,
-    title: "“I work until 9 PM finishing notes.”",
+    title: "I work until 9 PM finishing notes.",
     pain: "Family time sacrificed for paperwork.",
     gain: "GPGuide saves up to 1.5 hours per day by drafting your care plan notes and MBS documentation."
   },
   {
     icon: Calendar,
-    title: "“My practice is always running behind.”",
+    title: "My practice is always running behind.",
     pain: "Long wait times, reduced patient satisfaction.",
     gain: "Streamline consultations with ready-to-review templates and prefilled forms."
   },
   {
     icon: FileText,
-    title: "“I struggle to keep up with guidelines.”",
+    title: "I struggle to keep up with guidelines.",
     pain: "Risk of outdated or non-compliant documentation.",
     gain: "Instant access to evidence-based Australian guidelines integrated into your workflow."
   },
   {
     icon: FileEdit,
-    title: "“My documentation feels incomplete.”",
+    title: "My documentation feels incomplete.",
     pain: "Increased medicolegal risk and stress.",
     gain: "Generate clear, comprehensive, and defensible draft notes in seconds."
   },
   {
     icon: Zap,
-    title: "“I’m experiencing burnout and fatigue.”",
+    title: "I’m experiencing burnout and fatigue.",
     pain: "Losing passion for medicine under admin load.",
     gain: "Refocus on patient care — not paperwork — and reignite your purpose."
   },
   {
     icon: Users,
-    title: "“My practice struggles with consistency.”",
+    title: "My practice struggles with consistency.",
     pain: "Variable quality of care plans between clinicians.",
     gain: "Standardise excellence with shared, guideline-aligned templates for your team."
   }
@@ -93,28 +93,28 @@ const PainPoints = () => {
                                             whileHover={{ y: -5, scale: 1.02, transition: { type: 'spring', stiffness: 300 } }}
                                         >
                                             <div className="flex flex-col gap-4 text-left">
-                                                <div className="w-12 h-12 flex items-center justify-center rounded-lg p-2 shadow-md bg-medical-blue/50 border border-white/20">
-                                                    <Icon className="text-cyan-300 w-7 h-7" strokeWidth={1.5} />
-                                                </div>
-                                                <div>
-                                                    <h3 className="text-lg font-bold leading-tight mb-3 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg p-2 shadow-md bg-medical-blue/50 border border-white/20">
+                                                        <Icon className="text-cyan-300 w-7 h-7" strokeWidth={1.5} />
+                                                    </div>
+                                                    <h3 className="text-lg font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
                                                         {point.title}
                                                     </h3>
-                                                    <ul className="space-y-3 text-sm">
-                                                        <li className="flex items-start gap-2.5">
-                                                            <div className="mt-0.5 flex-shrink-0">
-                                                              <GlassCrossIcon />
-                                                            </div>
-                                                            <p className="text-gray-400">{point.pain}</p>
-                                                        </li>
-                                                        <li className="flex items-start gap-2.5">
-                                                            <div className="mt-0.5 flex-shrink-0">
-                                                              <GlassCheckIcon />
-                                                            </div>
-                                                            <p className="font-semibold text-gray-200">{point.gain}</p>
-                                                        </li>
-                                                    </ul>
                                                 </div>
+                                                <ul className="space-y-3 text-sm">
+                                                    <li className="flex items-start gap-2.5">
+                                                        <div className="mt-0.5 flex-shrink-0">
+                                                          <GlassCrossIcon />
+                                                        </div>
+                                                        <p className="text-gray-400">{point.pain}</p>
+                                                    </li>
+                                                    <li className="flex items-start gap-2.5">
+                                                        <div className="mt-0.5 flex-shrink-0">
+                                                          <GlassCheckIcon />
+                                                        </div>
+                                                        <p className="font-semibold text-gray-200">{point.gain}</p>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </motion.div>
                                     </div>

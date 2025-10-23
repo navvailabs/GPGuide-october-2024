@@ -27,6 +27,22 @@ const Header = ({ variant = 'default' }: HeaderProps) => {
   
   const isHomePage = location.pathname === '/';
 
+  const handleScrollLink = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Only handle scroll on the home page for hash links
+    if (isHomePage && href.includes('#')) {
+      e.preventDefault();
+      const targetId = href.split('#')[1];
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    // For mobile menu, always close it after a click
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <header className={headerClasses}>
       <div className="flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
@@ -51,15 +67,13 @@ const Header = ({ variant = 'default' }: HeaderProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 >
-                  {item.href.startsWith('/') ? (
-                    <Link to={item.href} className="text-trust-gray hover:text-premium-gold transition-colors duration-300">
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <a href={item.href} className="text-trust-gray hover:text-premium-gold transition-colors duration-300">
-                      {item.name}
-                    </a>
-                  )}
+                  <Link
+                    to={item.href}
+                    onClick={(e) => handleScrollLink(e, item.href)}
+                    className="text-trust-gray hover:text-premium-gold transition-colors duration-300"
+                  >
+                    {item.name}
+                  </Link>
                 </motion.div>
               ))}
             </nav>
@@ -118,15 +132,14 @@ const Header = ({ variant = 'default' }: HeaderProps) => {
           >
             <nav className="flex flex-col items-center space-y-4 pt-4">
               {navItems.map((item) => (
-                 item.href.startsWith('/') ? (
-                  <Link key={item.name} to={item.href} className="text-trust-gray hover:text-premium-gold transition-colors duration-300 py-2" onClick={() => setIsOpen(false)}>
+                 <Link
+                    key={item.name}
+                    to={item.href}
+                    className="text-trust-gray hover:text-premium-gold transition-colors duration-300 py-2"
+                    onClick={(e) => handleScrollLink(e, item.href)}
+                  >
                     {item.name}
                   </Link>
-                ) : (
-                  <a key={item.name} href={item.href} className="text-trust-gray hover:text-premium-gold transition-colors duration-300 py-2" onClick={() => setIsOpen(false)}>
-                    {item.name}
-                  </a>
-                )
               ))}
               <Link to="/login" className="w-4/5 text-center px-6 py-3 text-white bg-gold-gradient rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300" onClick={() => setIsOpen(false)}>
                 Login
