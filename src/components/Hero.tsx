@@ -97,7 +97,7 @@ const Hero = () => {
                                         <TextShimmer className='font-mono text-sm [--base-color:theme(colors.text-secondary)] dark:[--base-color:theme(colors.gray.400)] [--base-gradient-color:theme(colors.text-primary)] dark:[--base-gradient-color:theme(colors.white)]' duration={1.5}>
                                             Generating template...
                                         </TextShimmer>
-                                        <p className="text-text-secondary dark:text-gray-500 text-xs mt-2 animate-pulse">
+                                        <p className="text-text-secondary dark:text-gray-500 text-xs mt-2">
                                             Analyzing "Type 2 Diabetes Mellitus" input...
                                         </p>
                                     </div>
