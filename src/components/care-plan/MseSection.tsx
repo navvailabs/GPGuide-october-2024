@@ -111,68 +111,13 @@ const MseSection = ({ mseNotes, setMseNotes }: MseSectionProps) => {
                 "text-2xl font-satoshi font-bold mb-4",
                 theme === 'light' ? 'text-gray-900' : 'text-white'
             )}>Mental State Examination (MSE)</h3>
-            <InspiredCard className="space-y-8">
-                <div className="space-y-6">
-                    {Object.entries(mseDomains).map(([domain, options]) => (
-                        <div key={domain}>
-                            <h4 className={cn(
-                                "text-sm font-semibold mb-3",
-                                theme === 'light' ? 'text-gray-700' : 'text-gray-300'
-                            )}>{domain}</h4>
-                            <div className="flex flex-wrap gap-2">
-                                {options.map((option) => (
-                                    <QuickActionButton
-                                        key={option}
-                                        onClick={() => handleSelect(domain, option)}
-                                        className={cn(
-                                            'justify-center',
-                                            isSelected(domain, option) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
-                                        )}
-                                    >
-                                        {option}
-                                    </QuickActionButton>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
 
-                <div>
-                    <div className="flex justify-between items-center mb-2">
-                        <label className={cn(
-                            "text-sm font-medium flex items-center gap-2",
-                            theme === 'light' ? 'text-gray-600' : 'text-gray-300'
-                        )}>
-                            <FileText className="h-4 w-4" />
-                            Clinical Notes
-                        </label>
-                        <button
-                            onClick={() => setMseNotes('')}
-                            className={cn(
-                                "flex items-center gap-1.5 text-xs font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
-                                theme === 'light' 
-                                    ? 'text-gray-500 hover:text-red-500' 
-                                    : 'text-gray-400 hover:text-red-400'
-                            )}
-                            disabled={!mseNotes}
-                        >
-                            <XCircle className="h-4 w-4" />
-                            Clear
-                        </button>
-                    </div>
-                    <StyledTextarea
-                        value={mseNotes}
-                        onChange={(e) => setMseNotes(e.target.value)}
-                        placeholder='Select options above or a quick action below to build notes...'
-                        rows={8}
-                    />
-                </div>
-
-                <div>
+            <div className="mb-8">
+                <InspiredCard>
                     <p className={cn(
-                        "text-xs mb-2",
-                        theme === 'light' ? 'text-gray-500' : 'text-gray-400'
-                    )}>Quick Actions:</p>
+                        "text-sm font-medium mb-3",
+                        theme === 'light' ? 'text-gray-600' : 'text-gray-300'
+                    )}>Quick Presets:</p>
                     <div className="flex flex-wrap gap-2">
                         <QuickActionButton
                             onClick={() => handleSetPredefinedMse('normal')}
@@ -199,6 +144,69 @@ const MseSection = ({ mseNotes, setMseNotes }: MseSectionProps) => {
                             Stress
                         </QuickActionButton>
                     </div>
+                </InspiredCard>
+            </div>
+            
+            <InspiredCard className="space-y-8">
+                <h4 className={cn(
+                    "text-lg font-satoshi font-bold",
+                    theme === 'light' ? 'text-gray-800' : 'text-gray-200'
+                )}>Detailed Assessment</h4>
+
+                <div className="space-y-6">
+                    {Object.entries(mseDomains).map(([domain, options]) => (
+                        <div key={domain}>
+                            <h5 className={cn(
+                                "text-sm font-semibold mb-3",
+                                theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+                            )}>{domain}</h5>
+                            <div className="flex flex-wrap gap-2">
+                                {options.map((option) => (
+                                    <QuickActionButton
+                                        key={option}
+                                        onClick={() => handleSelect(domain, option)}
+                                        className={cn(
+                                            'justify-center',
+                                            isSelected(domain, option) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                        )}
+                                    >
+                                        {option}
+                                    </QuickActionButton>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div>
+                    <div className="flex justify-between items-center mb-2">
+                        <label className={cn(
+                            "text-sm font-medium flex items-center gap-2",
+                            theme === 'light' ? 'text-gray-600' : 'text-gray-300'
+                        )}>
+                            <FileText className="h-4 w-4" />
+                            Generated Clinical Notes
+                        </label>
+                        <button
+                            onClick={() => setMseNotes('')}
+                            className={cn(
+                                "flex items-center gap-1.5 text-xs font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
+                                theme === 'light' 
+                                    ? 'text-gray-500 hover:text-red-500' 
+                                    : 'text-gray-400 hover:text-red-400'
+                            )}
+                            disabled={!mseNotes}
+                        >
+                            <XCircle className="h-4 w-4" />
+                            Clear
+                        </button>
+                    </div>
+                    <StyledTextarea
+                        value={mseNotes}
+                        onChange={(e) => setMseNotes(e.target.value)}
+                        placeholder='Select options above or a quick preset to build notes...'
+                        rows={8}
+                    />
                 </div>
             </InspiredCard>
         </motion.section>
