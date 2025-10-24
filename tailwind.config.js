@@ -87,6 +87,9 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        purple: {
+          600: '#7F56D9',
+        },
       },
       fontFamily: {
         inter: ['"Inter"', 'sans-serif'],
