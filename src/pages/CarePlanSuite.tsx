@@ -23,7 +23,7 @@ interface MEDDResult {
 export type ActiveView = 'gp-care-plan' | 'mental-health-care-plan' | 'dexa-scan-tool' | 'centrelink-form-assist' | 'workers-comp-assist' | 'medd-assist-tool' | 'ndis-form-assist';
 
 const CarePlanSuite = () => {
-    const [activeView, setActiveView] = useState<ActiveView>('gp-care-plan');
+    const [activeView, setActiveView] = useState<ActiveView>('workers-comp-assist');
 
     // State for GPCarePlan
     const [gpConditions, setGpConditions] = useState<string>('');
