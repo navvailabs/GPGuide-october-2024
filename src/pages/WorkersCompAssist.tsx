@@ -151,14 +151,14 @@ const NewWorkersCompPreview = ({ markdownContent, identifier }: { markdownConten
     };
 
     const DocumentView = ({ html }: { html: string }) => (
-        <InspiredCard className="relative prose dark:prose-invert max-w-none p-6 md:p-8">
+        <InspiredCard className="relative prose dark:prose-invert max-w-none p-6 md:p-8 prose-headings:text-gray-900 dark:prose-headings:text-white">
             <SectionCopyButton contentToCopy={html} className="absolute top-4 right-4 z-10" />
             <div dangerouslySetInnerHTML={{ __html: html }} />
         </InspiredCard>
     );
 
     const TableView = ({ sections }: { sections: { id: string; title: string; contentHtml: string; sectionHtml: string; }[] }) => (
-        <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-800/30 shadow-lg">
+        <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-gray-900/70 shadow-lg">
             <table className="w-full text-sm text-left">
                 <thead className="bg-gray-50 dark:bg-white/5">
                     <tr>
@@ -167,15 +167,15 @@ const NewWorkersCompPreview = ({ markdownContent, identifier }: { markdownConten
                     </tr>
                 </thead>
                 <tbody>
-                    {sections.map((section) => {
+                    {sections.filter(section => section.title !== 'Section 1').map((section) => {
                         const isSeparator = section.contentHtml.trim() === '' && section.title === section.title.toUpperCase();
 
                         if (isSeparator) {
                             return (
                                 <tr key={section.id}>
                                     <td colSpan={2} className="p-0">
-                                        <div className="py-3 px-4 my-1 bg-black/20 dark:bg-white/5 backdrop-blur-md border-y border-white/10">
-                                            <h3 className="text-base font-bold tracking-widest uppercase text-cyan-400 dark:text-cyan-300 text-center">{section.title}</h3>
+                                        <div className="py-3 px-4 my-1 bg-gray-200 dark:bg-gray-800 backdrop-blur-md border-y border-gray-300 dark:border-gray-700">
+                                            <h3 className="text-base font-bold tracking-widest uppercase text-gray-600 dark:text-gray-300 text-center">{section.title}</h3>
                                         </div>
                                     </td>
                                 </tr>
@@ -240,7 +240,7 @@ const WorkersCompAssist = () => {
         setIsLoading(true);
         setGeneratedHtml(null);
 
-        const webhookUrl = '/api/webhook-test/workers comp first';
+        const webhookUrl = 'https://n8n.srv1072529.hstgr.cloud/webhook/workers%20comp%20first';
 
         try {
             const response = await axios.post(webhookUrl, state);
