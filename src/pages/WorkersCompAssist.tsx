@@ -240,7 +240,7 @@ const WorkersCompAssist = () => {
         setIsLoading(true);
         setGeneratedHtml(null);
 
-        const webhookUrl = '/api/webhook-test/workers comp first';
+        const webhookUrl = 'https://n8n.srv1072529.hstgr.cloud/webhook/workers%20comp%20first';
 
         try {
             const response = await axios.post(webhookUrl, state);
