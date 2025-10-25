@@ -7,62 +7,21 @@ import WorkCapacitySection from '@/components/workers-comp/WorkCapacitySection';
 import TreatmentPlanSection from '@/components/workers-comp/TreatmentPlanSection';
 import { WorkersCompState, initialWorkersCompState } from '@/components/workers-comp/common';
 import axios from 'axios';
-import WorkersCompSummary from '@/components/workers-comp/WorkersCompSummary';
+import WorkersCompPreviewSection from '@/components/workers-comp/WorkersCompPreviewSection';
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
-// Helper function to preprocess markdown for consistent formatting
-const preprocessMarkdown = (markdown: string): string => {
-    if (!markdown) return '';
-    let processed = markdown;
-
-    // Ensure a main title exists for sectioning, if not already present.
-    if (!processed.trim().startsWith('### **')) {
-        processed = `### **Workers Compensation Summary**\n\n` + processed;
-    }
-
-    // List of potential subheadings that might be unformatted.
-    const subheadings = [
-        'CERTIFICATE DETAILS',
-        'Diagnosis',
-        'Mechanism of Injury',
-        'Examination Findings',
-        'WORK CAPACITY',
-        'Capacity Status',
-        'Restrictions',
-        'Suitable Duties',
-        'Review Period',
-        'INJURY MANAGEMENT PLAN',
-        'Medications',
-        'Referrals',
-        'Investigations',
-        'Other Interventions',
-        'Follow-up'
-    ];
-
-    subheadings.forEach(sub => {
-        // This regex finds subheadings at the start of a line, followed by a colon,
-        // and wraps them in double asterisks to be parsed correctly.
-        // e.g., "Diagnosis:" becomes "**Diagnosis:**"
-        const regex = new RegExp(`^(${sub}:)`, 'gm');
-        processed = processed.replace(regex, `**${sub}:**`);
-    });
-
-    return processed;
-};
-
-
 const WorkersCompAssist = () => {
     const [state, setState] = useState<WorkersCompState>(initialWorkersCompState);
-    const [generatedSummary, setGeneratedSummary] = useState<string | null>(null);
+    const [generatedHtml, setGeneratedHtml] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleGenerateSummary = async () => {
         setIsLoading(true);
-        setGeneratedSummary(null);
+        setGeneratedHtml(null);
 
         const webhookUrl = '/api/webhook-test/workers comp first';
 
@@ -75,7 +34,7 @@ const WorkersCompAssist = () => {
             if (typeof responseData === 'string') {
                 finalSummary = responseData;
             } else if (typeof responseData === 'object' && responseData !== null) {
-                const priorityKeys = ['output', 'summary', 'content', 'message', 'text'];
+                const priorityKeys = ['output', 'summary', 'content', 'message', 'text', 'html'];
                 let found = false;
                 for (const key of priorityKeys) {
                     if (typeof responseData[key] === 'string') {
@@ -94,9 +53,7 @@ const WorkersCompAssist = () => {
                 }
             }
             
-            // Preprocess the summary to ensure consistent formatting
-            const processedSummary = preprocessMarkdown(finalSummary);
-            setGeneratedSummary(processedSummary);
+            setGeneratedHtml(finalSummary);
 
         } catch (error) {
             console.error('Error fetching summary from webhook:', error);
@@ -108,7 +65,7 @@ const WorkersCompAssist = () => {
                     errorMessage = `The server responded with an error: ${error.response.status} ${error.response.statusText}.`;
                 }
             }
-            setGeneratedSummary(`Error: ${errorMessage}`);
+            setGeneratedHtml(`<p style="color: red;">Error: ${errorMessage}</p>`);
         } finally {
             setIsLoading(false);
         }
@@ -116,7 +73,7 @@ const WorkersCompAssist = () => {
 
     const handleReset = () => {
         setState(initialWorkersCompState);
-        setGeneratedSummary(null);
+        setGeneratedHtml(null);
     };
 
     return (
@@ -145,9 +102,9 @@ const WorkersCompAssist = () => {
                 </motion.div>
 
                 <AnimatePresence>
-                    {generatedSummary && (
+                    {generatedHtml && (
                         <motion.div variants={sectionVariants} className="border-t border-gray-200 dark:border-white/10 pt-8 mt-12">
-                           <WorkersCompSummary content={generatedSummary} />
+                           <WorkersCompPreviewSection carePlanHtml={generatedHtml} identifier="workers-comp-summary" />
                         </motion.div>
                     )}
                 </AnimatePresence>
