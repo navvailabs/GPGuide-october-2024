@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, RefreshCw, Loader2, Copy, Check, ChevronDown, Bot } from 'lucide-react';
+import { Sparkles, RefreshCw, Loader2, Copy, Check, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import InspiredCard from '@/components/ui/InspiredCard';
 import InjuryDetailsSection from '@/components/workers-comp/InjuryDetailsSection';
 import WorkCapacitySection from '@/components/workers-comp/WorkCapacitySection';
 import TreatmentPlanSection from '@/components/workers-comp/TreatmentPlanSection';
-import { WorkersCompState, initialWorkersCompState, shoulderStrainScenario, backPainScenario } from '@/components/workers-comp/common';
+import { WorkersCompState, initialWorkersCompState } from '@/components/workers-comp/common';
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -48,14 +48,13 @@ const WorkersCompAssist = () => {
     const [state, setState] = useState<WorkersCompState>(initialWorkersCompState);
     const [generatedSections, setGeneratedSections] = useState<GeneratedSection[] | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isScenarioMenuOpen, setIsScenarioMenuOpen] = useState(false);
 
     const handleGenerateSummary = () => {
         setIsLoading(true);
         setGeneratedSections(null);
 
         setTimeout(() => {
-            const injurySection = `Diagnosis: ${state.diagnosis || '[Not specified]'}. This is a ${state.injuryType || 'injury'}. Mechanism: ${state.injuryDetails || '[Not specified]'}.`;
+            const injurySection = `${state.injuryDetails || '[Not specified]'}`;
             
             let capacitySection = '';
             if (state.capacityStatus === 'fit') {
@@ -69,7 +68,7 @@ const WorkersCompAssist = () => {
             const treatmentSection = `Current treatment plan includes: ${state.medications.join(', ') || 'Analgesia as required'}. Referrals: ${state.referrals.join(', ') || 'None'}. Investigations: ${state.investigations.join(', ') || 'None'}. Other interventions: ${state.interventions.join(', ') || 'None'}. Follow-up in ${state.followUp}.`;
 
             setGeneratedSections([
-                { title: 'Injury Details & Diagnosis', content: injurySection },
+                { title: 'Injury Details, Diagnosis & Mechanism', content: injurySection },
                 { title: 'Work Capacity', content: capacitySection },
                 { title: 'Treatment Plan', content: treatmentSection },
             ]);
@@ -82,38 +81,11 @@ const WorkersCompAssist = () => {
         setGeneratedSections(null);
     };
 
-    const handleScenarioSelect = (scenario: Partial<WorkersCompState>) => {
-        setState(s => ({ ...initialWorkersCompState, ...scenario }));
-        setIsScenarioMenuOpen(false);
-    };
-
     return (
         <motion.div initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }} className="max-w-4xl mx-auto">
             <motion.div variants={sectionVariants} className="mb-10 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Workers Compensation Assist</h2>
                 <p className="mt-3 text-base text-gray-500 dark:text-gray-400">Quickly generate statements for Certificates of Capacity.</p>
-            </motion.div>
-
-            <motion.div variants={sectionVariants} className="mb-8 relative inline-block text-left">
-                <div>
-                    <button type="button" onClick={() => setIsScenarioMenuOpen(!isScenarioMenuOpen)}
-                        className="inline-flex justify-center w-full rounded-md border border-gray-300 dark:border-white/20 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-premium-gold"
-                        id="options-menu" aria-haspopup="true" aria-expanded="true">
-                        ⚡ Common Scenarios
-                        <ChevronDown className="-mr-1 ml-2 h-5 w-5" />
-                    </button>
-                </div>
-                <AnimatePresence>
-                {isScenarioMenuOpen && (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.1 }}
-                        className="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
-                        <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                            <a href="#" onClick={(e) => { e.preventDefault(); handleScenarioSelect(shoulderStrainScenario); }} className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">🫱 Simple Shoulder Strain</a>
-                            <a href="#" onClick={(e) => { e.preventDefault(); handleScenarioSelect(backPainScenario); }} className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">🫨 Back Pain (Lifting Injury)</a>
-                        </div>
-                    </motion.div>
-                )}
-                </AnimatePresence>
             </motion.div>
 
             <div className="space-y-8">
@@ -122,10 +94,10 @@ const WorkersCompAssist = () => {
                 <TreatmentPlanSection state={state} setState={setState} />
 
                 <motion.div variants={sectionVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
-                    <button onClick={handleGenerateSummary} disabled={isLoading || !state.diagnosis}
+                    <button onClick={handleGenerateSummary} disabled={isLoading || !state.injuryDetails}
                         className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100">
                         {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Bot className="h-5 w-5" />}
-                        {isLoading ? 'Generating...' : 'Generate Certificate Text'}
+                        {isLoading ? 'Generating...' : 'Generate Summary'}
                     </button>
                     <button onClick={handleReset} disabled={isLoading}
                         className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-800 dark:text-white font-semibold rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
@@ -137,7 +109,7 @@ const WorkersCompAssist = () => {
                 <AnimatePresence>
                     {generatedSections && (
                         <motion.div variants={sectionVariants} className="border-t border-gray-200 dark:border-white/10 pt-8 mt-12">
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">📄 Generated Certificate</h3>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">📄 Generated Summary</h3>
                             <div className="space-y-4">
                                 {generatedSections.map((section, index) => (
                                     <InspiredCard key={index} className="relative p-6">
