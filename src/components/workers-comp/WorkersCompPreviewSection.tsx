@@ -85,17 +85,35 @@ const TableView = ({ htmlString }: { htmlString: string }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {sections.map((section, i) => (
-                        <tr key={i} className="border-t border-gray-200 dark:border-white/10">
-                            <td className="p-3 align-top font-semibold text-gray-900 dark:text-gray-100">{section.title}</td>
-                            <td className="p-3 align-top">
-                                <div 
-                                    className="prose prose-sm dark:prose-invert max-w-none"
-                                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(section.content) as string) }}
-                                />
-                            </td>
-                        </tr>
-                    ))}
+                    {sections.map((section, i) => {
+                        const isSeparator = section.content.trim() === '' && section.title === section.title.toUpperCase();
+
+                        if (isSeparator) {
+                            return (
+                                <tr key={i} className="border-t border-gray-200 dark:border-white/10">
+                                    <td colSpan={2} className="p-0">
+                                        <div className="my-2">
+                                            <div className="px-3 py-2 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent backdrop-blur-sm border-y border-cyan-400/20">
+                                                <h3 className="text-sm font-bold tracking-wider uppercase text-cyan-300 text-center">{section.title}</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            );
+                        }
+
+                        return (
+                            <tr key={i} className="border-t border-gray-200 dark:border-white/10">
+                                <td className="p-3 align-top font-semibold text-gray-900 dark:text-gray-100">{section.title}</td>
+                                <td className="p-3 align-top">
+                                    <div 
+                                        className="prose prose-sm dark:prose-invert max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(section.content) as string) }}
+                                    />
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>

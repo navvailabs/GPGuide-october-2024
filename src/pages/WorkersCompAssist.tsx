@@ -158,17 +158,44 @@ const NewWorkersCompPreview = ({ markdownContent, identifier }: { markdownConten
     );
 
     const TableView = ({ sections }: { sections: { id: string; title: string; contentHtml: string; sectionHtml: string; }[] }) => (
-        <div className="space-y-4">
-            {sections.map((section) => (
-                <InspiredCard key={section.id} className="relative p-6">
-                    <SectionCopyButton contentToCopy={section.sectionHtml} className="absolute top-4 right-4 z-10" />
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 pr-10 uppercase">{section.title}</h3>
-                    <div
-                        className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-300"
-                        dangerouslySetInnerHTML={{ __html: section.contentHtml }}
-                    />
-                </InspiredCard>
-            ))}
+        <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-800/30 shadow-lg">
+            <table className="w-full text-sm text-left">
+                <thead className="bg-gray-50 dark:bg-white/5">
+                    <tr>
+                        <th className="p-4 font-semibold text-gray-800 dark:text-white w-1/3">Section</th>
+                        <th className="p-4 font-semibold text-gray-800 dark:text-white w-2/3">Content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sections.map((section) => {
+                        const isSeparator = section.contentHtml.trim() === '' && section.title === section.title.toUpperCase();
+
+                        if (isSeparator) {
+                            return (
+                                <tr key={section.id}>
+                                    <td colSpan={2} className="p-0">
+                                        <div className="py-3 px-4 my-1 bg-black/20 dark:bg-white/5 backdrop-blur-md border-y border-white/10">
+                                            <h3 className="text-base font-bold tracking-widest uppercase text-cyan-400 dark:text-cyan-300 text-center">{section.title}</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                            );
+                        }
+
+                        return (
+                            <tr key={section.id} className="border-t border-gray-200 dark:border-white/10">
+                                <td className="p-4 align-top font-semibold text-gray-900 dark:text-gray-100">{section.title}</td>
+                                <td className="p-4 align-top">
+                                    <div 
+                                        className="prose prose-sm dark:prose-invert max-w-none text-gray-600 dark:text-gray-400"
+                                        dangerouslySetInnerHTML={{ __html: section.contentHtml }}
+                                    />
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
         </div>
     );
 
