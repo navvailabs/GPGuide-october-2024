@@ -13,7 +13,7 @@ interface TreatmentPlanSectionProps {
   setState: React.Dispatch<React.SetStateAction<WorkersCompState>>;
 }
 
-const quickMeds = ['Paracetamol 1g TDS/QID', 'Ibuprofen 400mg TDS', 'Diclofenac 50mg BD', 'Pregabalin', 'Amitriptyline'];
+const quickMeds = ['Paracetamol 1g TDS/QID', 'Ibuprofen 400mg TDS', 'Celecoxib BD', 'Pregabalin', 'Amitriptyline'];
 const referralOptions = ['Physiotherapy', 'Occupational Therapy', 'Orthopaedic Surgeon', 'Pain Specialist', 'Psychiatrist/Psychologist', 'Rehabilitation Program'];
 const investigationOptions = ['X-ray', 'MRI', 'CT scan', 'Ultrasound', 'Blood tests', 'Nerve studies'];
 const interventionOptions = ['Rest & activity modification', 'Ice therapy', 'Heat therapy', 'Compression/Splinting', 'Gentle exercises', 'Wound care'];
