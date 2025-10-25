@@ -20,8 +20,6 @@ const restrictionsOptions = [
     'No keyboard work', 'No climbing/ladders', 'Frequent breaks needed'
 ];
 
-const reviewOptions = ['1 week', '2 weeks', '4 weeks', '6 weeks'];
-
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
@@ -100,18 +98,6 @@ const WorkCapacitySection = ({ state, setState }: WorkCapacitySectionProps) => {
                                     <StyledTextarea id="suitable-duties-textarea" value={state.suitableDuties}
                                         onChange={(e) => setState(s => ({ ...s, suitableDuties: e.target.value }))}
                                         placeholder="e.g., Sedentary tasks only..." rows={3} />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-2 text-gray-600 dark:text-gray-300">Review In</label>
-                                    <div className="flex flex-wrap gap-2">
-                                        {reviewOptions.map(opt => (
-                                            <QuickActionButton key={opt} onClick={() => setState(s => ({ ...s, reviewIn: opt }))}
-                                                className={cn(state.reviewIn === opt && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}>
-                                                {opt}
-                                            </QuickActionButton>
-                                        ))}
-                                    </div>
                                 </div>
                             </motion.div>
                         )}

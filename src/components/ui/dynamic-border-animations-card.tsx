@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import { cn } from '@/lib/utils';
 
-const AnimatedCard = ({ children }: { children: React.ReactNode }) => {
+const AnimatedCard = ({ children, className }: { children: React.ReactNode, className?: string }) => {
   const topRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -29,7 +30,10 @@ const AnimatedCard = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="relative w-full h-full bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_1px_0_0_rgba(255,255,255,0.1)] transition-transform duration-300 hover:-translate-y-2">
+    <div className={cn(
+      "relative w-full h-full bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_1px_0_0_rgba(255,255,255,0.1)] transition-transform duration-300",
+      className
+    )}>
       {/* Animated border elements */}
       <div className="absolute top-0 left-0 w-full h-0.5 overflow-hidden">
         <div
@@ -56,7 +60,7 @@ const AnimatedCard = ({ children }: { children: React.ReactNode }) => {
         ></div>
       </div>
       {/* Card Content */}
-      <div className="relative z-10 h-full">
+      <div className="relative z-10 h-full flex flex-col">
         {children}
       </div>
     </div>

@@ -10,7 +10,6 @@ export interface WorkersCompState {
   hoursPerDay: number;
   daysPerWeek: number;
   suitableDuties: string;
-  reviewIn: string;
 
   // Step 3: Treatment Plan
   medications: string[];
@@ -27,7 +26,6 @@ export const initialWorkersCompState: WorkersCompState = {
   hoursPerDay: 4,
   daysPerWeek: 3,
   suitableDuties: '',
-  reviewIn: '2 weeks',
   medications: [],
   referrals: [],
   investigations: [],
@@ -40,7 +38,6 @@ export const shoulderStrainScenario: Partial<WorkersCompState> = {
     capacityStatus: 'modified',
     restrictions: ['No lifting >5kg', 'No overhead work'],
     suitableDuties: 'Suitable for sedentary or light duties. No use of right arm for lifting or reaching overhead.',
-    reviewIn: '2 weeks',
     medications: ['Ibuprofen 400mg TDS PRN'],
     referrals: ['Physiotherapy'],
     interventions: ['Rest & activity modification', 'Ice therapy'],
@@ -52,7 +49,6 @@ export const backPainScenario: Partial<WorkersCompState> = {
     capacityStatus: 'modified',
     restrictions: ['No lifting >2kg', 'No bending/twisting', 'No prolonged sitting'],
     suitableDuties: 'Can perform duties at a standing desk. May sit for 15-minute intervals. Avoid all lifting and bending.',
-    reviewIn: '1 week',
     medications: ['Ibuprofen 400mg TDS', 'Paracetamol 1g QID'],
     referrals: ['Physiotherapy'],
     interventions: ['Rest & activity modification', 'Heat therapy'],

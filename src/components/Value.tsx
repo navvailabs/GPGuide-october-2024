@@ -20,7 +20,7 @@ const Value = () => {
                         viewport={{ once: true, amount: 0.3 }}
                     >
                         <AnimatedCard>
-                            <div className="flex flex-col h-full p-2">
+                            <div className="p-2">
                                 <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">The Cost of Waiting</h3>
                                 <p className="mt-2 text-neutral-400">Every day without GP Guide equals hours of unnecessary admin work.</p>
                                 
@@ -55,7 +55,7 @@ const Value = () => {
                         transition={{ delay: 0.2 }}
                     >
                         <AnimatedCard>
-                            <div className="flex flex-col h-full p-2">
+                            <div className="p-2">
                                 <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">Stay Ahead of the Curve</h3>
                                 <p className="mt-2 text-neutral-400">Join the 500+ GPs already transforming their practice efficiency.</p>
                                 

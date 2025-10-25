@@ -20,16 +20,16 @@ const FinalCTA = () => {
                 </motion.div>
 
                 <motion.div
-                    className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+                    className="mt-10 flex flex-wrap gap-4 justify-center"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                    <button className="w-full sm:w-auto text-white bg-gold-gradient font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:scale-105 transform transition-transform duration-300">
+                    <button className="text-white bg-gold-gradient font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:scale-105 transform transition-transform duration-300">
                         START ESSENTIAL PLAN - $7.99/week
                     </button>
-                    <button className="w-full sm:w-auto text-white border-2 border-white font-bold py-4 px-8 rounded-full text-lg hover:bg-white hover:text-medical-blue transform transition-all duration-300">
+                    <button className="text-white border-2 border-white font-bold py-4 px-8 rounded-full text-lg hover:bg-white hover:text-medical-blue transform transition-all duration-300">
                         CHOOSE PROFESSIONAL PLAN - $14.99/week
                     </button>
                 </motion.div>
