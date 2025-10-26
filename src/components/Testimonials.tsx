@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { motion, useInView, useAnimate, animate } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import SectionGradientBackground from './ui/SectionGradientBackground';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 interface CounterProps {
   from: number;
@@ -72,10 +74,10 @@ const Testimonials = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">Real GPs, Real Results, Real Time Savings</h2>
-                    <p className="mt-4 text-lg text-brand-text-muted">
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Real GPs, Real Results, Real Time Savings</GradientHeading>
+                    <Description className="mt-4 text-lg">
                         Join 500+ Australian GPs who've transformed their practice efficiency.
-                    </p>
+                    </Description>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-3 gap-8">
