@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Home, Menu, BriefcaseMedical } from 'lucide-react';
+import { Home, Menu, Stethoscope } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
@@ -23,9 +23,17 @@ const AppHeader = ({ onMenuClick }: AppHeaderProps) => {
                 <Menu />
             </button>
           )}
-          <Link to="/" className="flex items-center space-x-2">
-              <BriefcaseMedical className="h-7 w-7 text-premium-gold" />
-              <span className="hidden sm:inline text-xl font-satoshi font-bold text-gradient-gold">
+          <Link to="/" className="flex items-center gap-2">
+              <div className={cn(
+                "w-7 h-7 flex items-center justify-center rounded-md shadow-sm",
+                theme === 'light' ? 'bg-brand-text' : 'bg-black/20'
+              )}>
+                <Stethoscope className={cn(
+                    "w-4 h-4",
+                    theme === 'light' ? 'text-brand-bg' : 'text-white'
+                )} />
+              </div>
+              <span className="text-xl font-satoshi font-bold text-gradient-gold">
                   GPGuide
               </span>
           </Link>

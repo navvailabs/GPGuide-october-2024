@@ -6,16 +6,11 @@ import { ReactNode, useEffect } from 'react';
 
 const InfoPageLayout = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
-        const root = window.document.documentElement;
-        if (!root.classList.contains('dark')) {
-          root.classList.add('dark');
-        }
-        root.classList.remove('light');
         window.scrollTo(0, 0);
       }, []);
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden bg-brand-bg">
       <FlowingGradientBackground />
       <AuroraBackground transparentBase={true}>
         <div className="relative z-10 flex flex-col min-h-screen">
