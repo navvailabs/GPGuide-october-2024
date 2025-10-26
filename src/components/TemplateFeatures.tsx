@@ -61,7 +61,7 @@ const featureSections = [
 
 const TemplateFeatures = () => {
     return (
-        <div className="py-12 space-y-28">
+        <div className="py-12 space-y-28 bg-brand-bg">
             {featureSections.map((section, index) => (
                 <motion.section
                     key={index}
@@ -76,7 +76,7 @@ const TemplateFeatures = () => {
                             {/* Left Content */}
                             <div className={`max-w-2xl ${index === 1 ? 'lg:order-2' : ''}`}>
                                 <div className="mb-6">
-                                    <div className="w-16 h-16 bg-white/10 border border-white/20 rounded-2xl p-1 flex items-center justify-center shadow-lg">
+                                    <div className="w-16 h-16 bg-brand-surface border border-brand-border rounded-2xl p-1 flex items-center justify-center shadow-lg">
                                         <img
                                             src={section.iconImage}
                                             alt="Feature icon"
@@ -86,13 +86,13 @@ const TemplateFeatures = () => {
                                         />
                                     </div>
                                 </div>
-                                <h3 className="text-purple-600 font-semibold mb-2">
+                                <h3 className="text-brand-accent font-semibold mb-2">
                                     {section.eyebrow}
                                 </h3>
-                                <h2 className="text-4xl lg:text-[34px] font-semibold text-neutral-100 mb-4 leading-tight tracking-tight">
+                                <h2 className="text-4xl lg:text-[34px] font-semibold text-gradient-heading mb-4 leading-tight tracking-tight">
                                     {section.title}
                                 </h2>
-                                <p className="text-lg text-neutral-300 mb-8 leading-relaxed">
+                                <p className="text-lg text-brand-text-muted mb-8 leading-relaxed">
                                     {section.description}
                                 </p>
                                 <div className="grid sm:grid-cols-2 gap-6">
@@ -105,7 +105,7 @@ const TemplateFeatures = () => {
                                                 width={24}
                                                 height={24}
                                             />
-                                            <p className="text-purple-600 font-semibold leading-snug">
+                                            <p className="text-brand-accent font-semibold leading-snug">
                                                 {feature.text}
                                             </p>
                                         </div>

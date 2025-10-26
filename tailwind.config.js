@@ -21,71 +21,48 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-slate': '#0d1117',
-        // Existing Marketing Colors
-        'premium-gold': '#f59e0b',
-        'success-green': '#10B981',
-        'clinical-white': '#FFFFFF',
-        'trust-gray': '#F8FAFC',
-        'medical-blue': '#0A2540',
-        'medical-teal': '#0F6E6E',
-        'pain-red': '#D62828',
-        "primary-gradient-start": "#1D5A9C",
-        "primary-gradient-end": "#05A39E",
-        "accent-gold": "#f59e0b",
-        "text-primary": "#0A1D31",
-        "text-secondary": "#4A5568",
-        "background-light": "#f6f8f8",
-        "background-dark": "#101f22",
-        "surface-light": "#FFFFFF",
-        "surface-dark": "#172A3A",
-        "glass-light": "rgba(255, 255, 255, 0.6)",
-        "glass-dark": "rgba(23, 42, 58, 0.6)",
-        "border-light": "#cfe3e7",
-        "border-dark": "#2a4a51",
-        "disclaimer-light": "#E2E8F0",
-        "disclaimer-dark": "#172A3A",
+        'brand-bg': '#F9F5EF',
+        'brand-surface': '#FFFFFF',
+        'brand-text': '#1E1B18',
+        'brand-text-muted': '#57534E',
+        'brand-accent': '#D97706',
+        'brand-border': '#E7E5E4',
+        'success-green': '#16A34A',
+        'pain-red': '#DC2626',
         
-        // New App Theme Colors
-        "primary": "#13c8ec",
-        "foreground-light": "#0d191b",
-        "foreground-dark": "#e8f3f5",
-        "subtle-light": "#e7f1f3",
-        "subtle-dark": "#1a2e32",
-        "muted-light": "#4c8d9a",
-        "muted-dark": "#a0c5cc",
-        brand: "hsl(var(--brand))",
-        "brand-foreground": "hsl(var(--brand-foreground))",
-
         // ShadCN UI Colors
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: "hsl(30, 8%, 90%)", // brand-border
+        input: "hsl(30, 8%, 90%)", // brand-border
+        ring: "hsl(32, 96%, 44%)", // brand-accent
+        background: "hsl(38, 42%, 96%)", // brand-bg
+        foreground: "hsl(28, 10%, 10%)", // brand-text
+        primary: {
+          DEFAULT: "hsl(28, 10%, 10%)", // brand-text
+          foreground: "hsl(38, 42%, 96%)", // brand-bg
+        },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "hsl(30, 8%, 90%)", // brand-border
+          foreground: "hsl(28, 10%, 10%)", // brand-text
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "hsl(0, 72%, 51%)", // pain-red
+          foreground: "hsl(0, 0%, 100%)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "hsl(30, 8%, 90%)", // brand-border
+          foreground: "hsl(31, 5%, 32%)", // brand-text-muted
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "hsl(30, 8%, 90%)", // brand-border
+          foreground: "hsl(28, 10%, 10%)", // brand-text
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "hsl(0, 0%, 100%)", // brand-surface
+          foreground: "hsl(28, 10%, 10%)", // brand-text
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "hsl(0, 0%, 100%)", // brand-surface
+          foreground: "hsl(28, 10%, 10%)", // brand-text
         },
         purple: {
           600: '#7F56D9',
@@ -116,9 +93,9 @@ export default {
         container: "80rem",
       },
       boxShadow: {
-        'layered': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-        'layered-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
-        'layered-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+        'layered': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05)',
+        'layered-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05)',
+        'layered-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
         'inner-light': 'inset 0 2px 4px 0 rgba(0,0,0,0.05)',
         'inner-dark': 'inset 0 2px 4px 0 rgba(0,0,0,0.2)',
         glow: "0 -16px 128px 0 hsla(var(--brand-foreground) / 0.5) inset, 0 -16px 32px 0 hsla(var(--brand) / 0.5) inset",
@@ -127,13 +104,13 @@ export default {
         'clay-dark': '0px 15px 30px -10px rgba(0, 0, 0, 0.5), inset 0px 1px 1px rgba(255, 255, 255, 0.08), inset 0px -1px 1px rgba(0, 0, 0, 0.3)',
       },
       backgroundImage: {
-        'primary-gradient': 'linear-gradient(to right, #0A2540, #0F6E6E)',
-        'gold-gradient': 'linear-gradient(to right, #f59e0b, #ea580c)',
+        'primary-gradient': 'linear-gradient(to right, #1E1B18, #57534E)',
+        'gold-gradient': 'linear-gradient(to right, #D97706, #B45309)',
       },
       keyframes: {
         pulse: {
-          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(16, 185, 129, 0.7)' },
-          '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(16, 185, 129, 0)' },
+          '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(217, 119, 6, 0.7)' },
+          '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(217, 119, 6, 0)' },
         },
         float: {
             '0%': { transform: 'translateY(0px)' },
@@ -207,7 +184,7 @@ export default {
         },
       },
       animation: {
-        'pulse-green': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-orange': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         float: 'float 6s ease-in-out infinite',
         'float-1': 'float-delay-1 7s ease-in-out infinite',
         'float-2': 'float-delay-2 5s ease-in-out infinite',

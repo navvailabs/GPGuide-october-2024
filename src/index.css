@@ -7,52 +7,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 38 42% 96%;
+    --foreground: 28 10% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 28 10% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-    --brand: 27 96% 61%;
-    --brand-foreground: 31 97% 72%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --brand: 31 97% 72%;
-    --brand-foreground: 27 96% 61%;
+    --popover-foreground: 28 10% 10%;
+    --primary: 28 10% 10%;
+    --primary-foreground: 38 42% 96%;
+    --secondary: 30 8% 90%;
+    --secondary-foreground: 28 10% 10%;
+    --muted: 30 8% 90%;
+    --muted-foreground: 31 5% 32%;
+    --accent: 30 8% 90%;
+    --accent-foreground: 28 10% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 8% 90%;
+    --input: 30 8% 90%;
+    --ring: 32 96% 44%;
+    --radius: 0.75rem;
   }
 }
 
@@ -61,19 +35,19 @@
     @apply scroll-smooth;
   }
   body {
-    @apply bg-medical-blue text-trust-gray font-inter antialiased;
+    @apply bg-brand-bg text-brand-text font-inter antialiased;
   }
-  h1, h2, h3 {
-    @apply font-satoshi font-bold;
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-brand-text;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg;
+    @apply bg-brand-surface border border-brand-border rounded-2xl shadow-lg;
   }
 
-  /* Living Origami Styles */
+  /* Living Origami Styles - kept for potential future use, but not visible with new bg */
   .hero-section {
     @apply relative w-full h-screen overflow-hidden;
     perspective: 1000px;
@@ -99,20 +73,20 @@
     @apply absolute;
     width: 0;
     height: 0;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
   }
 
   .crane-part.body {
     border-left: 25px solid transparent;
     border-right: 25px solid transparent;
-    border-bottom: 50px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 50px solid rgba(0, 0, 0, 0.05);
     transform: translate(-25px, -25px) rotate(45deg);
   }
   
   .crane-part.wing-left {
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
-    border-bottom: 60px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 60px solid rgba(0, 0, 0, 0.08);
     transform-origin: bottom center;
     animation-name: flap-left;
     animation-duration: 2s;
@@ -123,7 +97,7 @@
   .crane-part.wing-right {
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
-    border-bottom: 60px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 60px solid rgba(0, 0, 0, 0.08);
     transform-origin: bottom center;
     animation-name: flap-right;
     animation-duration: 2s;
@@ -134,22 +108,15 @@
   .crane-part.tail {
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 30px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 30px solid rgba(0, 0, 0, 0.06);
     transform: translate(-15px, 25px) rotate(225deg);
   }
 
   .care-plan-container {
-    @apply bg-gray-100 dark:bg-[#1A1B1E]/85 backdrop-blur-lg border border-transparent dark:border-white/10 rounded-[20px] p-6 md:p-8 shadow-clay-light dark:shadow-clay-dark space-y-8 overflow-x-auto;
-    color: #374151; /* Base text color for light theme */
-  }
-  .dark .care-plan-container {
-      color: #e8f3f5; /* Base text color for dark theme */
+    @apply bg-brand-surface border border-brand-border rounded-[20px] p-6 md:p-8 shadow-clay-light space-y-8 overflow-x-auto;
+    color: #374151;
   }
 
-  /*
-    Targeted reset to override unwanted styles from the webhook.
-    This is safer than a wildcard (*) selector.
-  */
   .care-plan-container h1,
   .care-plan-container h2,
   .care-plan-container h3,
@@ -173,26 +140,14 @@
   }
 
   .care-plan-container h2 {
-    @apply text-2xl md:text-3xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-white/10;
-  }
-  .dark .care-plan-container h2 {
-    color: white !important;
-  }
-  .care-plan-container h2 {
+    @apply text-2xl md:text-3xl font-bold mb-4 pb-2 border-b border-brand-border;
     color: #111827 !important;
   }
 
-  /* Adjusted font size for better hierarchy */
   .care-plan-container h3 {
     @apply text-xl font-semibold mb-3 flex items-center gap-x-2;
-  }
-  .dark .care-plan-container h3 {
-    color: white !important;
-  }
-  .care-plan-container h3 {
     color: #111827 !important;
   }
-
 
   .care-plan-container h3::before {
     content: '';
@@ -212,30 +167,17 @@
   }
 
   .care-plan-container thead {
-    background-color: rgba(243, 244, 246, 1) !important; /* bg-gray-100 */
-  }
-  .dark .care-plan-container thead {
-    background-color: rgba(0, 0, 0, 0.3) !important;
+    background-color: #f9fafb !important;
   }
 
   .care-plan-container th {
-    @apply p-3 font-medium border border-gray-200 dark:border-white/10;
-  }
-  .dark .care-plan-container th {
-    color: white !important;
-  }
-  .care-plan-container th {
+    @apply p-3 font-medium border border-brand-border;
     color: #1F2937 !important;
   }
 
   .care-plan-container td {
-    @apply p-3 align-top border border-gray-200 dark:border-white/10;
-  }
-  .dark .care-plan-container td {
-    color: #D1D5DB !important; /* text-gray-300 */
-  }
-  .care-plan-container td {
-    color: #4B5563 !important; /* text-gray-600 */
+    @apply p-3 align-top border border-brand-border;
+    color: #4B5563 !important;
   }
 
   .care-plan-container td ul {
@@ -243,17 +185,11 @@
   }
 
   .care-plan-container tbody tr:nth-child(even) {
-    background-color: rgba(249, 250, 251, 1) !important; /* bg-gray-50 */
-  }
-  .dark .care-plan-container tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: #f9fafb !important;
   }
   
   .care-plan-container tbody tr:hover {
-    background-color: rgba(243, 244, 246, 1) !important; /* bg-gray-100 */
-  }
-  .dark .care-plan-container tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: #f3f4f6 !important;
   }
 
   .sidebar-scroll::-webkit-scrollbar {
@@ -265,22 +201,16 @@
   }
 
   .sidebar-scroll::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 3px;
-  }
-
-  .sidebar-scroll:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .light .sidebar-scroll:hover::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
 @layer utilities {
-  .text-gradient-gold {
-    @apply bg-gold-gradient bg-clip-text text-transparent;
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-brand-accent to-amber-600 bg-clip-text text-transparent;
+  }
+  .text-gradient-heading {
+    @apply bg-gradient-to-r from-brand-text to-brand-accent bg-clip-text text-transparent;
   }
   .delay-100 {
     animation-delay: 100ms;

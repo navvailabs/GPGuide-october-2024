@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTheme } from '@/contexts/ThemeContext';
 
 export interface AccordionItemProps {
   question: string;
@@ -17,16 +16,13 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   'data-id': dataId,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const { theme } = useTheme();
 
   return (
     <div
       data-id={dataId}
       className={cn(
         "w-full max-w-[700px] mx-auto relative rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300",
-        theme === 'light' 
-          ? 'bg-gray-100 shadow-clay-light'
-          : 'bg-black/30 backdrop-blur-lg border border-white/10 shadow-clay-dark'
+        'bg-brand-surface shadow-clay-light border border-brand-border/80'
       )}
       onClick={() => setIsOpen(!isOpen)}
       tabIndex={0}
@@ -41,17 +37,17 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     >
       {/* Decorative gradient overlay */}
       <div
-        className="absolute top-0 left-0 w-[437px] h-[306px] pointer-events-none opacity-10 z-10"
+        className="absolute top-0 left-0 w-[437px] h-[306px] pointer-events-none opacity-[0.03] z-10"
         style={{
           background:
-            'radial-gradient(50% 50% at 7.2% 6.1%, rgba(184, 199, 217, 0.5) 0%, rgba(4, 7, 13, 0) 100%)',
+            'radial-gradient(50% 50% at 7.2% 6.1%, rgba(28, 27, 24, 0.5) 0%, rgba(249, 245, 239, 0) 100%)',
         }}
       />
       {/* Header with question and icon */}
       <div className="flex items-center justify-between gap-2.5 px-4 py-3 relative z-20">
         <p className={cn(
           "flex-1 text-base leading-6 text-left select-none",
-          theme === 'light' ? 'text-gray-900' : 'text-white'
+          'text-brand-text'
         )}>
           {question}
         </p>
@@ -59,7 +55,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
           className={cn(
             "w-5 h-5 flex-shrink-0 transition-transform duration-300",
             isOpen ? 'rotate-180' : '',
-            theme === 'light' ? 'text-gray-600' : 'text-gray-300'
+            'text-brand-text-muted'
           )}
         />
       </div>
@@ -69,7 +65,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       >
         <p className={cn(
           "text-sm leading-[22.4px] text-left select-none whitespace-pre-line",
-          theme === 'light' ? 'text-gray-700' : 'text-gray-400'
+          'text-brand-text-muted'
         )}>
           {answer}
         </p>

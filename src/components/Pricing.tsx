@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Check, Dot } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import AnimatedCard from './ui/dynamic-border-animations-card';
 
 const Pricing = () => {
     const plans = [
@@ -52,7 +51,7 @@ const Pricing = () => {
     ];
 
     return (
-        <section id="pricing" className="py-20 sm:py-24 text-white">
+        <section id="pricing" className="py-20 sm:py-24 text-brand-text">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div 
                     className="text-center max-w-3xl mx-auto mb-12"
@@ -61,8 +60,8 @@ const Pricing = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Choose Your Productivity Plan</h2>
-                    <p className="mt-4 text-lg text-neutral-300">
+                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">Choose Your Productivity Plan</h2>
+                    <p className="mt-4 text-lg text-brand-text-muted">
                         Flexible weekly subscriptions designed for busy healthcare professionals.
                         <br />
                         No contracts • Immediate access • Start saving time today
@@ -79,18 +78,21 @@ const Pricing = () => {
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                             className="h-full"
                         >
-                            <AnimatedCard className={cn(plan.isPopular ? 'border-premium-gold/60' : '')}>
+                            <div className={cn(
+                                "relative w-full h-full bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col transition-transform duration-300 hover:-translate-y-2",
+                                plan.isPopular ? 'border-2 border-brand-accent' : ''
+                            )}>
                                 {plan.isPopular && (
-                                    <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-gold-gradient text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                                    <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-accent text-brand-bg px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                                         MOST POPULAR
                                     </div>
                                 )}
 
-                                <h3 className={cn("text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400", plan.isPopular && "mt-4")}>{plan.name}</h3>
-                                <p className="mt-2 text-neutral-300">{plan.description}</p>
+                                <h3 className={cn("text-2xl font-bold text-brand-text", plan.isPopular && "mt-4")}>{plan.name}</h3>
+                                <p className="mt-2 text-brand-text-muted">{plan.description}</p>
                                 
                                 {plan.limitedNote && (
-                                    <div className="mt-4 bg-amber-500/20 text-amber-300 text-sm font-semibold px-3 py-1 rounded-full inline-block border border-amber-500/30">
+                                    <div className="mt-4 bg-brand-accent/20 text-brand-accent text-sm font-semibold px-3 py-1 rounded-full inline-block border border-brand-accent/30">
                                         {plan.limitedNote}
                                     </div>
                                 )}
@@ -98,17 +100,17 @@ const Pricing = () => {
                                 <div className="mt-6">
                                     {plan.salePrice ? (
                                         <div className="flex items-baseline gap-2">
-                                            <span className="text-5xl font-bold text-white">{plan.salePrice}</span>
-                                            <del className="text-2xl font-medium text-gray-500">{plan.price}</del>
-                                            <span className="text-lg text-gray-400">{plan.billing}</span>
+                                            <span className="text-5xl font-bold text-brand-text">{plan.salePrice}</span>
+                                            <del className="text-2xl font-medium text-brand-text-muted/70">{plan.price}</del>
+                                            <span className="text-lg text-brand-text-muted">{plan.billing}</span>
                                         </div>
                                     ) : (
                                         <div>
-                                            <span className="text-5xl font-bold text-white">{plan.price}</span>
-                                            <span className="text-lg text-gray-400">{plan.billing}</span>
+                                            <span className="text-5xl font-bold text-brand-text">{plan.price}</span>
+                                            <span className="text-lg text-brand-text-muted">{plan.billing}</span>
                                         </div>
                                     )}
-                                    <p className="text-sm text-gray-400 mt-1">Billed weekly • Cancel anytime</p>
+                                    <p className="text-sm text-brand-text-muted mt-1">Billed weekly • Cancel anytime</p>
                                 </div>
 
                                 <ul className="mt-8 space-y-4 flex-grow">
@@ -120,8 +122,8 @@ const Pricing = () => {
                                         if (isSubFeature) {
                                             return (
                                                 <li key={feature} className="flex items-start pl-8">
-                                                    <Dot className="h-5 w-5 text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
-                                                    <span className="text-gray-300">{featureText}</span>
+                                                    <Dot className="h-5 w-5 text-brand-text-muted mr-3 mt-0.5 flex-shrink-0" />
+                                                    <span className="text-brand-text-muted">{featureText}</span>
                                                 </li>
                                             );
                                         }
@@ -130,8 +132,8 @@ const Pricing = () => {
                                             <li key={feature} className="flex items-start">
                                                 <Check className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
                                                 <span className={cn(
-                                                    'text-gray-300',
-                                                    { 'font-semibold text-white': isAdvancedToolsTitle }
+                                                    'text-brand-text-muted',
+                                                    { 'font-semibold text-brand-text': isAdvancedToolsTitle }
                                                 )}>
                                                     {featureText}
                                                 </span>
@@ -141,24 +143,24 @@ const Pricing = () => {
                                 </ul>
 
                                 <div className="mt-auto pt-8">
-                                    <button className={`w-full py-3 px-6 rounded-full font-bold text-lg transition-transform duration-300 hover:scale-105 ${plan.isPopular ? 'bg-gold-gradient text-white' : 'border-2 border-white text-white hover:bg-white hover:text-medical-blue'}`}>
+                                    <button className={`w-full py-3 px-6 rounded-full font-bold text-lg transition-transform duration-300 hover:scale-105 ${plan.isPopular ? 'bg-brand-accent text-brand-bg' : 'border-2 border-brand-text text-brand-text hover:bg-brand-text hover:text-brand-bg'}`}>
                                         {plan.cta}
                                     </button>
-                                    <div className="mt-4 text-center text-sm text-gray-300 bg-white/5 p-3 rounded-xl border border-white/10">
-                                        <p className="font-semibold text-white">{plan.roi}</p>
+                                    <div className="mt-4 text-center text-sm text-brand-text-muted bg-brand-bg p-3 rounded-xl border border-brand-border">
+                                        <p className="font-semibold text-brand-text">{plan.roi}</p>
                                         <p>{plan.value}</p>
                                     </div>
                                     {plan.disclaimer && (
-                                        <p className="mt-4 text-xs text-center text-gray-400">{plan.disclaimer}</p>
+                                        <p className="mt-4 text-xs text-center text-brand-text-muted/80">{plan.disclaimer}</p>
                                     )}
                                 </div>
-                            </AnimatedCard>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
 
                 <motion.div 
-                    className="mt-12 text-center text-gray-300"
+                    className="mt-12 text-center text-brand-text-muted"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true, amount: 0.5 }}

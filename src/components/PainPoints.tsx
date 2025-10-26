@@ -1,8 +1,6 @@
-import { Clock, Calendar, FileText, FileEdit, Zap, Users } from 'lucide-react';
+import { Clock, Calendar, FileText, FileEdit, Zap, Users, XCircle, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionGradientBackground from './ui/SectionGradientBackground';
-import { GlassCrossIcon } from './ui/GlassCrossIcon';
-import { GlassCheckIcon } from './ui/GlassCheckIcon';
 
 const painPointsData = [
   {
@@ -45,7 +43,7 @@ const painPointsData = [
 
 const PainPoints = () => {
     return (
-        <section id="features" className="relative overflow-hidden py-16 md:py-24">
+        <section id="features" className="relative overflow-hidden py-16 md:py-24 bg-brand-bg">
             <SectionGradientBackground />
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div 
@@ -55,15 +53,15 @@ const PainPoints = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">The Hidden Cost of GP Documentation</h2>
-                    <p className="mt-4 text-lg text-neutral-300">
+                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">The Hidden Cost of GP Documentation</h2>
+                    <p className="mt-4 text-lg text-brand-text-muted">
                       Every hour spent on admin is an hour lost to patient care. GPGuide helps Australian GPs reclaim their time, improve compliance, and restore work–life balance.
                     </p>
                 </motion.div>
 
                 <div className="relative max-w-3xl mx-auto">
                     {/* Vertical line */}
-                    <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-white/10" />
+                    <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-brand-border" />
 
                     <div className="space-y-16">
                         {painPointsData.map((point, index) => {
@@ -81,38 +79,38 @@ const PainPoints = () => {
                                 >
                                     {/* Dot */}
                                     <div className="absolute top-0 left-4 md:left-1/2 -translate-x-1/2 mt-1.5 z-10">
-                                        <div className="w-5 h-5 rounded-full bg-medical-blue border-2 border-cyan-400 flex items-center justify-center">
-                                            <div className="w-2 h-2 bg-cyan-400 rounded-full" />
+                                        <div className="w-5 h-5 rounded-full bg-brand-surface border-2 border-brand-accent flex items-center justify-center">
+                                            <div className="w-2 h-2 bg-brand-accent rounded-full" />
                                         </div>
                                     </div>
 
                                     {/* Content Card */}
                                     <div className={`w-full pl-12 md:pl-0 ${isRightSide ? 'md:pl-[calc(50%+2.5rem)]' : 'md:pr-[calc(50%+2.5rem)]'}`}>
                                         <motion.div 
-                                            className="bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.07)] transition-all duration-300 hover:border-white/20 hover:bg-slate-800/60"
+                                            className="bg-gray-100 shadow-clay-light rounded-2xl p-6 transition-all duration-300"
                                             whileHover={{ y: -5, scale: 1.02, transition: { type: 'spring', stiffness: 300 } }}
                                         >
                                             <div className="flex flex-col gap-4 text-left">
                                                 <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg p-2 shadow-md bg-medical-blue/50 border border-white/20">
-                                                        <Icon className="text-cyan-300 w-7 h-7" strokeWidth={1.5} />
+                                                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-lg p-2 shadow-md bg-brand-bg border border-brand-border">
+                                                        <Icon className="text-brand-accent w-7 h-7" strokeWidth={1.5} />
                                                     </div>
-                                                    <h3 className="text-lg font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+                                                    <h3 className="text-lg font-bold leading-tight text-brand-text">
                                                         {point.title}
                                                     </h3>
                                                 </div>
                                                 <ul className="space-y-3 text-sm">
                                                     <li className="flex items-start gap-2.5">
                                                         <div className="mt-0.5 flex-shrink-0">
-                                                          <GlassCrossIcon />
+                                                          <XCircle className="w-4 h-4 text-brand-text-muted" />
                                                         </div>
-                                                        <p className="text-gray-400">{point.pain}</p>
+                                                        <p className="text-brand-text-muted">{point.pain}</p>
                                                     </li>
                                                     <li className="flex items-start gap-2.5">
                                                         <div className="mt-0.5 flex-shrink-0">
-                                                          <GlassCheckIcon />
+                                                          <CheckCircle className="w-4 h-4 text-brand-accent" />
                                                         </div>
-                                                        <p className="font-semibold text-gray-200">{point.gain}</p>
+                                                        <p className="font-semibold text-brand-text">{point.gain}</p>
                                                     </li>
                                                 </ul>
                                             </div>

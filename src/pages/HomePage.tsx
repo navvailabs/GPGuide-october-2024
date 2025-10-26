@@ -44,6 +44,7 @@ function HomePage() {
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove('dark');
+    root.classList.add('light');
   }, []);
 
   return (
@@ -59,15 +60,10 @@ function HomePage() {
           <main>
             <Hero />
             <PainPoints />
-            <Showcase />
-            <TemplateFeatures />
-            <VideoDemo />
             <HowItWorks />
+            <Features />
             <Pricing />
             <Testimonials />
-            <Features />
-            <Trust />
-            <Value />
             <FAQ />
             <FinalCTA />
             <Contact />
