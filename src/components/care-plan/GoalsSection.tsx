@@ -72,7 +72,7 @@ const GoalsSection = ({ goals, setGoals }: GoalsSectionProps) => {
                                 onClick={() => handleAddShortcut(goal)}
                                 className={cn(
                                     'w-full justify-start text-left',
-                                    isSelected(goal) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                    isSelected(goal) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                 )}
                             >
                                 {goal}

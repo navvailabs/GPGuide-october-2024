@@ -167,7 +167,7 @@ const MseSection = ({ mseNotes, setMseNotes }: MseSectionProps) => {
                                         onClick={() => handleSelect(domain, option)}
                                         className={cn(
                                             'justify-center',
-                                            isSelected(domain, option) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isSelected(domain, option) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {option}
