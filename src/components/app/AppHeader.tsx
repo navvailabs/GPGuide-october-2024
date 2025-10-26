@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Home, Menu, BriefcaseMedical } from 'lucide-react';
+import { Home, Menu } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
+import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface AppHeaderProps {
@@ -11,23 +12,23 @@ interface AppHeaderProps {
 
 const AppHeader = ({ onMenuClick }: AppHeaderProps) => {
   const { theme } = useTheme();
+
   return (
     <header className={cn(
-        "sticky top-0 z-40 backdrop-blur-md border-b",
-        theme === 'light' ? 'bg-gray-50/80 border-gray-200' : 'bg-[#16181C]/80 border-gray-800'
+      "sticky top-0 z-50",
+      theme === 'light' 
+        ? "border-b border-brand-border/20 bg-brand-bg/20 backdrop-blur-xl"
+        : "border-transparent bg-transparent"
     )}>
-      <div className="flex items-center justify-between h-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">
           {onMenuClick && (
-            <button onClick={onMenuClick} className="text-gray-800 dark:text-white p-2 -ml-2 md:hidden">
+            <button onClick={onMenuClick} className="text-brand-text dark:text-gray-300 p-2 -ml-2 md:hidden">
                 <Menu />
             </button>
           )}
-          <Link to="/" className="flex items-center space-x-2">
-              <BriefcaseMedical className="h-7 w-7 text-premium-gold" />
-              <span className="hidden sm:inline text-xl font-satoshi font-bold text-gradient-gold">
-                  GPGuide
-              </span>
+          <Link to="/" className="flex items-center">
+              <Logo className="h-48 w-auto" />
           </Link>
         </div>
         <div className="flex items-center gap-4">

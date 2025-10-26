@@ -7,7 +7,6 @@ import CentrelinkFormAssist from '@/pages/CentrelinkFormAssist';
 import WorkersCompAssist from '@/pages/WorkersCompAssist';
 import MEDDAssistTool from '@/pages/MEDDAssistTool';
 import NDISFormAssist from '@/pages/NDISFormAssist';
-import { ThemeProvider } from '@/contexts/ThemeContext';
 
 interface MEDDResult {
     totalMEDD: number;
@@ -128,11 +127,9 @@ const CarePlanSuite = () => {
     };
 
     return (
-        <ThemeProvider>
-            <CarePlanLayout activeView={activeView} setActiveView={setActiveView}>
-                {renderContent()}
-            </CarePlanLayout>
-        </ThemeProvider>
+        <CarePlanLayout activeView={activeView} setActiveView={setActiveView}>
+            {renderContent()}
+        </CarePlanLayout>
     );
 };
 

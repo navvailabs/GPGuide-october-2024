@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Mail, BookOpen, ClipboardList, MessageSquare } from 'lucide-react';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const Contact = () => {
     const contactMethods = [
@@ -19,10 +21,10 @@ const Contact = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold text-gradient-heading">Get Help When You Need It</h2>
-                    <p className="mt-4 text-lg text-brand-text-muted">
+                    <GradientHeading className="text-3xl md:text-4xl font-bold text-center">Get Help When You Need It</GradientHeading>
+                    <Description className="mt-4 text-lg">
                         Our Australian-based support team understands the challenges GPs face and is here to provide real help from real people.
-                    </p>
+                    </Description>
                 </motion.div>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
