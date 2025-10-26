@@ -85,7 +85,7 @@ const TreatmentPlanSection = ({ state, setState }: TreatmentPlanSectionProps) =>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                             {referralOptions.map(opt => (
                                 <QuickActionButton key={opt} onClick={() => handleToggleList('referrals', opt)}
-                                    className={cn('w-full justify-start', state.referrals.includes(opt) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}>
+                                    className={cn('w-full justify-start', state.referrals.includes(opt) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}>
                                     {opt}
                                 </QuickActionButton>
                             ))}
@@ -97,7 +97,7 @@ const TreatmentPlanSection = ({ state, setState }: TreatmentPlanSectionProps) =>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                             {investigationOptions.map(opt => (
                                 <QuickActionButton key={opt} onClick={() => handleToggleList('investigations', opt)}
-                                    className={cn('w-full justify-start', state.investigations.includes(opt) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}>
+                                    className={cn('w-full justify-start', state.investigations.includes(opt) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}>
                                     {opt}
                                 </QuickActionButton>
                             ))}
@@ -109,7 +109,7 @@ const TreatmentPlanSection = ({ state, setState }: TreatmentPlanSectionProps) =>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                             {interventionOptions.map(opt => (
                                 <QuickActionButton key={opt} onClick={() => handleToggleList('interventions', opt)}
-                                    className={cn('w-full justify-start', state.interventions.includes(opt) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}>
+                                    className={cn('w-full justify-start', state.interventions.includes(opt) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}>
                                     {opt}
                                 </QuickActionButton>
                             ))}
@@ -121,7 +121,7 @@ const TreatmentPlanSection = ({ state, setState }: TreatmentPlanSectionProps) =>
                         <div className="flex flex-wrap gap-2">
                             {followUpOptions.map(opt => (
                                 <QuickActionButton key={opt} onClick={() => setState(s => ({ ...s, followUp: opt }))}
-                                    className={cn(state.followUp === opt && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}>
+                                    className={cn(state.followUp === opt && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}>
                                     {opt}
                                 </QuickActionButton>
                             ))}

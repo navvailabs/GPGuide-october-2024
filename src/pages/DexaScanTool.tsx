@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, RefreshCw, Loader2, Copy, Check } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StyledPillInput } from '@/components/ui/StyledPillInput';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
 import InspiredCard from '@/components/ui/InspiredCard';
+import { Button } from '@/components/ui/NewButton';
 
 interface DexaInputs {
     age: string;
@@ -151,7 +152,7 @@ const DexaScanTool = ({ inputs, setInputs, summary, setSummary }: DexaScanToolPr
                                     onClick={() => handleIndicationToggle(indication)}
                                     className={cn(
                                         'w-full justify-start text-left',
-                                        inputs.indications.includes(indication) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                        inputs.indications.includes(indication) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                     )}
                                 >
                                     {indication}
@@ -178,31 +179,24 @@ const DexaScanTool = ({ inputs, setInputs, summary, setSummary }: DexaScanToolPr
                     variants={sectionVariants}
                     className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6"
                 >
-                    <button
-                        onClick={handleGenerateSummary}
-                        disabled={isLoading || !inputs.age}
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
+                    <Button
+                        variant="primary"
+                        showIcon
+                        onClick={(e) => { e.preventDefault(); handleGenerateSummary(); }}
+                        disabled={!inputs.age}
+                        isLoading={isLoading}
+                        className="w-full sm:w-auto"
                     >
-                        {isLoading ? (
-                            <>
-                                <Loader2 className="h-5 w-5 animate-spin" />
-                                Generating...
-                            </>
-                        ) : (
-                            <>
-                                <Sparkles className="h-5 w-5" />
-                                Generate Summary
-                            </>
-                        )}
-                    </button>
-                    <button
-                        onClick={handleReset}
+                        {isLoading ? 'Generating...' : 'Generate Summary'}
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        onClick={(e) => { e.preventDefault(); handleReset(); }}
                         disabled={isLoading}
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-800 dark:text-white font-semibold rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full sm:w-auto"
                     >
-                        <RefreshCw className="h-5 w-5" />
                         Reset
-                    </button>
+                    </Button>
                 </motion.div>
 
                 {summary && (
