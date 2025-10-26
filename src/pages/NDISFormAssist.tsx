@@ -130,7 +130,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                                     <QuickActionButton 
                                         key={item} 
                                         onClick={() => handleAddQuickAction('diagnosis', item)}
-                                        className={cn(isSelected('diagnosis', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                        className={cn(isSelected('diagnosis', item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}
                                     >
                                         {item}
                                     </QuickActionButton>
@@ -157,7 +157,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                                     <QuickActionButton 
                                         key={item} 
                                         onClick={() => handleAddQuickAction('functionalImpact', item)} 
-                                        className={cn('w-full justify-start text-left', isSelected('functionalImpact', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                        className={cn('w-full justify-start text-left', isSelected('functionalImpact', item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}
                                     >
                                         {item}
                                     </QuickActionButton>
@@ -184,7 +184,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                                     <QuickActionButton 
                                         key={item} 
                                         onClick={() => handleAddQuickAction('recommendedSupports', item)}
-                                        className={cn(isSelected('recommendedSupports', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                        className={cn(isSelected('recommendedSupports', item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}
                                     >
                                         {item}
                                     </QuickActionButton>

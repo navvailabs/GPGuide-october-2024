@@ -77,7 +77,7 @@ const MentalHealthCarePlan = ({
     setPresentation,
     assessment,
     setAssessment,
-    mse,
+mse,
     setMse,
     history,
     setHistory,
@@ -164,11 +164,17 @@ const MentalHealthCarePlan = ({
 
     const handleAddPresentation = (presentationToAdd: string) => {
         setPresentation(prev => {
-            if (!prev) return presentationToAdd;
             const items = prev.split(',').map(item => item.trim()).filter(Boolean);
-            if (items.includes(presentationToAdd)) return prev;
-            return `${prev}, ${presentationToAdd}`;
+            if (items.includes(presentationToAdd)) {
+                return items.filter(item => item !== presentationToAdd).join(', ');
+            } else {
+                return [...items, presentationToAdd].join(', ');
+            }
         });
+    };
+
+    const isPresentationSelected = (itemToCheck: string) => {
+        return presentation.split(',').map(item => item.trim()).includes(itemToCheck);
     };
 
     const handleAddGoal = (goalToAdd: string) => {
@@ -216,7 +222,10 @@ const MentalHealthCarePlan = ({
                                             <QuickActionButton
                                                 key={item}
                                                 onClick={() => handleAddPresentation(item)}
-                                                className="justify-center"
+                                                className={cn(
+                                                    'justify-center',
+                                                    isPresentationSelected(item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
+                                                )}
                                             >
                                                 {item}
                                             </QuickActionButton>

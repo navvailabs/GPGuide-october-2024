@@ -75,7 +75,7 @@ const WorkCapacitySection = ({ state, setState }: WorkCapacitySectionProps) => {
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                                         {restrictionsOptions.map(opt => (
                                             <QuickActionButton key={opt} onClick={() => handleRestrictionToggle(opt)}
-                                                className={cn('w-full justify-start', state.restrictions.includes(opt) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}>
+                                                className={cn('w-full justify-start', state.restrictions.includes(opt) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}>
                                                 {opt}
                                             </QuickActionButton>
                                         ))}

@@ -73,7 +73,7 @@ const AlliedHealthSection = ({ alliedHealth, setAlliedHealth }: AlliedHealthSect
                                 onClick={() => handleAddQuickAction(action)}
                                 className={cn(
                                     'justify-center',
-                                    isSelected(action) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                    isSelected(action) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                 )}
                             >
                                 {action}
