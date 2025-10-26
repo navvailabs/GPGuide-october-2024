@@ -3,6 +3,7 @@ import { Zap, ShieldCheck, FileText, DollarSign, CheckCircle } from 'lucide-reac
 import { TextShimmer } from './ui/text-shimmer';
 import { ShinyButton } from './ui/shiny-button';
 import { Description } from './ui/Description';
+import { GradientHeading } from '@/components/ui/GradientHeading';
 
 const Hero = () => {
     const features = [
@@ -33,9 +34,13 @@ const Hero = () => {
                         <h1 className="font-display font-black text-5xl sm:text-6xl md:text-7xl tracking-tighter leading-tight mb-4 text-brand-text">
                             HIGH YIELD GP
                             <br />
-                            <span className="text-brand-accent">
+                            <GradientHeading 
+                                as="span" 
+                                className="font-display"
+                                gradient="linear-gradient(to right, #F59E0B, #B45309)"
+                            >
                                 RESOURCE GUIDE
-                            </span>
+                            </GradientHeading>
                         </h1>
 
                         <p className="text-lg text-brand-text-muted mb-4">For GPs, GP Registrars, Aspiring GPs</p>

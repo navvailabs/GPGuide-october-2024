@@ -39,7 +39,7 @@ const Trust = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <GradientHeading className="text-3xl md:text-4xl font-bold text-center" gradient="linear-gradient(to right, #10B981, #06B6D4)">Your Data Security is Our Priority</GradientHeading>
+                    <GradientHeading className="text-3xl md:text-4xl font-bold text-center">Your Data Security is Our Priority</GradientHeading>
                     <Description className="mt-4 text-lg">
                         We are committed to the highest standards of data protection and privacy, ensuring your practice and patient information remains secure.
                     </Description>
@@ -57,7 +57,7 @@ const Trust = () => {
                         <ul className="space-y-4">
                             {leftColumnPoints.map(point => (
                                 <li key={point} className="flex items-start">
-                                    <CheckCircle className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
+                                    <CheckCircle className="h-5 w-5 text-brand-accent mr-3 mt-0.5 flex-shrink-0" />
                                     <span className="text-brand-text-muted">{point}</span>
                                 </li>
                             ))}
@@ -67,7 +67,7 @@ const Trust = () => {
                         <ul className="space-y-4">
                             {rightColumnPoints.map(point => (
                                 <li key={point} className="flex items-start">
-                                    <CheckCircle className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
+                                    <CheckCircle className="h-5 w-5 text-brand-accent mr-3 mt-0.5 flex-shrink-0" />
                                     <span className="text-brand-text-muted">{point}</span>
                                 </li>
                             ))}
@@ -84,7 +84,7 @@ const Trust = () => {
                 >
                     {bottomBadges.map((badgeText) => (
                         <div key={badgeText} className="bg-gray-100 shadow-clay-light flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium text-brand-text">
-                            <ShieldCheck className="h-5 w-5 text-success-green" />
+                            <ShieldCheck className="h-5 w-5 text-brand-accent" />
                             <span>{badgeText}</span>
                         </div>
                     ))}

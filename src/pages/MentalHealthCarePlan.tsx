@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { Sparkles, RefreshCw, Loader2 } from 'lucide-react';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import InspiredCard from '@/components/ui/InspiredCard';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
@@ -9,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useTheme } from '@/contexts/ThemeContext';
 import MseSection from '@/components/care-plan/MseSection';
 import MentalHealthPreviewSection from '@/components/care-plan/MentalHealthPreviewSection';
+import { Button } from '@/components/ui/NewButton';
 
 interface MentalHealthCarePlanProps {
     presentation: string;
@@ -77,7 +77,7 @@ const MentalHealthCarePlan = ({
     setPresentation,
     assessment,
     setAssessment,
-    mse,
+mse,
     setMse,
     history,
     setHistory,
@@ -164,11 +164,17 @@ const MentalHealthCarePlan = ({
 
     const handleAddPresentation = (presentationToAdd: string) => {
         setPresentation(prev => {
-            if (!prev) return presentationToAdd;
             const items = prev.split(',').map(item => item.trim()).filter(Boolean);
-            if (items.includes(presentationToAdd)) return prev;
-            return `${prev}, ${presentationToAdd}`;
+            if (items.includes(presentationToAdd)) {
+                return items.filter(item => item !== presentationToAdd).join(', ');
+            } else {
+                return [...items, presentationToAdd].join(', ');
+            }
         });
+    };
+
+    const isPresentationSelected = (itemToCheck: string) => {
+        return presentation.split(',').map(item => item.trim()).includes(itemToCheck);
     };
 
     const handleAddGoal = (goalToAdd: string) => {
@@ -216,7 +222,10 @@ const MentalHealthCarePlan = ({
                                             <QuickActionButton
                                                 key={item}
                                                 onClick={() => handleAddPresentation(item)}
-                                                className="justify-center"
+                                                className={cn(
+                                                    'justify-center',
+                                                    isPresentationSelected(item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
+                                                )}
                                             >
                                                 {item}
                                             </QuickActionButton>
@@ -291,41 +300,24 @@ const MentalHealthCarePlan = ({
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                 className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-12"
             >
-                <button
-                    onClick={handleGeneratePreview}
-                    disabled={isLoading || !presentation.trim()}
-                    className={cn(
-                        "w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 font-bold rounded-lg shadow-lg transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100",
-                        theme === 'light'
-                            ? 'bg-gray-900 text-white hover:bg-gray-700'
-                            : 'bg-white text-black hover:bg-gray-200'
-                    )}
+                <Button
+                    variant="primary"
+                    showIcon
+                    onClick={(e) => { e.preventDefault(); handleGeneratePreview(); }}
+                    disabled={!presentation.trim()}
+                    isLoading={isLoading}
+                    className="w-full sm:w-auto"
                 >
-                    {isLoading ? (
-                        <>
-                            <Loader2 className="h-5 w-5 animate-spin" />
-                            Generating...
-                        </>
-                    ) : (
-                        <>
-                            <Sparkles className="h-5 w-5" />
-                            Generate Care Plan
-                        </>
-                    )}
-                </button>
-                <button
-                    onClick={handleReset}
+                    {isLoading ? 'Generating...' : 'Generate Care Plan'}
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={(e) => { e.preventDefault(); handleReset(); }}
                     disabled={isLoading}
-                    className={cn(
-                        "w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 font-semibold rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed",
-                        theme === 'light'
-                            ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                            : 'bg-white/10 text-white hover:bg-white/20'
-                    )}
+                    className="w-full sm:w-auto"
                 >
-                    <RefreshCw className="h-5 w-5" />
                     Reset
-                </button>
+                </Button>
             </motion.div>
 
             <MentalHealthPreviewSection carePlanHtml={carePlanHtml} />
