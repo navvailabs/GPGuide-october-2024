@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, RefreshCw, Loader2, Copy, Check } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
 import InspiredCard from '@/components/ui/InspiredCard';
+import { Button } from '@/components/ui/NewButton';
 
 interface NDISInputs {
     diagnosis: string;
@@ -130,7 +131,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                                     <QuickActionButton 
                                         key={item} 
                                         onClick={() => handleAddQuickAction('diagnosis', item)}
-                                        className={cn(isSelected('diagnosis', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                        className={cn(isSelected('diagnosis', item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}
                                     >
                                         {item}
                                     </QuickActionButton>
@@ -157,7 +158,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                                     <QuickActionButton 
                                         key={item} 
                                         onClick={() => handleAddQuickAction('functionalImpact', item)} 
-                                        className={cn('w-full justify-start text-left', isSelected('functionalImpact', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                        className={cn('w-full justify-start text-left', isSelected('functionalImpact', item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}
                                     >
                                         {item}
                                     </QuickActionButton>
@@ -184,7 +185,7 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                                     <QuickActionButton 
                                         key={item} 
                                         onClick={() => handleAddQuickAction('recommendedSupports', item)}
-                                        className={cn(isSelected('recommendedSupports', item) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold')}
+                                        className={cn(isSelected('recommendedSupports', item) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent')}
                                     >
                                         {item}
                                     </QuickActionButton>
@@ -195,22 +196,24 @@ const NDISFormAssist = ({ inputs, setInputs, summary, setSummary }: NDISFormAssi
                 </motion.section>
 
                 <motion.div variants={sectionVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
-                    <button
-                        onClick={handleGenerateSummary}
-                        disabled={isLoading || !inputs.diagnosis}
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
+                    <Button
+                        variant="primary"
+                        showIcon
+                        onClick={(e) => { e.preventDefault(); handleGenerateSummary(); }}
+                        disabled={!inputs.diagnosis}
+                        isLoading={isLoading}
+                        className="w-full sm:w-auto"
                     >
-                        {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Sparkles className="h-5 w-5" />}
                         {isLoading ? 'Generating...' : 'Generate Summary'}
-                    </button>
-                    <button
-                        onClick={handleReset}
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        onClick={(e) => { e.preventDefault(); handleReset(); }}
                         disabled={isLoading}
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-800 dark:text-white font-semibold rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full sm:w-auto"
                     >
-                        <RefreshCw className="h-5 w-5" />
                         Reset
-                    </button>
+                    </Button>
                 </motion.div>
 
                 {summary && (
