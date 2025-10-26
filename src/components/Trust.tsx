@@ -27,7 +27,7 @@ const Trust = () => {
     ];
 
     return (
-        <section className="relative overflow-hidden py-20 sm:py-24">
+        <section className="relative overflow-hidden py-20 sm:py-24 bg-brand-bg">
             <SectionGradientBackground />
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
@@ -37,8 +37,8 @@ const Trust = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Your Data Security is Our Priority</h2>
-                    <p className="mt-4 text-lg text-neutral-300">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gradient-heading">Your Data Security is Our Priority</h2>
+                    <p className="mt-4 text-lg text-brand-text-muted">
                         We are committed to the highest standards of data protection and privacy, ensuring your practice and patient information remains secure.
                     </p>
                 </motion.div>
@@ -56,7 +56,7 @@ const Trust = () => {
                             {leftColumnPoints.map(point => (
                                 <li key={point} className="flex items-start">
                                     <CheckCircle className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
-                                    <span className="text-gray-200">{point}</span>
+                                    <span className="text-brand-text-muted">{point}</span>
                                 </li>
                             ))}
                         </ul>
@@ -66,7 +66,7 @@ const Trust = () => {
                             {rightColumnPoints.map(point => (
                                 <li key={point} className="flex items-start">
                                     <CheckCircle className="h-5 w-5 text-success-green mr-3 mt-0.5 flex-shrink-0" />
-                                    <span className="text-gray-200">{point}</span>
+                                    <span className="text-brand-text-muted">{point}</span>
                                 </li>
                             ))}
                         </ul>
@@ -81,7 +81,7 @@ const Trust = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
                     {bottomBadges.map((badgeText) => (
-                        <div key={badgeText} className="glass-card flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium text-white">
+                        <div key={badgeText} className="bg-brand-surface border border-brand-border flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium text-brand-text">
                             <ShieldCheck className="h-5 w-5 text-success-green" />
                             <span>{badgeText}</span>
                         </div>

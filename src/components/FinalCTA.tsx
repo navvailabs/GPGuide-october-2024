@@ -4,7 +4,7 @@ import SectionGradientBackground from './ui/SectionGradientBackground';
 
 const FinalCTA = () => {
     return (
-        <section className="relative overflow-hidden py-20 sm:py-24 text-white">
+        <section className="relative overflow-hidden py-20 sm:py-24 text-brand-text">
             <SectionGradientBackground />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <motion.div
@@ -13,8 +13,8 @@ const FinalCTA = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Ready to Reclaim Your Time?</h2>
-                    <p className="mt-4 text-lg text-neutral-300 max-w-3xl mx-auto">
+                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-gradient-heading">Ready to Reclaim Your Time?</h2>
+                    <p className="mt-4 text-lg text-brand-text-muted max-w-3xl mx-auto">
                         Join 500+ Australian GPs who've already transformed their practice efficiency. Every day without GPGuide is another day lost to unnecessary admin work.
                     </p>
                 </motion.div>
@@ -26,16 +26,16 @@ const FinalCTA = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                    <button className="text-white bg-gold-gradient font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:scale-105 transform transition-transform duration-300">
+                    <button className="bg-brand-accent text-brand-bg font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:scale-105 transform transition-transform duration-300">
                         START ESSENTIAL PLAN - $7.99/week
                     </button>
-                    <button className="text-white border-2 border-white font-bold py-4 px-8 rounded-full text-lg hover:bg-white hover:text-medical-blue transform transition-all duration-300">
+                    <button className="text-brand-text border-2 border-brand-text font-bold py-4 px-8 rounded-full text-lg hover:bg-brand-text hover:text-brand-bg transform transition-all duration-300">
                         CHOOSE PROFESSIONAL PLAN - $14.99/week
                     </button>
                 </motion.div>
 
                 <motion.div
-                    className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-300 max-w-4xl mx-auto"
+                    className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-brand-text-muted max-w-4xl mx-auto"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
@@ -48,7 +48,7 @@ const FinalCTA = () => {
                 </motion.div>
 
                 <motion.div
-                    className="mt-12 text-premium-gold font-semibold"
+                    className="mt-12 text-brand-accent font-semibold"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true, amount: 0.5 }}

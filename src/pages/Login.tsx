@@ -5,14 +5,11 @@ import Header from '@/components/Header.tsx';
 export default function LoginPage() {
   useEffect(() => {
     const root = window.document.documentElement;
-    if (!root.classList.contains('dark')) {
-      root.classList.add('dark');
-    }
-    root.classList.remove('light');
+    root.classList.remove('dark');
   }, []);
 
   return (
-    <div>
+    <div className="bg-brand-bg">
       {/* Header is positioned absolutely to float over the SignInCard */}
       <div className="absolute top-0 left-0 w-full z-50">
         <Header variant="transparent" />

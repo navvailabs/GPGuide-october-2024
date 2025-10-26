@@ -65,8 +65,8 @@ const FAQ = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">Frequently Asked Questions</h2>
-                    <p className="mt-4 text-lg text-neutral-300">
+                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">Frequently Asked Questions</h2>
+                    <p className="mt-4 text-lg text-brand-text-muted">
                         Everything you need to know about GPGuide.
                     </p>
                 </motion.div>
@@ -81,7 +81,7 @@ const FAQ = () => {
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-2xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">{category}</h3>
+                            <h3 className="text-2xl font-bold mb-8 text-center text-gradient-heading">{category}</h3>
                             <div className="space-y-4">
                                 {items.map((item, index) => (
                                     <AccordionItem key={index} question={item.q} answer={item.a} />
