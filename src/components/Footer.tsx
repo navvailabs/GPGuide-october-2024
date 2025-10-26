@@ -1,5 +1,6 @@
-import { BriefcaseMedical, Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Logo } from '@/components/ui/Logo';
 
 const Footer = () => {
     const productLinks = [
@@ -42,9 +43,8 @@ const Footer = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {/* Column 1: Company Info */}
                     <div className="space-y-4 pr-8 col-span-1 md:col-span-2 lg:col-span-1">
-                        <div className="flex items-center space-x-2">
-                            <BriefcaseMedical className="h-8 w-8 text-brand-accent" />
-                            <span className="text-2xl font-satoshi font-bold text-brand-text">GPGuide</span>
+                        <div className="flex items-center">
+                            <Logo className="h-48 w-auto" />
                         </div>
                         <p className="text-sm">Professional documentation templates for Australian GPs.</p>
                         <div className="text-xs space-y-1 pt-2">

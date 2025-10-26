@@ -1,6 +1,8 @@
 import InfoPageLayout from '@/layouts/InfoPageLayout';
 import { motion } from 'framer-motion';
 import { AccordionItem } from '@/components/ui/AccordionItem';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const faqData = {
     "GETTING STARTED": [
@@ -84,7 +86,7 @@ const faqData = {
     "SECURITY & PRIVACY": [
         {
             q: "Is my data secure?",
-            a: "Yes. GP Guide uses:\n• Bank-level encryption (AES-256)\n• HTTPS secure connections\n• Australian Privacy Principles compliance\n• No patient identifier storage\n• Secure cloud infrastructure\n\nFor full details, see our Privacy Policy and Security & Compliance pages."
+            a: "Yes. GP Guide uses:\n• Bank-level encryption (AES-256)\n• HTTPS secure connections\n• Secure cloud infrastructure\n• Regular security audits\n• Access controls\n• Staff training on privacy and security\n\nFor full details, see our Privacy Policy and Security & Compliance pages."
         },
         {
             q: "Is GP Guide tax deductible?",
@@ -104,19 +106,19 @@ const HelpCenter = () => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-3xl md:text-5xl font-bold font-satoshi bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-4 text-center">
+          <GradientHeading as="h1" className="text-3xl md:text-5xl font-bold text-center mb-4">
             Help Center
-          </h1>
-          <p className="text-lg text-neutral-300 max-w-3xl mx-auto text-center mb-12">
+          </GradientHeading>
+          <Description className="text-lg max-w-3xl mx-auto text-center mb-12">
             Find answers to common questions and learn how to get the most out of GP Guide.
-          </p>
+          </Description>
           
           <div className="space-y-12">
             {Object.entries(faqData).map(([category, items]) => (
                 <div key={category}>
-                    <h2 className="text-2xl md:text-3xl font-bold font-satoshi bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-6 text-center">
+                    <GradientHeading as="h2" className="text-2xl md:text-3xl font-bold text-center mb-6">
                         {category}
-                    </h2>
+                    </GradientHeading>
                     <div className="space-y-4">
                         {items.map((item, index) => (
                             <AccordionItem key={index} question={item.q} answer={item.a} />
@@ -125,18 +127,18 @@ const HelpCenter = () => {
                 </div>
             ))}
              <div className="text-center mt-16">
-                <h2 className="text-2xl md:text-3xl font-bold font-satoshi bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-6">
+                <GradientHeading as="h2" className="text-2xl md:text-3xl font-bold text-center mb-6">
                     Still Need Help?
-                </h2>
-                <p className="text-neutral-300 mb-2">Contact Support</p>
-                <a href="mailto:support@gpguide.com.au" className="text-premium-gold text-lg font-semibold hover:text-amber-300 transition-colors">
+                </GradientHeading>
+                <Description className="mb-2">Contact Support</Description>
+                <a href="mailto:support@gpguide.com.au" className="text-brand-accent text-lg font-semibold hover:text-amber-700 transition-colors">
                     support@gpguide.com.au
                 </a>
-                <p className="text-neutral-400 mt-4">
+                <Description className="mt-4">
                     Response Times:<br/>
                     Basic Plan: Within 48 hours<br/>
                     Professional Plan: Within 24 hours (priority)
-                </p>
+                </Description>
             </div>
           </div>
         </motion.div>

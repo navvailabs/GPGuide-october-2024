@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ShieldCheck, CheckCircle } from 'lucide-react';
 import SectionGradientBackground from './ui/SectionGradientBackground';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const Trust = () => {
     // Left column points
@@ -37,10 +39,10 @@ const Trust = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold text-gradient-heading">Your Data Security is Our Priority</h2>
-                    <p className="mt-4 text-lg text-brand-text-muted">
+                    <GradientHeading className="text-3xl md:text-4xl font-bold text-center" gradient="linear-gradient(to right, #10B981, #06B6D4)">Your Data Security is Our Priority</GradientHeading>
+                    <Description className="mt-4 text-lg">
                         We are committed to the highest standards of data protection and privacy, ensuring your practice and patient information remains secure.
-                    </p>
+                    </Description>
                 </motion.div>
 
                 <motion.div
