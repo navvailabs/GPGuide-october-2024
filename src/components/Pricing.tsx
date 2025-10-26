@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Check, Dot } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const Pricing = () => {
     const plans = [
@@ -60,12 +62,12 @@ const Pricing = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">Choose Your Productivity Plan</h2>
-                    <p className="mt-4 text-lg text-brand-text-muted">
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Choose Your Productivity Plan</GradientHeading>
+                    <Description className="mt-4 text-lg">
                         Flexible weekly subscriptions designed for busy healthcare professionals.
                         <br />
                         No contracts • Immediate access • Start saving time today
-                    </p>
+                    </Description>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto lg:items-stretch">
