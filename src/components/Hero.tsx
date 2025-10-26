@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Zap, ShieldCheck, FileText, DollarSign, CheckCircle } from 'lucide-react';
 import { TextShimmer } from './ui/text-shimmer';
 import { ShinyButton } from './ui/shiny-button';
+import { Description } from './ui/Description';
 
 const Hero = () => {
     const features = [
@@ -38,13 +39,13 @@ const Hero = () => {
                         </h1>
 
                         <p className="text-lg text-brand-text-muted mb-4">For GPs, GP Registrars, Aspiring GPs</p>
-                        <p className="text-lg text-brand-text-muted mb-8 max-w-xl">
+                        <Description className="text-lg mb-8 max-w-xl">
                             Generate professional-quality drafts for Care Plans, Mental Health 
                             Care Plans, and clinical forms — designed as learning templates 
                             to support best-practice documentation.
                             <br/><br/>
                             Designed by Australian GPs. Trusted by over 500 clinicians nationwide.
-                        </p>
+                        </Description>
 
                         <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8 text-brand-text w-full">
                             {features.map((feature, index) => (

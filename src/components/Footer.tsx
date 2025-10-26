@@ -1,4 +1,4 @@
-import { BriefcaseMedical, Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Twitter, Stethoscope } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -42,8 +42,10 @@ const Footer = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {/* Column 1: Company Info */}
                     <div className="space-y-4 pr-8 col-span-1 md:col-span-2 lg:col-span-1">
-                        <div className="flex items-center space-x-2">
-                            <BriefcaseMedical className="h-8 w-8 text-brand-accent" />
+                        <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 flex items-center justify-center bg-brand-text rounded-lg shadow-md">
+                                <Stethoscope className="w-5 h-5 text-brand-bg" />
+                            </div>
                             <span className="text-2xl font-satoshi font-bold text-brand-text">GPGuide</span>
                         </div>
                         <p className="text-sm">Professional documentation templates for Australian GPs.</p>
