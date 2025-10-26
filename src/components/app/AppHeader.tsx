@@ -18,7 +18,7 @@ const AppHeader = ({ onMenuClick }: AppHeaderProps) => {
       "sticky top-0 z-50",
       theme === 'light' 
         ? "border-b border-brand-border/20 bg-brand-bg/20 backdrop-blur-xl"
-        : "border-transparent bg-transparent"
+        : "border-b border-white/10 bg-black/20 backdrop-blur-xl"
     )}>
       <div className="flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4">

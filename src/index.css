@@ -114,7 +114,9 @@
 
   .care-plan-container {
     @apply bg-brand-surface border border-brand-border rounded-[20px] p-6 md:p-8 shadow-clay-light space-y-8 overflow-x-auto;
+    @apply dark:bg-[#1A1B1E]/85 dark:backdrop-blur-lg dark:border-white/10 dark:shadow-clay-dark;
     color: #374151;
+    @apply dark:text-gray-300;
   }
 
   .care-plan-container h1,
@@ -140,13 +142,19 @@
   }
 
   .care-plan-container h2 {
-    @apply text-2xl md:text-3xl font-bold mb-4 pb-2 border-b border-brand-border;
+    @apply text-2xl md:text-3xl font-bold mb-4 pb-2 border-b border-brand-border dark:border-white/10;
     color: #111827 !important;
+  }
+  .dark .care-plan-container h2 {
+    color: #FFFFFF !important;
   }
 
   .care-plan-container h3 {
     @apply text-xl font-semibold mb-3 flex items-center gap-x-2;
     color: #111827 !important;
+  }
+  .dark .care-plan-container h3 {
+    color: #FFFFFF !important;
   }
 
   .care-plan-container h3::before {
@@ -169,15 +177,24 @@
   .care-plan-container thead {
     background-color: #f9fafb !important;
   }
+  .dark .care-plan-container thead {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
 
   .care-plan-container th {
-    @apply p-3 font-medium border border-brand-border;
+    @apply p-3 font-medium border border-brand-border dark:border-white/10;
     color: #1F2937 !important;
+  }
+  .dark .care-plan-container th {
+    color: #FFFFFF !important;
   }
 
   .care-plan-container td {
-    @apply p-3 align-top border border-brand-border;
+    @apply p-3 align-top border border-brand-border dark:border-white/10;
     color: #4B5563 !important;
+  }
+  .dark .care-plan-container td {
+    color: #D1D5DB !important;
   }
 
   .care-plan-container td ul {
@@ -187,9 +204,15 @@
   .care-plan-container tbody tr:nth-child(even) {
     background-color: #f9fafb !important;
   }
+  .dark .care-plan-container tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+  }
   
   .care-plan-container tbody tr:hover {
     background-color: #f3f4f6 !important;
+  }
+  .dark .care-plan-container tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
   }
 
   .sidebar-scroll::-webkit-scrollbar {

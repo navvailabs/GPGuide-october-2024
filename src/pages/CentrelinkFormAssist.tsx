@@ -1,12 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, RefreshCw, Loader2, Copy, Check } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StyledTextarea } from '@/components/ui/StyledTextarea';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
 import InspiredCard from '@/components/ui/InspiredCard';
 import axios from 'axios';
 import FormattedWebhookOutput from '@/components/ui/FormattedWebhookOutput';
+import { Button } from '@/components/ui/NewButton';
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -211,7 +212,7 @@ const CentrelinkFormAssist = () => {
                                         onClick={() => handleAddClinicalInfo(info)}
                                         className={cn(
                                             'w-full justify-start text-left',
-                                            isClinicalInfoSelected(info) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isClinicalInfoSelected(info) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {info}
@@ -241,7 +242,7 @@ const CentrelinkFormAssist = () => {
                                         onClick={() => handleAddFunctionalImpact(impact)}
                                         className={cn(
                                             'w-full justify-start text-left',
-                                            isFunctionalImpactSelected(impact) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isFunctionalImpactSelected(impact) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {impact}
@@ -271,7 +272,7 @@ const CentrelinkFormAssist = () => {
                                         onClick={() => handleAddTreatment(treatment)}
                                         className={cn(
                                             'w-full justify-start text-left',
-                                            isTreatmentSelected(treatment) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isTreatmentSelected(treatment) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {treatment}
@@ -283,35 +284,30 @@ const CentrelinkFormAssist = () => {
                 </motion.section>
 
                 <motion.div variants={sectionVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6">
-                    <button
-                        onClick={handleGenerateSummary}
-                        disabled={isLoading || !clinicalInformation}
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
+                    <Button
+                        variant="primary"
+                        showIcon
+                        onClick={(e) => { e.preventDefault(); handleGenerateSummary(); }}
+                        disabled={!clinicalInformation}
+                        isLoading={isLoading}
+                        className="w-full sm:w-auto"
                     >
-                        {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Sparkles className="h-5 w-5" />}
                         {isLoading ? 'Generating...' : 'Generate Summary'}
-                    </button>
-                    <button
-                        onClick={handleReset}
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        onClick={(e) => { e.preventDefault(); handleReset(); }}
                         disabled={isLoading}
-                        className="w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-800 dark:text-white font-semibold rounded-lg transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full sm:w-auto"
                     >
-                        <RefreshCw className="h-5 w-5" />
                         Reset
-                    </button>
+                    </Button>
                 </motion.div>
 
                 {statement && (
                     <motion.div variants={sectionVariants} className="border-t border-gray-200 dark:border-white/10 pt-8 mt-12">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Generated Summary Statement</h3>
-                            <button
-                                onClick={handleCopy}
-                                className={cn('flex items-center justify-center gap-2 h-9 px-3 bg-gray-100 dark:bg-black/20 hover:bg-gray-200 dark:hover:bg-black/40 font-semibold rounded-lg transition-all text-gray-700 dark:text-gray-300 text-sm', isCopied && 'text-success-green')}
-                            >
-                                {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                                <span>{isCopied ? 'Copied!' : 'Copy All'}</span>
-                            </button>
                         </div>
                         <FormattedWebhookOutput content={statement} />
                     </motion.div>

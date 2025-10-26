@@ -83,7 +83,7 @@ const ConditionsSection = ({ conditions, setConditions }: ConditionsSectionProps
                                 onClick={() => handleAddShortcut(c)}
                                 className={cn(
                                     'justify-center',
-                                    isSelected(c) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                    isSelected(c) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                 )}
                             >
                                 {c}
