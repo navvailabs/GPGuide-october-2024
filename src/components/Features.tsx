@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { ClipboardList, BrainCircuit, BriefcaseMedical, CheckCircle, Clock, ShieldCheck, Users } from 'lucide-react';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const Features = () => {
     const primaryFeatures = [
@@ -58,10 +60,10 @@ const Features = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">Stop Spending Hours on Paperwork</h2>
-                    <p className="mt-4 text-lg text-brand-text-muted">
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Stop Spending Hours on Paperwork</GradientHeading>
+                    <Description className="mt-4 text-lg">
                         Custom templates to help Australian GPs complete complex documentation in minutes, not hours.
-                    </p>
+                    </Description>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-3 gap-8 mb-20">
@@ -122,7 +124,7 @@ const Features = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                    <h3 className="text-3xl font-bold mb-12 text-gradient-heading">Transform Your Practice Starting Today</h3>
+                    <GradientHeading as="h3" className="text-3xl font-bold text-center mb-12">Transform Your Practice Starting Today</GradientHeading>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {achievements.map((item, index) => (
                             <motion.div
