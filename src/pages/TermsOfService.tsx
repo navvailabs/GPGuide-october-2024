@@ -1,5 +1,7 @@
 import InfoPageLayout from '@/layouts/InfoPageLayout';
 import { motion } from 'framer-motion';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const TermsOfService = () => {
   const lastUpdated = "October 26, 2025";
@@ -13,12 +15,12 @@ const TermsOfService = () => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-3xl md:text-5xl font-bold font-satoshi bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-2 text-center">
+          <GradientHeading as="h1" className="text-3xl md:text-5xl font-bold text-center mb-2">
             Terms of Service
-          </h1>
-          <p className="text-center text-neutral-400 mb-12">Last updated: {lastUpdated}</p>
+          </GradientHeading>
+          <Description className="text-center text-brand-text-muted mb-12">Last updated: {lastUpdated}</Description>
           
-          <div className="prose prose-lg dark:prose-invert max-w-none prose-h2:font-satoshi prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b prose-h2:border-white/10 prose-h3:text-xl prose-h3:md:text-2xl prose-h3:font-bold prose-h3:text-white prose-a:text-premium-gold hover:prose-a:text-amber-300 prose-strong:text-white">
+          <div className="prose prose-lg max-w-none prose-h2:font-satoshi prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b prose-h2:border-brand-border prose-h3:text-xl prose-h3:md:text-2xl prose-h3:font-bold prose-h3:text-brand-text prose-a:text-brand-accent hover:prose-a:text-amber-700 prose-strong:text-brand-text">
             <p>These Terms of Service ("Terms") govern your use of GP Guide, operated by New Era Pty Ltd (ABN: 14 345 878 901) ("we," "us," "our"). By subscribing to or using GP Guide, you agree to these Terms.</p>
             
             <h2>1. Service Purpose</h2>

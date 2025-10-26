@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { GradientHeading } from '@/components/ui/GradientHeading';
 
 const featureSections = [
     {
@@ -89,9 +90,9 @@ const TemplateFeatures = () => {
                                 <h3 className="text-brand-accent font-semibold mb-2">
                                     {section.eyebrow}
                                 </h3>
-                                <h2 className="text-4xl lg:text-[34px] font-semibold text-gradient-heading mb-4 leading-tight tracking-tight">
+                                <GradientHeading as="h2" className="text-4xl lg:text-[34px] font-semibold text-left mb-4 leading-tight tracking-tight">
                                     {section.title}
-                                </h2>
+                                </GradientHeading>
                                 <p className="text-lg text-brand-text-muted mb-8 leading-relaxed">
                                     {section.description}
                                 </p>

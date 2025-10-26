@@ -8,14 +8,14 @@ interface ThemeContextType {
 }
 
 const defaultThemeContext: ThemeContextType = {
-  theme: 'dark',
+  theme: 'light',
   toggleTheme: () => console.warn('toggleTheme called outside of a ThemeProvider'),
 };
 
 const ThemeContext = createContext<ThemeContextType>(defaultThemeContext);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
     const root = window.document.documentElement;

@@ -1,5 +1,6 @@
-import { BriefcaseMedical, Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Logo } from '@/components/ui/Logo';
 
 const Footer = () => {
     const productLinks = [
@@ -42,17 +43,10 @@ const Footer = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {/* Column 1: Company Info */}
                     <div className="space-y-4 pr-8 col-span-1 md:col-span-2 lg:col-span-1">
-                        <div className="flex items-center space-x-2">
-                            <BriefcaseMedical className="h-8 w-8 text-brand-accent" />
-                            <span className="text-2xl font-satoshi font-bold text-brand-text">GPGuide</span>
+                        <div className="flex items-center">
+                            <Logo className="h-32 w-auto" />
                         </div>
                         <p className="text-sm">Professional documentation templates for Australian GPs.</p>
-                        <div className="text-xs space-y-1 pt-2">
-                            <p>New Era Pty Ltd (trading as GPGuide)</p>
-                            <p>ABN: 14 345 878 901</p>
-                            <p>Sydney, Australia</p>
-                            <p>Email: <a href="mailto:support@gpguide.com.au" className="hover:text-brand-text transition-colors">support@gpguide.com.au</a></p>
-                        </div>
                     </div>
 
                     {/* Column 2: Product */}
@@ -93,8 +87,13 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="mt-16 border-t border-brand-border pt-8 flex flex-col sm:flex-row justify-between items-center text-sm">
-                    <p className="order-2 sm:order-1 mt-4 sm:mt-0">&copy; 2025 New Era Pty Ltd. All rights reserved.</p>
+                <div className="mt-16 border-t border-brand-border pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+                    <div className="text-center sm:text-left space-y-1 order-2 sm:order-1 mt-4 sm:mt-0">
+                        <p>&copy; 2025 New Era Pty Ltd. All rights reserved.</p>
+                        <p className="text-xs">
+                            New Era Pty Ltd (trading as GPGuide) | ABN: 14 345 878 901 | Sydney, Australia | Email: <a href="mailto:support@gpguide.com.au" className="hover:text-brand-text transition-colors">support@gpguide.com.au</a>
+                        </p>
+                    </div>
                     <div className="flex items-center space-x-4 order-1 sm:order-2">
                         <a href="#" aria-label="LinkedIn" className="hover:text-brand-text transition-colors">
                             <Linkedin className="h-5 w-5" />

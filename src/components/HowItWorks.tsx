@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { FileText, Zap, FileCheck2, Download, Clock, CheckCircle, Sparkles } from 'lucide-react';
 import SectionGradientBackground from './ui/SectionGradientBackground';
+import { GradientHeading } from '@/components/ui/GradientHeading';
+import { Description } from '@/components/ui/Description';
 
 const steps = [
     {
@@ -60,10 +62,10 @@ const HowItWorks = () => {
                 viewport={{ once: true, amount: 0.2 }}
             >
                 <motion.div className="text-center max-w-3xl mx-auto mb-16" variants={itemVariants}>
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">From Consultation to Care Plan in Minutes</h2>
-                    <p className="mt-4 text-lg text-brand-text-muted font-body">
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">From Consultation to Care Plan in Minutes</GradientHeading>
+                    <Description className="mt-4 text-lg">
                         Professional care plan automation for modern GPs — fast, accurate, guideline-aligned.
-                    </p>
+                    </Description>
                 </motion.div>
 
                 <motion.div className="relative mb-20" variants={itemVariants}>
@@ -71,8 +73,8 @@ const HowItWorks = () => {
                         {steps.map((step) => (
                             <motion.div
                                 key={step.title}
-                                className="relative bg-brand-surface border border-brand-border rounded-2xl p-6 text-center flex flex-col items-center"
-                                whileHover={{ y: -8, scale: 1.03, transition: { type: 'spring', stiffness: 300 } }}
+                                className="relative bg-gray-100 shadow-clay-light rounded-2xl p-6 text-center flex flex-col items-center"
+                                whileHover={{ y: -5, scale: 1.02, transition: { type: 'spring', stiffness: 300 } }}
                             >
                                 <span className="absolute top-4 left-4 text-2xl font-bold text-brand-accent">{step.num}</span>
                                 <div className="relative mb-4">
@@ -89,7 +91,7 @@ const HowItWorks = () => {
                 </motion.div>
 
                 <motion.div
-                    className="max-w-4xl mx-auto bg-brand-surface border border-brand-border rounded-2xl p-8"
+                    className="max-w-4xl mx-auto bg-gray-100 shadow-clay-light rounded-2xl p-8"
                     variants={itemVariants}
                 >
                     <div className="grid md:grid-cols-2 gap-8 items-start">
