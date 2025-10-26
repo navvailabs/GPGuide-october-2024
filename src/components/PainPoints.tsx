@@ -1,6 +1,7 @@
 import { Clock, Calendar, FileText, FileEdit, Zap, Users, XCircle, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SectionGradientBackground from './ui/SectionGradientBackground';
+import { GradientHeading } from '@/components/ui/GradientHeading';
 
 const painPointsData = [
   {
@@ -53,7 +54,7 @@ const PainPoints = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">The Hidden Cost of GP Documentation</h2>
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">The Hidden Cost of GP Documentation</GradientHeading>
                     <p className="mt-4 text-lg text-brand-text-muted">
                       Every hour spent on admin is an hour lost to patient care. GPGuide helps Australian GPs reclaim their time, improve compliance, and restore work–life balance.
                     </p>

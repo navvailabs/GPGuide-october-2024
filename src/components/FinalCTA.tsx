@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CheckCircle, ShieldCheck } from 'lucide-react';
 import SectionGradientBackground from './ui/SectionGradientBackground';
+import { GradientHeading } from '@/components/ui/GradientHeading';
 
 const FinalCTA = () => {
     return (
@@ -13,7 +14,7 @@ const FinalCTA = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-gradient-heading">Ready to Reclaim Your Time?</h2>
+                    <GradientHeading className="text-3xl md:text-5xl font-bold text-center" gradient="linear-gradient(to right, #D97706, #FBBF24)">Ready to Reclaim Your Time?</GradientHeading>
                     <p className="mt-4 text-lg text-brand-text-muted max-w-3xl mx-auto">
                         Join 500+ Australian GPs who've already transformed their practice efficiency. Every day without GPGuide is another day lost to unnecessary admin work.
                     </p>

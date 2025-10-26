@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { AccordionItem } from '@/components/ui/AccordionItem';
+import { GradientHeading } from '@/components/ui/GradientHeading';
 
 const faqData = {
     "Subscription & Business": [
@@ -65,7 +66,7 @@ const FAQ = () => {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-mobile-h2 md:text-desktop-h2 font-bold text-gradient-heading">Frequently Asked Questions</h2>
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Frequently Asked Questions</GradientHeading>
                     <p className="mt-4 text-lg text-brand-text-muted">
                         Everything you need to know about GPGuide.
                     </p>
@@ -81,7 +82,7 @@ const FAQ = () => {
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-2xl font-bold mb-8 text-center text-gradient-heading">{category}</h3>
+                            <GradientHeading as="h3" className="text-2xl font-bold text-center mb-8">{category}</GradientHeading>
                             <div className="space-y-4">
                                 {items.map((item, index) => (
                                     <AccordionItem key={index} question={item.q} answer={item.a} />
