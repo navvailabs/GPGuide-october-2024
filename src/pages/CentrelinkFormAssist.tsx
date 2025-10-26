@@ -211,7 +211,7 @@ const CentrelinkFormAssist = () => {
                                         onClick={() => handleAddClinicalInfo(info)}
                                         className={cn(
                                             'w-full justify-start text-left',
-                                            isClinicalInfoSelected(info) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isClinicalInfoSelected(info) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {info}
@@ -241,7 +241,7 @@ const CentrelinkFormAssist = () => {
                                         onClick={() => handleAddFunctionalImpact(impact)}
                                         className={cn(
                                             'w-full justify-start text-left',
-                                            isFunctionalImpactSelected(impact) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isFunctionalImpactSelected(impact) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {impact}
@@ -271,7 +271,7 @@ const CentrelinkFormAssist = () => {
                                         onClick={() => handleAddTreatment(treatment)}
                                         className={cn(
                                             'w-full justify-start text-left',
-                                            isTreatmentSelected(treatment) && '!bg-premium-gold/10 dark:!bg-premium-gold/20 !border-premium-gold !text-premium-gold'
+                                            isTreatmentSelected(treatment) && '!bg-brand-accent/10 dark:!bg-brand-accent/20 !border-brand-accent !text-brand-accent'
                                         )}
                                     >
                                         {treatment}
