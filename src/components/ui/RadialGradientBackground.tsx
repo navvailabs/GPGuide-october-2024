@@ -1,5 +1,6 @@
 import { useBrightness } from '@/contexts/BrightnessContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { cn } from '@/lib/utils';
 
 const DarkBackground = () => {
     return (
@@ -24,18 +25,29 @@ const DarkBackground = () => {
 const LightBackground = () => {
     return (
         <>
-            {/* Base light color */}
-            <div className="absolute inset-0 bg-gray-50" />
-            
-            {/* Subtle radial gradient for a soft glow */}
-            <div 
-                className="absolute top-0 left-0 w-full h-full"
-                style={{
-                    background: 'radial-gradient(ellipse at 50% 0%, rgba(200, 210, 230, 0.4) 0%, transparent 70%)',
-                }}
-            />
-            
-            {/* Noise Overlay */}
+            {/* Base light color from the original landing page */}
+            <div className="absolute inset-0 bg-brand-bg" />
+
+            {/* Aurora Effect */}
+            <div
+              className={cn(
+                `
+                [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)]
+                [--aurora:repeating-linear-gradient(100deg,var(--amber-500)_10%,var(--orange-300)_15%,var(--amber-300)_20%,var(--yellow-200)_25%,var(--amber-400)_30%)]
+                [background-image:var(--white-gradient),var(--aurora)]
+                [background-size:300%,_200%]
+                [background-position:50%_50%,50%_50%]
+                filter blur-[10px]
+                after:content-[""] after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] 
+                after:[background-size:200%,_100%] 
+                after:animate-aurora after:[background-attachment:fixed] after:mix-blend-multiply
+                pointer-events-none
+                absolute -inset-[10px] opacity-[0.15] will-change-transform`,
+                `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,var(--transparent)_70%)]`
+              )}
+            ></div>
+
+            {/* Noise Overlay from original LightBackground */}
             <div
                 className="absolute inset-0 opacity-[0.02] mix-blend-multiply pointer-events-none"
                 style={{
