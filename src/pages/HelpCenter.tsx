@@ -86,7 +86,7 @@ const faqData = {
     "SECURITY & PRIVACY": [
         {
             q: "Is my data secure?",
-            a: "Yes. GP Guide uses:\n• Bank-level encryption (AES-256)\n• HTTPS secure connections\n• Secure cloud infrastructure\n• Regular security audits\n• Access controls\n• Staff training on privacy and security\n\nFor full details, see our Privacy Policy and Security & Compliance pages."
+            a: "Yes. GP Guide uses:\n• Bank-level encryption (AES-256)\n• HTTPS secure connections\n• Australian Privacy Principles compliance\n• No patient identifier storage\n• Secure cloud infrastructure\n\nFor full details, see our Privacy Policy and Security & Compliance pages."
         },
         {
             q: "Is GP Guide tax deductible?",
@@ -126,7 +126,7 @@ const HelpCenter = () => {
                     </div>
                 </div>
             ))}
-             <div className="text-center mt-16">
+             <div className="text-center mt-16 border-t border-brand-border pt-12">
                 <GradientHeading as="h2" className="text-2xl md:text-3xl font-bold text-center mb-6">
                     Still Need Help?
                 </GradientHeading>
@@ -134,11 +134,17 @@ const HelpCenter = () => {
                 <a href="mailto:support@gpguide.com.au" className="text-brand-accent text-lg font-semibold hover:text-amber-700 transition-colors">
                     support@gpguide.com.au
                 </a>
-                <Description className="mt-4">
-                    Response Times:<br/>
+                <Description className="mt-4 text-sm">
+                    <strong>Response Times:</strong><br/>
                     Basic Plan: Within 48 hours<br/>
-                    Professional Plan: Within 24 hours (priority)
+                    Professional Plan: Within 24 hours (priority)<br/><br/>
+                    <strong>Business Hours:</strong><br/>
+                    Monday-Friday, 9 AM - 6 PM AEST
                 </Description>
+                <Description className="mt-4 text-sm">
+                    When contacting support, please include your account email, a description of your issue, any error messages, and screenshots if applicable.
+                </Description>
+                <p className="text-xs text-brand-text-muted mt-12">&copy; 2025 New Era Pty Ltd (trading as GP Guide). All rights reserved.</p>
             </div>
           </div>
         </motion.div>

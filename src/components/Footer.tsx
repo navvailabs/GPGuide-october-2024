@@ -21,9 +21,9 @@ const Footer = () => {
     ];
 
     const companyLinks = [
-        { name: "About GPGuide", href: "#" },
-        { name: "Our Mission", href: "#" },
-        { name: "Security & Compliance", href: "#" }
+        { name: "About GPGuide", href: "/about" },
+        { name: "Our Mission", href: "/mission" },
+        { name: "Security & Compliance", href: "/security-compliance" }
     ];
 
     const handleScrollLink = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -79,7 +79,7 @@ const Footer = () => {
                         <ul className="space-y-2">
                             {companyLinks.map(link => (
                                 <li key={link.name}>
-                                    <a href={link.href} className="text-sm hover:text-brand-text transition-colors">{link.name}</a>
+                                    <Link to={link.href} className="text-sm hover:text-brand-text transition-colors">{link.name}</Link>
                                 </li>
                             ))}
                         </ul>

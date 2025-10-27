@@ -20,47 +20,55 @@ const ContactSupport = () => {
             Contact Support
           </GradientHeading>
           <Description className="text-lg max-w-3xl mx-auto text-center mb-12">
-            Get help from our Australian-based support team.
+            Get Help from Our Australian Support Team
           </Description>
 
           <div className="space-y-8">
-            <InspiredCard className="p-8 text-center">
-              <div className="flex justify-center mb-4">
-                  <div className="bg-brand-accent/10 p-4 rounded-full">
-                      <Mail className="h-10 w-10 text-brand-accent" />
-                  </div>
+            <InspiredCard className="p-8">
+              <div className="flex items-center gap-4 mb-4">
+                <Mail className="h-8 w-8 text-brand-accent flex-shrink-0" />
+                <h2 className="text-2xl font-bold text-brand-text">Email Support</h2>
               </div>
-              <h2 className="text-2xl font-bold text-brand-text">Email Support</h2>
-              <a href="mailto:support@gpguide.com.au" className="text-2xl font-semibold text-brand-accent hover:text-amber-700 transition-colors">
+              <a href="mailto:support@gpguide.com.au" className="text-2xl font-semibold text-brand-accent hover:text-amber-700 transition-colors break-words">
                 support@gpguide.com.au
               </a>
               <p className="text-brand-text-muted mt-4">Our support team is here to help with:</p>
-              <ul className="mt-2 text-brand-text-muted list-inside list-disc">
+              <ul className="mt-2 text-brand-text-muted list-disc list-inside space-y-1">
                 <li>Account and billing questions</li>
                 <li>Technical issues</li>
-                <li>Template questions & feature requests</li>
+                <li>Template questions</li>
+                <li>Feature requests</li>
+                <li>Subscription management</li>
               </ul>
               <div className="mt-6 divide-y divide-brand-border border-y border-brand-border">
                 <div className="py-3">
-                    <p className="font-semibold text-brand-text">Basic Plan Response Time</p>
-                    <p className="text-brand-text-muted">Within 48 hours</p>
+                    <p className="font-semibold text-brand-text">Response Times:</p>
+                    <p className="text-brand-text-muted">Basic Plan: Within 48 hours</p>
+                    <p className="text-brand-text-muted">Professional Plan: Within 24 hours (priority support)</p>
                 </div>
                 <div className="py-3">
-                    <p className="font-semibold text-brand-text">Professional Plan Response Time</p>
-                    <p className="text-brand-text-muted">Within 24 hours (priority)</p>
+                    <p className="font-semibold text-brand-text">Business Hours:</p>
+                    <p className="text-brand-text-muted">Monday-Friday, 9 AM - 6 PM AEST</p>
                 </div>
               </div>
-              <p className="text-sm text-brand-text-muted/80 mt-4">Business Hours: Monday-Friday, 9 AM - 6 PM AEST</p>
             </InspiredCard>
 
             <InspiredCard className="p-8">
-              <div className="flex items-center gap-4">
-                <HelpCircle className="h-8 w-8 text-brand-accent flex-shrink-0" />
+              <div className="flex items-start gap-4">
+                <HelpCircle className="h-8 w-8 text-brand-accent flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="text-xl font-bold text-brand-text">Before You Contact Us</h3>
-                  <p className="text-brand-text-muted">
+                  <p className="text-brand-text-muted mt-2">
                     Please check our <Link to="/help-center" className="text-brand-accent hover:text-amber-700 underline">Help Center</Link> first - you may find an immediate answer to your question.
                   </p>
+                  <p className="text-brand-text-muted mt-2">Common topics covered:</p>
+                  <ul className="mt-2 text-brand-text-muted list-disc list-inside text-sm space-y-1">
+                    <li>How to generate templates</li>
+                    <li>Billing and subscription management</li>
+                    <li>Exporting and using templates</li>
+                    <li>Technical troubleshooting</li>
+                    <li>Clinical compliance information</li>
+                  </ul>
                 </div>
               </div>
             </InspiredCard>
@@ -79,16 +87,47 @@ const ContactSupport = () => {
             </InspiredCard>
 
             <div className="border-2 border-red-500/50 bg-red-500/5 rounded-2xl p-8">
-              <div className="flex items-center gap-4">
-                <AlertTriangle className="h-10 w-10 text-red-500 flex-shrink-0" />
+              <div className="flex items-start gap-4">
+                <AlertTriangle className="h-10 w-10 text-red-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="text-xl font-bold text-red-700">Emergency Clinical Situations</h3>
-                  <p className="text-red-600">
-                    GP Guide does not provide emergency medical support or clinical advice. For urgent clinical matters, call 000 or contact your local hospital.
+                  <p className="text-red-600 mt-2">
+                    ⚠️ <strong>IMPORTANT:</strong> GP Guide does not provide emergency medical support or clinical advice.
                   </p>
+                  <p className="text-red-600 mt-2">For emergency medical situations:</p>
+                  <ul className="mt-2 text-red-600 list-disc list-inside space-y-1">
+                    <li>Call 000 (Australia)</li>
+                    <li>Contact your local hospital emergency department</li>
+                    <li>Seek immediate in-person medical care</li>
+                  </ul>
+                   <p className="text-red-600 mt-2">GP Guide is a documentation tool only and cannot assist with urgent clinical matters.</p>
                 </div>
               </div>
             </div>
+
+            <InspiredCard className="p-8">
+                <h3 className="text-xl font-bold text-brand-text mb-2">Account &amp; Billing Inquiries</h3>
+                <p className="text-brand-text-muted">For subscription, billing, or refund requests:</p>
+                <p className="mt-2">Email: <a href="mailto:support@gpguide.com.au" className="text-brand-accent hover:text-amber-700">support@gpguide.com.au</a></p>
+                <p className="text-brand-text-muted">Include your account email and invoice number (if applicable).</p>
+                <p className="text-brand-text-muted mt-2">We respond to all account inquiries within 24-48 hours.</p>
+            </InspiredCard>
+
+             <InspiredCard className="p-8">
+                <h3 className="text-xl font-bold text-brand-text mb-2">Feature Requests &amp; Feedback</h3>
+                <p className="text-brand-text-muted"><strong>Professional Plan Members:</strong> Submit template ideas and feature requests directly via email. We review all suggestions and may build custom templates based on user feedback.</p>
+                <p className="text-brand-text-muted mt-2"><strong>All Users:</strong> We welcome feedback on how to improve GP Guide. Your input helps us serve Australian GPs better.</p>
+            </InspiredCard>
+
+            <div className="text-center text-sm text-brand-text-muted mt-16">
+                <h4 className="font-bold text-brand-text mb-2">Business Information</h4>
+                <p>New Era Pty Ltd (trading as GP Guide)</p>
+                <p>ABN: 14 345 878 901</p>
+                <p>Sydney, Australia</p>
+                <p>Email: <a href="mailto:support@gpguide.com.au" className="hover:text-brand-text transition-colors">support@gpguide.com.au</a></p>
+                <p className="mt-8">&copy; 2025 New Era Pty Ltd (trading as GP Guide). All rights reserved.</p>
+            </div>
+
           </div>
         </motion.div>
       </div>

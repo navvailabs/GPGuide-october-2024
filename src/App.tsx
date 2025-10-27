@@ -10,6 +10,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import MedicalDisclaimer from './pages/MedicalDisclaimer';
 import RefundPolicy from './pages/RefundPolicy';
+import AboutPage from './pages/About';
+import MissionPage from './pages/Mission';
+import SecurityCompliancePage from './pages/SecurityCompliance';
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/mission" element={<MissionPage />} />
+          <Route path="/security-compliance" element={<SecurityCompliancePage />} />
         </Routes>
       </BrightnessProvider>
     </ThemeProvider>
