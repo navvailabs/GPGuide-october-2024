@@ -81,7 +81,7 @@ const Pricing = () => {
                             className="h-full"
                         >
                             <div className={cn(
-                                "relative w-full h-full bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col transition-transform duration-300 hover:-translate-y-2",
+                                "relative w-full h-full bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col",
                                 plan.isPopular ? 'border-2 border-brand-accent' : ''
                             )}>
                                 {plan.isPopular && (
@@ -90,7 +90,7 @@ const Pricing = () => {
                                     </div>
                                 )}
 
-                                <h3 className={cn("text-2xl font-bold text-brand-text", plan.isPopular && "mt-4")}>{plan.name}</h3>
+                                <h3 className="text-2xl font-bold text-brand-text mt-4">{plan.name}</h3>
                                 <p className="mt-2 text-brand-text-muted">{plan.description}</p>
                                 
                                 {plan.limitedNote && (
@@ -145,9 +145,19 @@ const Pricing = () => {
                                 </ul>
 
                                 <div className="mt-auto pt-8">
-                                    <button className={`w-full py-3 px-6 rounded-full font-bold text-lg transition-transform duration-300 hover:scale-105 ${plan.isPopular ? 'bg-brand-accent text-brand-bg' : 'border-2 border-brand-text text-brand-text hover:bg-brand-text hover:text-brand-bg'}`}>
+                                    <motion.button
+                                        whileHover={{ scale: 1.03, y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                        className={cn(
+                                            "w-full py-3 px-6 rounded-full font-bold text-lg transition-all duration-300",
+                                            plan.isPopular
+                                                ? 'bg-brand-accent text-brand-bg shadow-lg hover:shadow-xl'
+                                                : 'border-2 border-brand-text text-brand-text hover:bg-brand-text hover:text-brand-bg'
+                                        )}
+                                    >
                                         {plan.cta}
-                                    </button>
+                                    </motion.button>
                                     <div className="mt-4 text-center text-sm text-brand-text-muted bg-brand-bg p-3 rounded-xl border border-brand-border">
                                         <p className="font-semibold text-brand-text">{plan.roi}</p>
                                         <p>{plan.value}</p>
