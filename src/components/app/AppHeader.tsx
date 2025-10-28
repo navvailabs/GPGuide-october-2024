@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Home, Menu } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ThemeToggle from '@/components/ThemeToggle';
+import CinematicThemeSwitcher from '@/components/ui/cinematic-theme-switcher';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/ui/Logo';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -32,7 +32,7 @@ const AppHeader = ({ onMenuClick }: AppHeaderProps) => {
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <ThemeToggle />
+          <CinematicThemeSwitcher />
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
