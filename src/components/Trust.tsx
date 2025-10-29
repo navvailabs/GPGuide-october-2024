@@ -36,8 +36,9 @@ const Trust = () => {
                     className="text-center max-w-3xl mx-auto mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-3xl md:text-4xl font-bold text-center">Your Data Security is Our Priority</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -49,8 +50,9 @@ const Trust = () => {
                     className="max-w-4xl mx-auto"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
                         {/* Left Column */}
@@ -79,8 +81,9 @@ const Trust = () => {
                     className="mt-16 flex flex-wrap justify-center gap-4"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     {bottomBadges.map((badgeText) => (
                         <div key={badgeText} className="bg-gray-100 shadow-clay-light flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium text-brand-text">

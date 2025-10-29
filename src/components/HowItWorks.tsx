@@ -61,14 +61,14 @@ const HowItWorks = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
             >
-                <motion.div className="text-center max-w-3xl mx-auto mb-16" variants={itemVariants}>
+                <motion.div className="text-center max-w-3xl mx-auto mb-16" variants={itemVariants} style={{ willChange: 'transform, opacity' }}>
                     <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">From Consultation to Care Plan in Minutes</GradientHeading>
                     <Description className="mt-4 text-lg">
                         Professional care plan automation for modern GPs — fast, accurate, guideline-aligned.
                     </Description>
                 </motion.div>
 
-                <motion.div className="relative mb-20" variants={itemVariants}>
+                <motion.div className="relative mb-20" variants={itemVariants} style={{ willChange: 'transform, opacity' }}>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {steps.map((step) => (
                             <motion.div
@@ -93,6 +93,7 @@ const HowItWorks = () => {
                 <motion.div
                     className="max-w-4xl mx-auto bg-gray-100 shadow-clay-light rounded-2xl p-8"
                     variants={itemVariants}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <div className="grid md:grid-cols-2 gap-8 items-start">
                         {/* Traditional Method */}

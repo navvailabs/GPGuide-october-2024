@@ -57,8 +57,9 @@ const Features = () => {
                     className="text-center max-w-3xl mx-auto mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Stop Spending Hours on Paperwork</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -73,8 +74,9 @@ const Features = () => {
                             className="bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col h-full"
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             <div className="relative w-16 h-16 bg-brand-accent/10 border border-brand-accent/20 rounded-full flex items-center justify-center mb-6 mx-auto">
                                 <div className="absolute -inset-2 bg-brand-accent/20 rounded-full blur-md animate-pulse"></div>
@@ -121,8 +123,9 @@ const Features = () => {
                     className="text-center"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
+                    style={{ willChange: 'opacity' }}
                 >
                     <GradientHeading as="h3" className="text-3xl font-bold text-center mb-12">Transform Your Practice Starting Today</GradientHeading>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -134,6 +137,7 @@ const Features = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: 0.2 }}
                                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                                style={{ willChange: 'transform, opacity' }}
                             >
                                 <div className="relative w-14 h-14 bg-brand-accent/10 border border-brand-accent/20 rounded-full flex items-center justify-center mb-5 mx-auto">
                                     <div className="absolute -inset-1.5 bg-brand-accent/20 rounded-full blur-md animate-pulse"></div>

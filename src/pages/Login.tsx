@@ -1,13 +1,7 @@
-import { useEffect } from 'react';
 import { Component as SignInCard } from '@/components/ui/sign-in-card-2.tsx';
 import Header from '@/components/Header.tsx';
 
 export default function LoginPage() {
-  useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove('dark');
-  }, []);
-
   return (
     <div className="bg-brand-bg">
       {/* Header is positioned absolutely to float over the SignInCard */}

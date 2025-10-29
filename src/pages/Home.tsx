@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import Header from '@/components/Header.tsx';
 import Hero from '@/components/Hero.tsx';
 import Pricing from '@/components/Pricing.tsx';
@@ -20,11 +18,6 @@ import { AuroraBackground } from '@/components/ui/aurora-background.tsx';
 import FlowingGradientBackground from '@/components/ui/FlowingGradientBackground.tsx';
 
 function HomePage() {
-  useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove('dark');
-  }, []);
-
   return (
     <div className="bg-brand-bg">
       <FlowingGradientBackground />

@@ -18,8 +18,9 @@ const Contact = () => {
                     className="text-center max-w-3xl mx-auto mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-3xl md:text-4xl font-bold text-center">Get Help When You Need It</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -34,8 +35,9 @@ const Contact = () => {
                             className="bg-gray-100 shadow-clay-light rounded-2xl p-6 text-center flex flex-col"
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             <div className="flex justify-center mb-4">
                                 <div className="bg-brand-accent/10 p-4 rounded-full">

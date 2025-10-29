@@ -72,7 +72,7 @@ const Hero = () => {
                     </div>
 
                     <div className="lg:col-span-6 relative h-[500px] lg:h-auto @container group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-all duration-500 animate-tilt"></div>
+                        <div style={{ transform: 'translateZ(0)' }} className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-all duration-500 animate-tilt"></div>
                         
                         <div className="relative w-full h-full bg-brand-surface/60 backdrop-blur-xl rounded-2xl shadow-layered-xl border border-brand-border p-6">
                             <div className="h-full flex flex-col border border-brand-border/50 rounded-lg bg-brand-surface shadow-inner-light">

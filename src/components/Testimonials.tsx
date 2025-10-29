@@ -71,8 +71,9 @@ const Testimonials = () => {
                     className="text-center max-w-3xl mx-auto mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Real GPs, Real Results, Real Time Savings</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -87,8 +88,9 @@ const Testimonials = () => {
                             className="bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.5, delay: index * 0.15 }}
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             <Quote className="w-10 h-10 text-brand-accent/70 mb-4" />
                             <p className="text-brand-text-muted mb-6 flex-grow">"{testimonial.quote}"</p>
@@ -113,8 +115,9 @@ const Testimonials = () => {
                     className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-brand-text bg-gray-100 shadow-clay-light p-8 rounded-2xl"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <div>
                         <p className="text-5xl font-bold text-brand-accent"><Counter from={0} to={547} /></p>

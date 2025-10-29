@@ -17,7 +17,8 @@ const Value = () => {
                         variants={cardVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <div className={cn(
                             "relative w-full h-full bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col transition-transform duration-300 hover:-translate-y-2"
@@ -51,8 +52,9 @@ const Value = () => {
                         variants={cardVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         transition={{ delay: 0.2 }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <div className={cn(
                             "relative w-full h-full bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col transition-transform duration-300 hover:-translate-y-2"

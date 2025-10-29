@@ -27,6 +27,7 @@ export const AuroraBackground = ({
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
+          style={{ transform: 'translateZ(0)' }}
           className={cn(
             `
             [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)]

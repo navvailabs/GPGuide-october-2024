@@ -64,8 +64,9 @@ const FAQ = () => {
                     className="text-center max-w-3xl mx-auto mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Frequently Asked Questions</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -80,8 +81,9 @@ const FAQ = () => {
                             className="mb-12"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.5 }}
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             <GradientHeading as="h3" className="text-2xl font-bold text-center mb-8">{category}</GradientHeading>
                             <div className="space-y-4">

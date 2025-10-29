@@ -52,8 +52,9 @@ const PainPoints = () => {
                     className="text-center max-w-3xl mx-auto mb-20"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">The Hidden Cost of GP Documentation</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -76,8 +77,9 @@ const PainPoints = () => {
                                     className="relative flex items-start"
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, amount: 0.5 }}
+                                    viewport={{ once: true, amount: 0.2 }}
                                     transition={{ duration: 0.6 }}
+                                    style={{ willChange: 'transform, opacity' }}
                                 >
                                     {/* Dot */}
                                     <div className="absolute top-0 left-4 md:left-1/2 -translate-x-1/2 mt-1.5 z-10">

@@ -59,8 +59,9 @@ const Pricing = () => {
                     className="text-center max-w-3xl mx-auto mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5 }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Choose Your Productivity Plan</GradientHeading>
                     <Description className="mt-4 text-lg">
@@ -76,9 +77,10 @@ const Pricing = () => {
                             key={plan.name}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.5 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                             className="h-full"
+                            style={{ willChange: 'transform, opacity' }}
                         >
                             <div className={cn(
                                 "relative w-full h-full bg-gray-100 shadow-clay-light rounded-2xl p-8 flex flex-col",
@@ -175,8 +177,9 @@ const Pricing = () => {
                     className="mt-12 text-center text-brand-text-muted"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
+                    style={{ willChange: 'opacity' }}
                 >
                     <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
                         <li className="flex items-center"><Check className="h-4 w-4 mr-2 text-success-green" />All prices include GST</li>
