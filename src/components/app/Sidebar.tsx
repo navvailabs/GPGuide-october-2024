@@ -137,7 +137,7 @@ const Sidebar = ({ isMobileOpen, setIsMobileOpen, activeView, setActiveView }: S
         <>
             {/* Desktop Sidebar */}
             <div
-                className="hidden md:flex flex-col fixed top-20 left-0 h-[calc(100vh-5rem)] z-30 w-80 p-4"
+                className="hidden md:flex flex-col fixed top-24 left-0 h-[calc(100vh-6rem)] z-30 w-80 p-4"
             >
                 <SidebarContent 
                     activeView={activeView} 

@@ -28,7 +28,7 @@ const CarePlanLayout = ({ children, activeView, setActiveView }: CarePlanLayoutP
                 />
                 <main 
                     className={cn(
-                        "flex-1 w-full pt-12", // pt-12 for header height
+                        "flex-1 w-full pt-24", // pt-24 for header height
                         "md:ml-80" // margin for sidebar
                     )}
                 >

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home } from 'lucide-react';
+import { Menu, X, Home, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/ui/Logo';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface HeaderProps {
   variant?: 'default' | 'transparent';
@@ -12,6 +13,7 @@ interface HeaderProps {
 const Header = ({ variant = 'default' }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { theme } = useTheme();
 
   const navItems = [
     { name: 'Features', href: '/#features' },
@@ -20,11 +22,6 @@ const Header = ({ variant = 'default' }: HeaderProps) => {
     { name: 'Care Suite', href: '/gp-care-plan-generator' },
   ];
 
-  const headerClasses = cn(
-    "sticky top-0 z-50 border-b",
-    "border-brand-border/20 bg-brand-bg/20 backdrop-blur-xl"
-  );
-  
   const isHomePage = location.pathname === '/';
 
   const handleScrollLink = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -42,76 +39,108 @@ const Header = ({ variant = 'default' }: HeaderProps) => {
   };
 
   return (
-    <header className={headerClasses}>
-      <div className="w-full max-w-[1350px] mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink-0">
-            <Link to="/" aria-label="Home" className="flex items-center">
-              <Logo className="h-48 w-auto" />
-            </Link>
-          </div>
+    <header className="sticky top-4 left-0 right-0 z-50 flex justify-center px-4">
+      <div className={cn(
+        "w-full max-w-5xl h-16 flex items-center justify-between px-5 transition-all duration-300",
+        "rounded-2xl border shadow-xl",
+        theme === 'light' 
+            ? 'bg-white/40 border-black/10 backdrop-blur-lg'
+            : 'bg-black/30 border-white/10 backdrop-blur-lg'
+      )}>
+        <div className="flex-shrink-0">
+          <Link to="/" aria-label="Home" className="flex items-center">
+            <Logo className="h-28 w-auto" />
+          </Link>
+        </div>
 
-          {variant === 'default' && (
-            <>
-              <nav className="hidden md:flex items-center gap-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={(e) => handleScrollLink(e, item.href)}
-                    className="px-4 py-2 text-sm font-normal text-brand-text rounded-lg hover:bg-black/5 transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-
-              <div className="hidden md:flex flex-shrink-0">
+        {variant === 'default' && (
+          <>
+            <nav className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => (
                 <Link
-                  to="/#pricing"
-                  onClick={(e) => handleScrollLink(e, "/#pricing")}
-                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-brand-bg bg-brand-text rounded-lg shadow-lg hover:bg-gray-900 transition-colors"
+                  key={item.name}
+                  to={item.href}
+                  onClick={(e) => handleScrollLink(e, item.href)}
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                    theme === 'light'
+                      ? 'text-gray-700 hover:bg-black/5'
+                      : 'text-gray-300 hover:bg-white/10'
+                  )}
                 >
-                  Get Started
+                  {item.name}
+                  {item.name !== 'Care Suite' && <ChevronDown size={14} className={cn(theme === 'light' ? 'text-gray-500' : 'text-gray-400')} />}
                 </Link>
-              </div>
+              ))}
+            </nav>
 
-              <div className="md:hidden">
-                <button onClick={() => setIsOpen(!isOpen)} className="text-brand-text p-2">
-                  {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
-            </>
-          )}
-          
-          {variant === 'transparent' && (
-            <div className="flex items-center space-x-4">
+            <div className="hidden md:flex flex-shrink-0">
               <Link
-                to="/"
-                className="flex items-center gap-2 px-4 py-2 text-brand-text border border-brand-border rounded-full font-semibold hover:bg-brand-surface/50 transition-all duration-300 text-sm"
+                to="/#pricing"
+                onClick={(e) => handleScrollLink(e, "/#pricing")}
+                className={cn(
+                  "px-5 py-2 text-sm font-semibold rounded-lg shadow-md transition-all duration-300",
+                  theme === 'light'
+                    ? 'bg-gray-900 text-white hover:bg-gray-700'
+                    : 'bg-white text-black hover:bg-gray-200'
+                )}
               >
-                <Home className="w-4 h-4" />
-                Home
+                Get Started
               </Link>
             </div>
-          )}
-        </div>
+
+            <div className="md:hidden">
+              <button onClick={() => setIsOpen(!isOpen)} className={cn('p-2', theme === 'light' ? 'text-gray-800' : 'text-white')}>
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </>
+        )}
+        
+        {variant === 'transparent' && (
+          <div className="flex items-center space-x-4">
+            <Link
+              to="/"
+              className={cn(
+                "flex items-center gap-2 px-4 py-2 border rounded-full font-semibold transition-all duration-300 text-sm",
+                theme === 'light'
+                  ? 'text-gray-700 border-gray-300 hover:bg-gray-100'
+                  : 'text-gray-300 border-gray-600 hover:bg-gray-700'
+              )}
+            >
+              <Home className="w-4 h-4" />
+              Home
+            </Link>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
         {isOpen && variant === 'default' && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-brand-bg/80 backdrop-blur-sm pb-4"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className={cn(
+              "md:hidden absolute top-24 left-4 right-4 rounded-2xl border shadow-xl p-4",
+              theme === 'light' 
+                  ? 'bg-white/80 border-black/10'
+                  : 'bg-black/70 border-white/10',
+              "backdrop-blur-lg"
+            )}
           >
-            <nav className="flex flex-col items-center space-y-2 pt-2">
+            <nav className="flex flex-col items-center space-y-1">
               {navItems.map((item) => (
                  <Link
                     key={item.name}
                     to={item.href}
-                    className="px-4 py-3 text-base font-normal text-brand-text rounded-lg hover:bg-black/5 transition-colors w-full text-center"
+                    className={cn(
+                        "px-4 py-3 text-base font-medium rounded-lg transition-colors w-full text-center",
+                        theme === 'light'
+                          ? 'text-gray-800 hover:bg-black/5'
+                          : 'text-gray-200 hover:bg-white/10'
+                    )}
                     onClick={(e) => handleScrollLink(e, item.href)}
                   >
                     {item.name}
@@ -120,7 +149,12 @@ const Header = ({ variant = 'default' }: HeaderProps) => {
               <Link 
                 to="/#pricing" 
                 onClick={(e) => handleScrollLink(e, "/#pricing")}
-                className="w-[calc(100%-2rem)] mx-4 mt-4 inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-brand-bg bg-brand-text rounded-lg shadow-lg hover:bg-gray-900 transition-colors"
+                className={cn(
+                  "w-full mt-4 inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-lg shadow-md transition-all duration-300",
+                  theme === 'light'
+                    ? 'bg-gray-900 text-white hover:bg-gray-700'
+                    : 'bg-white text-black hover:bg-gray-200'
+                )}
               >
                 Get Started
               </Link>
