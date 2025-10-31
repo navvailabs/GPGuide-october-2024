@@ -16,27 +16,29 @@ import SecurityCompliancePage from './pages/SecurityCompliance';
 
 function App() {
   return (
-    <ThemeProvider>
-      <BrightnessProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route 
-            path="/gp-care-plan-generator" 
-            element={<CarePlanSuite />} 
-          />
-          <Route path="/help-center" element={<HelpCenter />} />
-          <Route path="/contact-support" element={<ContactSupport />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
-          <Route path="/refund-policy" element={<RefundPolicy />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/mission" element={<MissionPage />} />
-          <Route path="/security-compliance" element={<SecurityCompliancePage />} />
-        </Routes>
-      </BrightnessProvider>
-    </ThemeProvider>
+    <BrightnessProvider>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route 
+          path="/gp-care-plan-generator" 
+          element={
+            <ThemeProvider>
+              <CarePlanSuite />
+            </ThemeProvider>
+          } 
+        />
+        <Route path="/help-center" element={<HelpCenter />} />
+        <Route path="/contact-support" element={<ContactSupport />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/mission" element={<MissionPage />} />
+        <Route path="/security-compliance" element={<SecurityCompliancePage />} />
+      </Routes>
+    </BrightnessProvider>
   );
 }
 

@@ -59,26 +59,58 @@ const LightBackground = () => {
     );
 };
 
-
-const ThemedBackground = () => {
-    const { theme } = useTheme();
-    return theme === 'light' ? <LightBackground /> : <DarkBackground />;
+const SimpleLightBackground = () => {
+    return (
+        <>
+            {/* Base light color */}
+            <div className="absolute inset-0 bg-brand-bg" />
+            {/* Simple static gradient glow */}
+            <div
+              className="absolute top-0 left-0 w-full h-full opacity-40"
+              style={{
+                background: 'radial-gradient(ellipse at top, hsla(38, 62%, 90%, 1) 0%, transparent 60%)',
+              }}
+            />
+            {/* Noise Overlay */}
+            <div
+                className="absolute inset-0 opacity-[0.02] mix-blend-multiply pointer-events-none"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: '400px 400px',
+                }}
+            />
+        </>
+    );
 };
 
 
-const RadialGradientBackground = () => {
+const ThemedBackground = ({ simple }: { simple: boolean }) => {
+    const { theme } = useTheme();
+    if (theme === 'light') {
+        return simple ? <SimpleLightBackground /> : <LightBackground />;
+    }
+    return <DarkBackground />;
+};
+
+
+interface RadialGradientBackgroundProps {
+    simple?: boolean;
+    disableBrightness?: boolean;
+}
+
+const RadialGradientBackground = ({ simple = false, disableBrightness = false }: RadialGradientBackgroundProps) => {
     const { brightness } = useBrightness();
 
     return (
         <div
             className="fixed inset-0 -z-20 overflow-hidden"
-            style={{ 
-                filter: `brightness(${brightness})`, 
+            style={{
+                filter: disableBrightness ? 'none' : `brightness(${brightness})`,
                 transition: 'filter 0.3s ease-in-out',
                 transform: 'translateZ(0)'
             }}
         >
-            <ThemedBackground />
+            <ThemedBackground simple={simple} />
         </div>
     );
 };
