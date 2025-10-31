@@ -45,28 +45,7 @@ const Hero = () => {
 
     return (
         <section className="relative w-full font-body text-brand-text-muted overflow-hidden">
-            <div 
-                className="absolute inset-0 -z-20 bg-gradient-to-b from-[#EEE0C6] via-[#FAF5EC] to-[#FFFFFE]"
-            />
-            <div
-                className="absolute inset-0 -z-10"
-                aria-hidden="true"
-            >
-                <div
-                    className={cn(
-                        `absolute inset-0`,
-                        `[--aurora:repeating-linear-gradient(100deg,var(--amber-500)_10%,var(--orange-300)_15%,var(--amber-300)_20%,var(--yellow-200)_25%,var(--amber-400)_30%)]`,
-                        `[background-image:var(--aurora)]`,
-                        `[background-size:200%_200%]`,
-                        `animate-aurora`,
-                        `[background-attachment:fixed]`,
-                        `mix-blend-soft-light`,
-                        `blur-3xl`,
-                        `opacity-20`,
-                        `[mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]`
-                    )}
-                />
-            </div>
+            {/* The local radial gradient was removed to allow the global animated background to show through, creating a more unified and seamless look for the page. */}
             
             <motion.div
                 className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center py-24 sm:py-32"
