@@ -17,7 +17,7 @@ const CarePlanLayout = ({ children, activeView, setActiveView }: CarePlanLayoutP
 
     return (
         <div className="font-display text-gray-800 dark:text-foreground-dark min-h-screen">
-            <RadialGradientBackground />
+            <RadialGradientBackground simple />
             <AppHeader onMenuClick={() => setIsMobileSidebarOpen(true)} />
             <div className="relative flex">
                 <Sidebar
