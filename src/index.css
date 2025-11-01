@@ -226,6 +226,16 @@
   .sidebar-scroll::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
   }
+
+  /* Image Auto Slider */
+  .scroll-container {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .infinite-scroll {
+    animation: scroll-right 60s linear infinite;
+  }
 }
 
 @layer utilities {
@@ -371,4 +381,13 @@
 .animate-float-slow {
   animation: float-slow 5s ease-in-out infinite;
   animation-delay: 1s;
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

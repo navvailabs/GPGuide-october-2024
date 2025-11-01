@@ -2,8 +2,7 @@ import Header from '@/components/Header.tsx';
 import Hero from '@/components/Hero.tsx';
 import Pricing from '@/components/Pricing.tsx';
 import PainPoints from '@/components/PainPoints.tsx';
-import Showcase from '@/components/Showcase.tsx';
-import TemplateFeatures from '@/components/TemplateFeatures.tsx';
+import WebAppFeatures from '@/components/WebAppFeatures.tsx';
 import VideoDemo from '@/components/VideoDemo.tsx';
 import HowItWorks from '@/components/HowItWorks.tsx';
 import Testimonials from '@/components/Testimonials.tsx';
@@ -16,6 +15,7 @@ import Contact from '@/components/Contact.tsx';
 import Footer from '@/components/Footer.tsx';
 import { AuroraBackground } from '@/components/ui/aurora-background.tsx';
 import FlowingGradientBackground from '@/components/ui/FlowingGradientBackground.tsx';
+import ImageAutoSlider from '@/components/ui/image-auto-slider';
 
 function HomePage() {
   return (
@@ -27,16 +27,16 @@ function HomePage() {
           
           <main>
             <Hero />
+            <ImageAutoSlider />
             <PainPoints />
-            <Showcase />
-            <TemplateFeatures />
+            <WebAppFeatures />
             <VideoDemo />
             <HowItWorks />
-            <Pricing />
-            <Testimonials />
             <Features />
             <Trust />
             <Value />
+            <Pricing />
+            <Testimonials />
             <FAQ />
             <FinalCTA />
             <Contact />
