@@ -35,31 +35,31 @@ function Counter({ from, to, duration = 2 }: CounterProps) {
 const Testimonials = () => {
     const testimonials = [
         {
-            quote: "GPGuide changed my career trajectory. I was considering leaving general practice due to documentation burden. Now I finish notes during lunch breaks and actually enjoy patient care again. My family gets me home by 6 PM instead of 9 PM. This is life-changing.",
-            name: "Dr. Michael Chen",
-            practice: "Westmead Family Practice",
-            details: "8 years experience • 25 patients/day average",
-            stats: "Time saved: 8 hours weekly • $320+ weekly value",
-            image: "https://img-wrapper.vercel.app/image?url=https://xsgames.co/randomusers/avatar.php?g=male&i=1",
-            badge: "Practice Verified"
-        },
-        {
             quote: "As a registrar rotating through different practices, GPGuide was my lifeline. Different practices, different systems, but consistent quality documentation every time. It's like having a senior GP mentor in your pocket guiding every care plan.",
-            name: "Dr. Lisa Park",
-            practice: "GP Registrar, Brisbane",
-            details: "Final year registrar • 4 practice rotations",
-            stats: "Confidence boost: 'From anxious to confident'",
-            image: "https://img-wrapper.vercel.app/image?url=https://xsgames.co/randomusers/avatar.php?g=female&i=2",
+            name: "Dr. Emma Riley",
+            practice: "GP Registrar, Perth",
+            details: "GP Registrar • Perth",
+            stats: "Time saved: 6 hours weekly + calmer consult days",
+            image: "https://images.unsplash.com/photo-1582750421291-d8a487d355a9?q=80&w=800&auto=format&fit=crop",
             badge: "Registrar"
         },
         {
-            quote: "GPGuide standardized documentation across our 8 GPs. Our audit scores improved 40% and we're capturing $2,000+ more monthly in previously missed billing opportunities. The ROI is incredible.",
-            name: "Dr. Sarah Thompson",
-            practice: "Practice Principal, Melbourne",
-            details: "15 years experience • 8-doctor practice",
-            stats: "Practice revenue increase: $24,000+ annually",
-            image: "https://img-wrapper.vercel.app/image?url=https://xsgames.co/randomusers/avatar.php?g=female&i=3",
-            badge: "Practice Owner"
+            quote: "GPGuide standardized documentation across our 8 GPs. Our audit scores improved 40% and we're capturing $1,500+ more monthly in previously missed billing opportunities. The ROI is incredible.",
+            name: "Dr. Amelia Wong",
+            practice: "Rural Health Service, Broome",
+            details: "Rural GP • Broome",
+            stats: "Smarter billing = $1,500+/month gain",
+            image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800&auto=format&fit=crop",
+            badge: "Rural Practice"
+        },
+        {
+            quote: "GPGuide changed my career trajectory. I was considering leaving general practice due to documentation burden. Now I finish notes during lunch breaks and actually enjoy patient care again. My family gets me home by 6 PM instead of 9 PM. This is life-changing.",
+            name: "Dr. Daniel Nguyen",
+            practice: "GP, Sydney Family Care",
+            details: "Family GP • Sydney",
+            stats: "Documentation time cut by 50% and now home for dinner",
+            image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+            badge: "Practice Verified"
         }
     ];
 
@@ -95,7 +95,7 @@ const Testimonials = () => {
                             <Quote className="w-10 h-10 text-brand-accent/70 mb-4" />
                             <p className="text-brand-text-muted mb-6 flex-grow">"{testimonial.quote}"</p>
                             <div className="flex items-center space-x-4">
-                                <img src={testimonial.image} alt={testimonial.name} className="w-16 h-16 rounded-full border-2 border-brand-accent" />
+                                <img src={testimonial.image} alt={testimonial.name} className="w-16 h-16 rounded-full border-2 border-brand-accent object-cover" />
                                 <div className="flex-1">
                                     <h4 className="font-bold text-brand-text">{testimonial.name}</h4>
                                     <p className="text-sm text-brand-text-muted">{testimonial.practice}</p>

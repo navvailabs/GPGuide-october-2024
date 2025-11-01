@@ -5,6 +5,7 @@ import PainPoints from '@/components/PainPoints.tsx';
 import WebAppFeatures from '@/components/WebAppFeatures.tsx';
 import VideoDemo from '@/components/VideoDemo.tsx';
 import HowItWorks from '@/components/HowItWorks.tsx';
+import TestimonialsV2 from '@/components/TestimonialsV2.tsx';
 import Testimonials from '@/components/Testimonials.tsx';
 import Features from '@/components/Features.tsx';
 import Trust from '@/components/Trust.tsx';
@@ -37,6 +38,7 @@ function HomePage() {
             <Value />
             <Pricing />
             <Testimonials />
+            <TestimonialsV2 />
             <FAQ />
             <FinalCTA />
             <Contact />

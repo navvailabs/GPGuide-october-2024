@@ -33,21 +33,21 @@ const featuresData = [
     description: 'Streamline your mental health documentation with structured templates. Based on contemporary guidelines, they include built-in clinical assessment prompts and support for review and follow-up planning.',
     linkText: 'Generate a MHCP',
     linkHref: '/gp-care-plan-generator',
-    imageUrl: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/800x450/F3F4F6/1E1B18?text=Mental+Health+Plan',
+    imageUrl: 'https://deljvtvdkqepubeshmvy.supabase.co/storage/v1/object/public/website-assets/website-images/MHTP.png',
   },
   {
     title: 'Workers Compensation Form Assist',
     description: 'Quickly generate key statements for Certificates of Capacity. Input injury details, work capacity, and treatment plans to create a concise, professional summary for WorkCover forms, saving you valuable time.',
     linkText: 'Assist with Workers Comp',
     linkHref: '/gp-care-plan-generator',
-    imageUrl: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/800x450/F3F4F6/1E1B18?text=Workers+Comp',
+    imageUrl: 'https://deljvtvdkqepubeshmvy.supabase.co/storage/v1/object/public/website-assets/website-images/Workers%20comp.png',
   },
   {
     title: 'Centrelink Form Assist',
     description: 'Effortlessly generate statements for the Centrelink Medical Certificate (SU415). Detail clinical information, functional impact, and treatment plans to produce a clear, effective summary for DSP applications.',
     linkText: 'Assist with Centrelink Form',
     linkHref: '/gp-care-plan-generator',
-    imageUrl: 'https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://img-wrapper.vercel.app/image?url=https://placehold.co/800x450/F3F4F6/1E1B18?text=Centrelink+Form',
+    imageUrl: 'https://deljvtvdkqepubeshmvy.supabase.co/storage/v1/object/public/website-assets/website-images/centerlink.png',
   }
 ];
 
