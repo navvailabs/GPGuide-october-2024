@@ -63,7 +63,7 @@ const Pricing = () => {
                     transition={{ duration: 0.5 }}
                     style={{ willChange: 'transform, opacity' }}
                 >
-                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Choose Your Productivity Plan</GradientHeading>
+                    <GradientHeading className="text-mobile-h2 md:text-desktop-h2 font-bold text-center">Choose Your Plan</GradientHeading>
                     <Description className="mt-4 text-lg">
                         Flexible weekly subscriptions designed for busy healthcare professionals.
                         <br />
