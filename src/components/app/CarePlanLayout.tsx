@@ -18,7 +18,7 @@ const CarePlanLayout = ({ children, activeView, setActiveView }: CarePlanLayoutP
     return (
         <div className="font-display text-gray-800 dark:text-foreground-dark min-h-screen">
             <RadialGradientBackground simple disableBrightness />
-            <AppHeader onMenuClick={() => setIsMobileSidebarOpen(true)} disableBlur />
+            <AppHeader onMenuClick={() => setIsMobileSidebarOpen(true)} />
             <div className="relative flex">
                 <Sidebar
                     isMobileOpen={isMobileSidebarOpen}
